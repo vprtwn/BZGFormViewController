@@ -14,11 +14,40 @@
 
 @implementation BZGFormViewController
 
-- (void)viewDidLoad
+- (id)init
 {
-    [super viewDidLoad];
+    self = [super init];
+    if (self) [self setup];
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) [self setup];
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) [self setup];
+    return self;
+}
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) [self setup];
+    return self;
+}
+
+- (void)setup
+{
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     [self.tableView setAllowsSelection:NO];
+    self.formFieldCells = [NSMutableArray new];
+    self.formSection = 0;
 }
 
 #pragma mark - Showing/hiding info cells
@@ -46,7 +75,7 @@
     // if an info cell is already showing, update the cell's text
     BZGFormInfoCell *infoCell = [self infoCellBelowFormFieldCell:cell];
     if (infoCell) {
-        infoCell.textLabel.text = text;
+        infoCell.infoLabel.text = text;
         return;
     }
 

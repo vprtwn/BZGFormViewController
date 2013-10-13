@@ -27,6 +27,14 @@
     [super tearDown];
 }
 
+- (void)testDefaults
+{
+    expect(formFieldCell.validationState).to.equal(BZGValidationStateNone);
+    expect(formFieldCell.textField.textColor).to.equal([UIColor blackColor]);
+    expect(formFieldCell.activityIndicatorView.hidden).to.beTruthy;
+    expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
+}
+
 - (void)testFormFieldValidState
 {
     formFieldCell.validationState = BZGValidationStateValid;

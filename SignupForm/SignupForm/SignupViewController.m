@@ -20,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.usernameFieldCell = [[BZGFormFieldCell alloc] init];
     self.usernameFieldCell.label.text = NSLocalizedString(@"Username", nil);
     self.usernameFieldCell.textField.placeholder = NSLocalizedString(@"username", nil);
