@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		30709D4AA1994EF090749611 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F90CF32A864DEC854302D2 /* libPods.a */; };
+		799AEBE944DD4B758103BA7E /* libPods-SignupFormTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */; };
+		EB59ED58180B2D9200DAA992 /* BZGFormFieldCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED55180B2D9200DAA992 /* BZGFormFieldCellTests.m */; };
+		EB59ED63180B2DB100DAA992 /* BZGFormFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED5D180B2DB100DAA992 /* BZGFormFieldCell.m */; };
+		EB59ED64180B2DB100DAA992 /* BZGFormInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED5F180B2DB100DAA992 /* BZGFormInfoCell.m */; };
+		EB59ED6C180B2F0800DAA992 /* BZGFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED6B180B2F0800DAA992 /* BZGFormViewController.m */; };
+		EB59ED6F180B313000DAA992 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED6E180B313000DAA992 /* SignupViewController.m */; };
+		EB59ED71180B377900DAA992 /* BZGFormInfoCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED70180B377900DAA992 /* BZGFormInfoCellTests.m */; };
+		EB59ED73180B378A00DAA992 /* BZGFormViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED72180B378A00DAA992 /* BZGFormViewControllerTests.m */; };
+		EB83D521180B2CA9001037F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB83D520180B2CA9001037F5 /* Foundation.framework */; };
+		EB83D523180B2CA9001037F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB83D522180B2CA9001037F5 /* CoreGraphics.framework */; };
+		EB83D525180B2CA9001037F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB83D524180B2CA9001037F5 /* UIKit.framework */; };
+		EB83D52B180B2CA9001037F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB83D529180B2CA9001037F5 /* InfoPlist.strings */; };
+		EB83D52D180B2CA9001037F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EB83D52C180B2CA9001037F5 /* main.m */; };
+		EB83D531180B2CA9001037F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EB83D530180B2CA9001037F5 /* AppDelegate.m */; };
+		EB83D533180B2CA9001037F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB83D532180B2CA9001037F5 /* Images.xcassets */; };
+		EB83D53A180B2CA9001037F5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB83D539180B2CA9001037F5 /* XCTest.framework */; };
+		EB83D53B180B2CA9001037F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB83D520180B2CA9001037F5 /* Foundation.framework */; };
+		EB83D53C180B2CA9001037F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB83D524180B2CA9001037F5 /* UIKit.framework */; };
+		EB83D544180B2CA9001037F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB83D542180B2CA9001037F5 /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EB83D53D180B2CA9001037F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB83D515180B2CA9001037F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB83D51C180B2CA9001037F5;
+			remoteInfo = SignupForm;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2F4402527AED4455AEE5A0EC /* Pods-SignupFormTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignupFormTests.xcconfig"; path = "Pods/Pods-SignupFormTests.xcconfig"; sourceTree = "<group>"; };
+		36501D3196434BDDACC01A05 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SignupFormTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90F90CF32A864DEC854302D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB59ED55180B2D9200DAA992 /* BZGFormFieldCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFormFieldCellTests.m; path = ../../BZGFormViewControllerTests/BZGFormFieldCellTests.m; sourceTree = "<group>"; };
+		EB59ED57180B2D9200DAA992 /* BZGTestsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGTestsBase.h; path = ../../BZGFormViewControllerTests/BZGTestsBase.h; sourceTree = "<group>"; };
+		EB59ED5C180B2DB100DAA992 /* BZGFormFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGFormFieldCell.h; path = ../../BZGFormViewController/BZGFormFieldCell.h; sourceTree = "<group>"; };
+		EB59ED5D180B2DB100DAA992 /* BZGFormFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFormFieldCell.m; path = ../../BZGFormViewController/BZGFormFieldCell.m; sourceTree = "<group>"; };
+		EB59ED5E180B2DB100DAA992 /* BZGFormInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGFormInfoCell.h; path = ../../BZGFormViewController/BZGFormInfoCell.h; sourceTree = "<group>"; };
+		EB59ED5F180B2DB100DAA992 /* BZGFormInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFormInfoCell.m; path = ../../BZGFormViewController/BZGFormInfoCell.m; sourceTree = "<group>"; };
+		EB59ED6A180B2F0800DAA992 /* BZGFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGFormViewController.h; path = ../../BZGFormViewController/BZGFormViewController.h; sourceTree = "<group>"; };
+		EB59ED6B180B2F0800DAA992 /* BZGFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFormViewController.m; path = ../../BZGFormViewController/BZGFormViewController.m; sourceTree = "<group>"; };
+		EB59ED6D180B313000DAA992 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		EB59ED6E180B313000DAA992 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		EB59ED70180B377900DAA992 /* BZGFormInfoCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZGFormInfoCellTests.m; sourceTree = "<group>"; };
+		EB59ED72180B378A00DAA992 /* BZGFormViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZGFormViewControllerTests.m; sourceTree = "<group>"; };
+		EB83D51D180B2CA9001037F5 /* SignupForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignupForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB83D520180B2CA9001037F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EB83D522180B2CA9001037F5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EB83D524180B2CA9001037F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EB83D528180B2CA9001037F5 /* SignupForm-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SignupForm-Info.plist"; sourceTree = "<group>"; };
+		EB83D52A180B2CA9001037F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EB83D52C180B2CA9001037F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EB83D52E180B2CA9001037F5 /* SignupForm-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SignupForm-Prefix.pch"; sourceTree = "<group>"; };
+		EB83D52F180B2CA9001037F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EB83D530180B2CA9001037F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EB83D532180B2CA9001037F5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EB83D538180B2CA9001037F5 /* SignupFormTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignupFormTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB83D539180B2CA9001037F5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		EB83D541180B2CA9001037F5 /* SignupFormTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SignupFormTests-Info.plist"; sourceTree = "<group>"; };
+		EB83D543180B2CA9001037F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EB83D51A180B2CA9001037F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB83D523180B2CA9001037F5 /* CoreGraphics.framework in Frameworks */,
+				EB83D525180B2CA9001037F5 /* UIKit.framework in Frameworks */,
+				EB83D521180B2CA9001037F5 /* Foundation.framework in Frameworks */,
+				30709D4AA1994EF090749611 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB83D535180B2CA9001037F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB83D53A180B2CA9001037F5 /* XCTest.framework in Frameworks */,
+				EB83D53C180B2CA9001037F5 /* UIKit.framework in Frameworks */,
+				EB83D53B180B2CA9001037F5 /* Foundation.framework in Frameworks */,
+				799AEBE944DD4B758103BA7E /* libPods-SignupFormTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EB59ED66180B2DB900DAA992 /* BZGFormViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EB59ED5C180B2DB100DAA992 /* BZGFormFieldCell.h */,
+				EB59ED5D180B2DB100DAA992 /* BZGFormFieldCell.m */,
+				EB59ED5E180B2DB100DAA992 /* BZGFormInfoCell.h */,
+				EB59ED5F180B2DB100DAA992 /* BZGFormInfoCell.m */,
+				EB59ED6A180B2F0800DAA992 /* BZGFormViewController.h */,
+				EB59ED6B180B2F0800DAA992 /* BZGFormViewController.m */,
+			);
+			name = BZGFormViewController;
+			sourceTree = "<group>";
+		};
+		EB83D514180B2CA9001037F5 = {
+			isa = PBXGroup;
+			children = (
+				EB83D526180B2CA9001037F5 /* SignupForm */,
+				EB83D53F180B2CA9001037F5 /* SignupFormTests */,
+				EB83D51F180B2CA9001037F5 /* Frameworks */,
+				EB83D51E180B2CA9001037F5 /* Products */,
+				36501D3196434BDDACC01A05 /* Pods.xcconfig */,
+				2F4402527AED4455AEE5A0EC /* Pods-SignupFormTests.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		EB83D51E180B2CA9001037F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB83D51D180B2CA9001037F5 /* SignupForm.app */,
+				EB83D538180B2CA9001037F5 /* SignupFormTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB83D51F180B2CA9001037F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EB83D520180B2CA9001037F5 /* Foundation.framework */,
+				EB83D522180B2CA9001037F5 /* CoreGraphics.framework */,
+				EB83D524180B2CA9001037F5 /* UIKit.framework */,
+				EB83D539180B2CA9001037F5 /* XCTest.framework */,
+				90F90CF32A864DEC854302D2 /* libPods.a */,
+				51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB83D526180B2CA9001037F5 /* SignupForm */ = {
+			isa = PBXGroup;
+			children = (
+				EB59ED66180B2DB900DAA992 /* BZGFormViewController */,
+				EB83D52F180B2CA9001037F5 /* AppDelegate.h */,
+				EB83D530180B2CA9001037F5 /* AppDelegate.m */,
+				EB59ED6D180B313000DAA992 /* SignupViewController.h */,
+				EB59ED6E180B313000DAA992 /* SignupViewController.m */,
+				EB83D532180B2CA9001037F5 /* Images.xcassets */,
+				EB83D527180B2CA9001037F5 /* Supporting Files */,
+			);
+			path = SignupForm;
+			sourceTree = "<group>";
+		};
+		EB83D527180B2CA9001037F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB83D528180B2CA9001037F5 /* SignupForm-Info.plist */,
+				EB83D529180B2CA9001037F5 /* InfoPlist.strings */,
+				EB83D52C180B2CA9001037F5 /* main.m */,
+				EB83D52E180B2CA9001037F5 /* SignupForm-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB83D53F180B2CA9001037F5 /* SignupFormTests */ = {
+			isa = PBXGroup;
+			children = (
+				EB59ED55180B2D9200DAA992 /* BZGFormFieldCellTests.m */,
+				EB59ED70180B377900DAA992 /* BZGFormInfoCellTests.m */,
+				EB59ED72180B378A00DAA992 /* BZGFormViewControllerTests.m */,
+				EB59ED57180B2D9200DAA992 /* BZGTestsBase.h */,
+				EB83D540180B2CA9001037F5 /* Supporting Files */,
+			);
+			path = SignupFormTests;
+			sourceTree = "<group>";
+		};
+		EB83D540180B2CA9001037F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB83D541180B2CA9001037F5 /* SignupFormTests-Info.plist */,
+				EB83D542180B2CA9001037F5 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EB83D51C180B2CA9001037F5 /* SignupForm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB83D549180B2CA9001037F5 /* Build configuration list for PBXNativeTarget "SignupForm" */;
+			buildPhases = (
+				7DD26754F29C4870A2544F40 /* Check Pods Manifest.lock */,
+				EB83D519180B2CA9001037F5 /* Sources */,
+				EB83D51A180B2CA9001037F5 /* Frameworks */,
+				EB83D51B180B2CA9001037F5 /* Resources */,
+				E54C409287014DF3BB675971 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SignupForm;
+			productName = SignupForm;
+			productReference = EB83D51D180B2CA9001037F5 /* SignupForm.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EB83D537180B2CA9001037F5 /* SignupFormTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB83D54C180B2CA9001037F5 /* Build configuration list for PBXNativeTarget "SignupFormTests" */;
+			buildPhases = (
+				CFFC48223DCA4B078FCDC2C5 /* Check Pods Manifest.lock */,
+				EB83D534180B2CA9001037F5 /* Sources */,
+				EB83D535180B2CA9001037F5 /* Frameworks */,
+				EB83D536180B2CA9001037F5 /* Resources */,
+				38FD35EDAD0346D082EDFA0D /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB83D53E180B2CA9001037F5 /* PBXTargetDependency */,
+			);
+			name = SignupFormTests;
+			productName = SignupFormTests;
+			productReference = EB83D538180B2CA9001037F5 /* SignupFormTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EB83D515180B2CA9001037F5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = benzguo;
+				TargetAttributes = {
+					EB83D537180B2CA9001037F5 = {
+						TestTargetID = EB83D51C180B2CA9001037F5;
+					};
+				};
+			};
+			buildConfigurationList = EB83D518180B2CA9001037F5 /* Build configuration list for PBXProject "SignupForm" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EB83D514180B2CA9001037F5;
+			productRefGroup = EB83D51E180B2CA9001037F5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB83D51C180B2CA9001037F5 /* SignupForm */,
+				EB83D537180B2CA9001037F5 /* SignupFormTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EB83D51B180B2CA9001037F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB83D52B180B2CA9001037F5 /* InfoPlist.strings in Resources */,
+				EB83D533180B2CA9001037F5 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB83D536180B2CA9001037F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB83D544180B2CA9001037F5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		38FD35EDAD0346D082EDFA0D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-SignupFormTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7DD26754F29C4870A2544F40 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CFFC48223DCA4B078FCDC2C5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E54C409287014DF3BB675971 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EB83D519180B2CA9001037F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB59ED6C180B2F0800DAA992 /* BZGFormViewController.m in Sources */,
+				EB59ED63180B2DB100DAA992 /* BZGFormFieldCell.m in Sources */,
+				EB59ED64180B2DB100DAA992 /* BZGFormInfoCell.m in Sources */,
+				EB83D531180B2CA9001037F5 /* AppDelegate.m in Sources */,
+				EB83D52D180B2CA9001037F5 /* main.m in Sources */,
+				EB59ED6F180B313000DAA992 /* SignupViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB83D534180B2CA9001037F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB59ED58180B2D9200DAA992 /* BZGFormFieldCellTests.m in Sources */,
+				EB59ED73180B378A00DAA992 /* BZGFormViewControllerTests.m in Sources */,
+				EB59ED71180B377900DAA992 /* BZGFormInfoCellTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EB83D53E180B2CA9001037F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB83D51C180B2CA9001037F5 /* SignupForm */;
+			targetProxy = EB83D53D180B2CA9001037F5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EB83D529180B2CA9001037F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB83D52A180B2CA9001037F5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EB83D542180B2CA9001037F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB83D543180B2CA9001037F5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EB83D547180B2CA9001037F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EB83D548180B2CA9001037F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EB83D54A180B2CA9001037F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36501D3196434BDDACC01A05 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SignupForm/SignupForm-Prefix.pch";
+				INFOPLIST_FILE = "SignupForm/SignupForm-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EB83D54B180B2CA9001037F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36501D3196434BDDACC01A05 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SignupForm/SignupForm-Prefix.pch";
+				INFOPLIST_FILE = "SignupForm/SignupForm-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		EB83D54D180B2CA9001037F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F4402527AED4455AEE5A0EC /* Pods-SignupFormTests.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SignupForm.app/SignupForm";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SignupForm/SignupForm-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SignupFormTests/SignupFormTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		EB83D54E180B2CA9001037F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F4402527AED4455AEE5A0EC /* Pods-SignupFormTests.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SignupForm.app/SignupForm";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SignupForm/SignupForm-Prefix.pch";
+				INFOPLIST_FILE = "SignupFormTests/SignupFormTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EB83D518180B2CA9001037F5 /* Build configuration list for PBXProject "SignupForm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB83D547180B2CA9001037F5 /* Debug */,
+				EB83D548180B2CA9001037F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB83D549180B2CA9001037F5 /* Build configuration list for PBXNativeTarget "SignupForm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB83D54A180B2CA9001037F5 /* Debug */,
+				EB83D54B180B2CA9001037F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB83D54C180B2CA9001037F5 /* Build configuration list for PBXNativeTarget "SignupFormTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB83D54D180B2CA9001037F5 /* Debug */,
+				EB83D54E180B2CA9001037F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EB83D515180B2CA9001037F5 /* Project object */;
+}

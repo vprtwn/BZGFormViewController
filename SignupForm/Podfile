@@ -1,0 +1,9 @@
+platform :ios, '5.0'
+pod 'ReactiveCocoa', '~>1.9.6'
+pod 'FrameAccessor'
+pod 'BZGMailgunEmailValidation', '1.0.0'
+
+target :SignupFormTests do
+    pod 'Expecta', '~>0.2.2'
+    pod 'OCMockito', '~>1.0.0'
+end
