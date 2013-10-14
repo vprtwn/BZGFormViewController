@@ -133,8 +133,7 @@
     NSUInteger cellIndex = [self.formFieldCells indexOfObject:fieldCell];
     if (cellIndex == NSNotFound) return nil;
 
-    NSUInteger i = cellIndex + 1;
-    while (i < self.formFieldCells.count) {
+    for (NSUInteger i = cellIndex + 1; i < self.formFieldCells.count; ++i) {
         UITableViewCell *cell = self.formFieldCells[i];
         if ([cell isKindOfClass:[BZGFormFieldCell class]]) {
             return (BZGFormFieldCell *)cell;
