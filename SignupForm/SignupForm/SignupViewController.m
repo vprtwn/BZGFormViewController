@@ -11,6 +11,7 @@
 #import "EXTScope.h"
 
 #define MAILGUN_PUBLIC_KEY @"YOUR_MAILGUN_PUBLIC_KEY"
+#warning Add your Mailgun public key ^^^
 
 @interface SignupViewController ()
 

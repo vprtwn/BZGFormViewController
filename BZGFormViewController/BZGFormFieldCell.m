@@ -59,7 +59,7 @@
 
         @weakify(self);
         RAC(self.textField, textColor) =
-        [RACAble(self.validationState) map:^UIColor *(NSNumber *validationState) {
+        [RACObserve(self, validationState) map:^UIColor *(NSNumber *validationState) {
             @strongify(self);
             if (self.textField.editing || self.textField.isFirstResponder) {
                 return [UIColor blackColor];
