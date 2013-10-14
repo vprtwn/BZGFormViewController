@@ -57,6 +57,15 @@
     expect([formViewController nextFormFieldCell:cell3]).to.equal(nil);
 }
 
+- (void)testFirstInvalidFormFieldCell
+{
+    formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+    expect([formViewController firstInvalidFormFieldCell]).to.equal(nil);
+    cell2.validationState = BZGValidationStateInvalid;
+    cell3.validationState = BZGValidationStateInvalid;
+    expect([formViewController firstInvalidFormFieldCell]).to.equal(cell2);
+}
+
 // Expect an info cell to be displayed and then removed.
 - (void)testUpdateInfoCellBelowFormFieldCell_invalidToValid
 {

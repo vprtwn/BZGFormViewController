@@ -31,4 +31,11 @@
  */
 - (BZGFormFieldCell *)nextFormFieldCell:(BZGFormFieldCell *)fieldCell;
 
+/**
+ * Returns the first invalid form field cell.
+ *
+ * @return The first form field cell with state 'BZGValidationStateInvalid' or nil if no cell is found.
+ */
+- (BZGFormFieldCell *)firstInvalidFormFieldCell;
+
 @end

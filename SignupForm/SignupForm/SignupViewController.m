@@ -10,8 +10,7 @@
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
 
-#warning remove public key
-#define MAILGUN_PUBLIC_KEY @"pubkey-2qnhwymcue-jpv13-mka58smsqunxy33" //@"YOUR_MAILGUN_PUBLIC_KEY"
+#define MAILGUN_PUBLIC_KEY @"YOUR_MAILGUN_PUBLIC_KEY"
 
 @interface SignupViewController ()
 
@@ -210,16 +209,19 @@
     [self updateInfoCellBelowFormFieldCell:cell];
 }
 
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField
-//{
-//    BZGFormFieldCell *cell = [BZGFormFieldCell parentCellForTextField:textField];
-//    if (!cell) return NO;
-//
-//    NSInteger cellIndex = [self.formFieldCells indexOfObject:cell];
-//    if (cellIndex == NSNotFound || cellIndex >= self.formFieldCells.count) return NO;
-//
-//    BZGFormFieldCell *nextCell = self.formFieldCells[cellIndex];
-//
-//}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    BZGFormFieldCell *cell = [BZGFormFieldCell parentCellForTextField:textField];
+    if (!cell) return NO;
+
+    BZGFormFieldCell *nextCell = [self nextFormFieldCell:cell];
+    if (!nextCell) {
+        [cell.textField resignFirstResponder];
+        return YES;
+    }
+
+    [nextCell.textField becomeFirstResponder];
+    return YES;
+}
 
 @end

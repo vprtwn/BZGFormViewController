@@ -114,6 +114,20 @@
     }
 }
 
+#pragma mark - Finding cells
+
+- (BZGFormFieldCell *)firstInvalidFormFieldCell
+{
+    for (UITableViewCell *cell in self.formFieldCells) {
+        if ([cell isKindOfClass:[BZGFormFieldCell class]]) {
+            if (((BZGFormFieldCell *)cell).validationState == BZGValidationStateInvalid) {
+                return (BZGFormFieldCell *)cell;
+            }
+        }
+    }
+    return nil;
+}
+
 - (BZGFormFieldCell *)nextFormFieldCell:(BZGFormFieldCell *)fieldCell
 {
     NSUInteger cellIndex = [self.formFieldCells indexOfObject:fieldCell];
