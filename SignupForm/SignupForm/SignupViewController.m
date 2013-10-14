@@ -10,7 +10,7 @@
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
 
-#define MAILGUN_PUBLIC_KEY @"pubkey-2qnhwymcue-jpv13-mka58smsqunxy33"
+#define MAILGUN_PUBLIC_KEY @"YOUR_PUBLIC_KEY"
 #warning Add your Mailgun public key ^^^
 
 @interface SignupViewController ()
@@ -49,9 +49,7 @@
                                                            self.passwordFieldCell]];
     self.formSection = 0;
 
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
-    self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY operationQueue:queue];
+    self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY operationQueue:[NSOperationQueue mainQueue]];
 }
 
 #pragma mark - UITableViewDataSource
