@@ -10,7 +10,7 @@
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
 
-#define MAILGUN_PUBLIC_KEY @"YOUR_MAILGUN_PUBLIC_KEY"
+#define MAILGUN_PUBLIC_KEY @"pubkey-2qnhwymcue-jpv13-mka58smsqunxy33"
 #warning Add your Mailgun public key ^^^
 
 @interface SignupViewController ()
