@@ -7,6 +7,8 @@
 #import "SignupViewController.h"
 #import "BZGFormFieldCell.h"
 #import "BZGMailgunEmailValidator.h"
+#import "ReactiveCocoa.h"
+#import "EXTScope.h"
 
 #warning remove public key
 #define MAILGUN_PUBLIC_KEY @"pubkey-2qnhwymcue-jpv13-mka58smsqunxy33" //@"YOUR_MAILGUN_PUBLIC_KEY"
@@ -20,6 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 100)];
     
     self.usernameFieldCell = [[BZGFormFieldCell alloc] init];
     self.usernameFieldCell.label.text = NSLocalizedString(@"Username", nil);
@@ -43,10 +47,84 @@
     self.formFieldCells = [NSMutableArray arrayWithArray:@[self.usernameFieldCell,
                                                            self.emailFieldCell,
                                                            self.passwordFieldCell]];
+    self.formSection = 0;
 
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY operationQueue:queue];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger rowCount = [super tableView:tableView numberOfRowsInSection:section];
+    if (rowCount) {
+        return rowCount;
+    } else {
+        return 1;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    if (cell) {
+        return cell;
+    } else {
+        UITableViewCell *signupCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        signupCell.textLabel.text = @"Sign Up";
+        signupCell.textLabel.textAlignment = NSTextAlignmentCenter;
+        RAC(signupCell, selectionStyle) =
+        [RACSignal combineLatest:@[[RACObserve(self.usernameFieldCell,validationState) skip:1],
+                                   [RACObserve(self.emailFieldCell, validationState) skip:1],
+                                   [RACObserve(self.passwordFieldCell, validationState) skip:1]]
+         reduce:^NSNumber *(NSNumber *u, NSNumber *e, NSNumber *p){
+             if (u.integerValue == BZGValidationStateValid
+                 && e.integerValue == BZGValidationStateValid
+                 && p.integerValue == BZGValidationStateValid) {
+                 return @(UITableViewCellSelectionStyleDefault);
+             } else {
+                 return @(UITableViewCellEditingStyleNone);
+             }
+         }];
+
+        RAC(signupCell.textLabel, textColor) =
+        [RACSignal combineLatest:@[[RACObserve(self.usernameFieldCell,validationState) skip:1],
+                                   [RACObserve(self.emailFieldCell, validationState) skip:1],
+                                   [RACObserve(self.passwordFieldCell, validationState) skip:1]]
+                          reduce:^UIColor *(NSNumber *u, NSNumber *e, NSNumber *p){
+                              if (u.integerValue == BZGValidationStateValid
+                                  && e.integerValue == BZGValidationStateValid
+                                  && p.integerValue == BZGValidationStateValid) {
+                                  return [UIColor colorWithRed:19/255.0 green:144/255.0 blue:255/255.0 alpha:1.0];
+                              } else {
+                                  return [UIColor lightGrayColor];
+                              }
+                          }];
+
+        return signupCell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    if (height) {
+        return height;
+    } else {
+        return 44;
+    }
 }
 
 #pragma mark - UITextFieldDelegate
@@ -66,14 +144,15 @@
     if (!cell) return YES;
 
     NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    // validation state should be None if field is empty
+
+    // validation state should be None if the field is empty
     if (newText.length == 0) {
         cell.validationState = BZGValidationStateNone;
     }
     else if ([cell isEqual:self.usernameFieldCell]) {
         if (newText.length < 5) {
             cell.validationState = BZGValidationStateInvalid;
-            cell.infoText = NSLocalizedString(@"Username must be at least 5 characters long. Username must be at least 5 characters long. Username must be at least 5 characters long.", nil);
+            cell.infoText = NSLocalizedString(@"Username must be at least 5 characters long.", nil);
         } else {
             cell.validationState = BZGValidationStateValid;
         }
@@ -99,6 +178,13 @@
     BZGFormFieldCell *cell = [BZGFormFieldCell parentCellForTextField:textField];
     if (!cell) return;
 
+    // validation state should be None if the field is empty
+    if (textField.text.length == 0) {
+        cell.validationState = BZGValidationStateNone;
+        [self updateInfoCellBelowFormFieldCell:cell];
+        return;
+    }
+
     if ([cell isEqual:self.emailFieldCell]) {
         cell.validationState = BZGValidationStateValidating;
         [self.emailValidator validateEmailAddress:self.emailFieldCell.textField.text
@@ -120,8 +206,20 @@
                                           }];
         return;
     }
+
     [self updateInfoCellBelowFormFieldCell:cell];
-    
 }
+
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField
+//{
+//    BZGFormFieldCell *cell = [BZGFormFieldCell parentCellForTextField:textField];
+//    if (!cell) return NO;
+//
+//    NSInteger cellIndex = [self.formFieldCells indexOfObject:cell];
+//    if (cellIndex == NSNotFound || cellIndex >= self.formFieldCells.count) return NO;
+//
+//    BZGFormFieldCell *nextCell = self.formFieldCells[cellIndex];
+//
+//}
 
 @end

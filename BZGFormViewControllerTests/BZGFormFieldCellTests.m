@@ -29,6 +29,7 @@
 
 - (void)testDefaults
 {
+    expect(formFieldCell.selectionStyle).to.equal(UITableViewCellSelectionStyleNone);
     expect(formFieldCell.validationState).to.equal(BZGValidationStateNone);
     expect(formFieldCell.textField.textColor).to.equal([UIColor blackColor]);
     expect(formFieldCell.activityIndicatorView.hidden).to.beTruthy;

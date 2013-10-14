@@ -5,8 +5,8 @@
 //
 
 #import "BZGFormFieldCell.h"
-#import "EXTScope.h"
 #import "ReactiveCocoa.h"
+#import "EXTScope.h"
 
 @implementation BZGFormFieldCell
 
@@ -18,6 +18,7 @@
         self.textLabel.hidden = YES;
         self.detailTextLabel.hidden = YES;
         self.imageView.hidden = YES;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
 
         CGFloat activityIndicatorWidth = self.bounds.size.height*0.7;
         CGRect activityIndicatorFrame = CGRectMake(self.bounds.size.width - activityIndicatorWidth,
@@ -78,7 +79,7 @@
         }];
 
         RAC(self, accessoryType) =
-        [RACAble(self.validationState) map:^NSNumber *(NSNumber *validationState) {
+        [RACObserve(self, validationState) map:^NSNumber *(NSNumber *validationState) {
             @strongify(self);
             if (validationState.integerValue == BZGValidationStateValid
                 && !self.textField.editing) {
@@ -89,7 +90,7 @@
         }];
 
         RAC(self.activityIndicatorView, hidden) =
-        [RACAble(self.validationState) map:^NSNumber *(NSNumber *validationState) {
+        [RACObserve(self, validationState) map:^NSNumber *(NSNumber *validationState) {
             @strongify(self);
             if (validationState.integerValue == BZGValidationStateValidating) {
                 [self.activityIndicatorView startAnimating];

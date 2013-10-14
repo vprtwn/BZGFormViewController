@@ -1,7 +1,4 @@
 .DS_Store
 xcuserdata
-Pods/*
-build/*
-dogbuild/*
-cibuild/*
+SignupForm/Pods/*
 *.xccheckout

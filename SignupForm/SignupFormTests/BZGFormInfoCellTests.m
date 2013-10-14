@@ -26,6 +26,7 @@
 - (void)testInitWithText
 {
     BZGFormInfoCell *cell = [[BZGFormInfoCell alloc] initWithText:@"foo"];
+    expect(cell.selectionStyle).to.equal(UITableViewCellSelectionStyleNone);
     expect(cell.infoLabel.text).to.equal(@"foo");
 }
 

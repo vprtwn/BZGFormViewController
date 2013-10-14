@@ -16,6 +16,7 @@
         self.textLabel.hidden = YES;
         self.detailTextLabel.hidden = YES;
         self.imageView.hidden = YES;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
         self.infoLabel = [[UILabel alloc] initWithFrame:self.bounds];

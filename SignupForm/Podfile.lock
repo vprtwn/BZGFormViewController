@@ -1,44 +1,115 @@
 PODS:
   - BZGMailgunEmailValidation (1.0.0)
   - Expecta (0.2.2)
-  - FrameAccessor (1.2.0)
-  - JRSwizzle (1.0)
+  - libextobjc (0.3):
+    - libextobjc/EXTADT
+    - libextobjc/EXTAnnotation
+    - libextobjc/EXTAspect
+    - libextobjc/EXTBlockMethod
+    - libextobjc/EXTBlockTarget
+    - libextobjc/EXTConcreteProtocol
+    - libextobjc/EXTDispatchObject
+    - libextobjc/EXTFinalMethod
+    - libextobjc/EXTKeyPathCoding
+    - libextobjc/EXTMaybe
+    - libextobjc/EXTMixin
+    - libextobjc/EXTMultimethod
+    - libextobjc/EXTMultiObject
+    - libextobjc/EXTNil
+    - libextobjc/EXTPassthrough
+    - libextobjc/EXTPrivateMethod
+    - libextobjc/EXTProtocolCategory
+    - libextobjc/EXTSafeCategory
+    - libextobjc/EXTScope
+    - libextobjc/EXTSelectorChecking
+    - libextobjc/EXTSwizzle
+    - libextobjc/EXTSynthesize
+    - libextobjc/EXTTuple
+    - libextobjc/EXTVarargs
+    - libextobjc/NSInvocation+EXT
+    - libextobjc/NSMethodSignature+EXT
+    - libextobjc/RuntimeExtensions
+    - libextobjc/UmbrellaHeader
+  - libextobjc/EXTADT (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTAnnotation (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTAspect (0.3):
+    - libextobjc/RuntimeExtensions
+    - libffi
+  - libextobjc/EXTBlockMethod (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTBlockTarget (0.3):
+    - libextobjc/RuntimeExtensions
   - libextobjc/EXTConcreteProtocol (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTDispatchObject (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTFinalMethod (0.3):
     - libextobjc/RuntimeExtensions
   - libextobjc/EXTKeyPathCoding (0.3):
     - libextobjc/RuntimeExtensions
+  - libextobjc/EXTMaybe (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTMixin (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTMultimethod (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTMultiObject (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTNil (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTPassthrough (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTPrivateMethod (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTProtocolCategory (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSafeCategory (0.3):
+    - libextobjc/RuntimeExtensions
   - libextobjc/EXTScope (0.3):
     - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSelectorChecking (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSwizzle (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSynthesize (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTTuple (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTVarargs (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/NSInvocation+EXT (0.3):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/NSMethodSignature+EXT (0.3):
+    - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.3)
+  - libextobjc/UmbrellaHeader (0.3)
+  - libffi (3.0.13)
   - OCHamcrest (3.0.0)
   - OCMockito (1.0.0):
     - OCHamcrest (~> 3.0)
-  - ReactiveCocoa (1.9.7):
+  - ReactiveCocoa (2.1.1):
     - ReactiveCocoa/Core
-    - ReactiveCocoa/RACExtensions
-  - ReactiveCocoa/Core (1.9.7):
-    - JRSwizzle (~> 1.0)
-    - libextobjc/EXTConcreteProtocol (~> 0.3.0)
-    - libextobjc/EXTKeyPathCoding (~> 0.3.0)
-    - libextobjc/EXTScope (~> 0.3.0)
-  - ReactiveCocoa/RACExtensions (1.9.7):
-    - ReactiveCocoa/Core
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/Core (2.1.1):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.1.1)
 
 DEPENDENCIES:
-  - BZGMailgunEmailValidation (= 1.0.0)
+  - BZGMailgunEmailValidation (~> 1.0.0)
   - Expecta (~> 0.2.2)
-  - FrameAccessor
+  - libextobjc (~> 0.3)
   - OCMockito (~> 1.0.0)
-  - ReactiveCocoa (~> 1.9.6)
+  - ReactiveCocoa (~> 2.1.1)
 
 SPEC CHECKSUMS:
   BZGMailgunEmailValidation: 7dc589ad0c982fa9d1f087c14edcf8419f5a5a98
   Expecta: 99adbb2e366a02796477523bfd426143350d9caf
-  FrameAccessor: 9cab222a118092deba0ae186d07fa51d4830d3e4
-  JRSwizzle: 6242ff38485d870fc2636899048ee1ab883ae587
   libextobjc: 820a79dbbbc498611e04fffd07d2d52a5588e7ac
+  libffi: 64ef39353e747bb2b25e1026afd96a157bf9231c
   OCHamcrest: 739added27df87b26adb60ab5aa14b7e3cf58afe
   OCMockito: 8b6a244d7d81ba3cd2095bc357c20ae7b22c8977
-  ReactiveCocoa: 86033375e366207afad5a5067f2dd10a1f2d8f32
+  ReactiveCocoa: 1419dd4d49ffa6088e0b0b41b784b5bd9e60d6ff
 
 COCOAPODS: 0.25.0

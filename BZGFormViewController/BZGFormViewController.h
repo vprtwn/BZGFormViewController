@@ -17,11 +17,18 @@
 @property (nonatomic, assign) NSUInteger formSection;
 
 /**
- * Updates the display state of the info cell corresponding to the given form cell.
+ * Updates the display state of the info cell below a form field cell.
  *
- * @param cell The given form cell.
+ * @param cell an instance of BZGFormFieldCell in a BZGFormViewController's formFieldCells
  */
-- (void)updateInfoCellBelowFormFieldCell:(BZGFormFieldCell *)cell;
+- (void)updateInfoCellBelowFormFieldCell:(BZGFormFieldCell *)fieldCell;
 
+/**
+ * Returns the next form field cell. (Useful for implementing textFieldShouldReturn.)
+ *
+ * @param cell The starting form field cell.
+ * @return The next form field cell or nil if no cell is found.
+ */
+- (BZGFormFieldCell *)nextFormFieldCell:(BZGFormFieldCell *)fieldCell;
 
 @end

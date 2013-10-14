@@ -37,20 +37,31 @@
 
 - (void)testDefaults
 {
-    expect(formViewController.formFieldCells).to.equal([NSMutableArray new]);
+    expect(formViewController.formFieldCells).to.equal(nil);
     expect(formViewController.formSection).to.equal(0);
 }
 
 - (void)testSetFormFieldCells
 {
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+    [formViewController.tableView reloadData];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
+}
+
+- (void)testNextFormFieldCell
+{
+    formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+    [formViewController.tableView reloadData];
+    expect([formViewController nextFormFieldCell:cell1]).to.equal(cell2);
+    expect([formViewController nextFormFieldCell:cell2]).to.equal(cell3);
+    expect([formViewController nextFormFieldCell:cell3]).to.equal(nil);
 }
 
 // Expect an info cell to be displayed and then removed.
 - (void)testUpdateInfoCellBelowFormFieldCell_invalidToValid
 {
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+    [formViewController.tableView reloadData];
     cell1.validationState = BZGValidationStateInvalid;
     cell1.infoText = @"cell1 info text";
     [formViewController updateInfoCellBelowFormFieldCell:cell1];
@@ -71,6 +82,7 @@
 - (void)testUpdateInfoCellBelowFormFieldCell_invalidToWarning
 {
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+    [formViewController.tableView reloadData];
     cell1.validationState = BZGValidationStateInvalid;
     cell1.infoText = @"cell1 info text";
     [formViewController updateInfoCellBelowFormFieldCell:cell1];
@@ -92,6 +104,7 @@
 - (void)testUpdateInfoCellBelowFormFieldCell_warningChangeText
 {
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+    [formViewController.tableView reloadData];
     cell2.validationState = BZGValidationStateInvalid;
     cell2.infoText = @"cell2 info text";
     [formViewController updateInfoCellBelowFormFieldCell:cell2];
@@ -119,6 +132,7 @@
     cell1.textField = mockEditingTextField;
 
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+    [formViewController.tableView reloadData];
     cell1.validationState = BZGValidationStateInvalid;
 
     [formViewController updateInfoCellBelowFormFieldCell:cell1];
@@ -133,6 +147,7 @@
     cell3.textField = mockEditingTextField;
 
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+    [formViewController.tableView reloadData];
     cell3.validationState = BZGValidationStateWarning;
 
     [formViewController updateInfoCellBelowFormFieldCell:cell1];
