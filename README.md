@@ -1,7 +1,7 @@
 BZGFormViewController
 =====================
 
-BZGFormViewController is a lightweight UITableViewController subclass inspired by the sign up form UX in Twitter's iOS app.
+BZGFormViewController is a lightweight UITableViewController subclass inspired by the dynamic form validation UX in Twitter's iOS app.
 
 ![alt tag](https://raw.github.com/benzguo/BZGFormViewController/master/Screenshots/1.png)               ![alt tag](https://raw.github.com/benzguo/BZGFormViewController/master/Screenshots/3.png)
 
