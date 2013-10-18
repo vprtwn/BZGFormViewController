@@ -16,9 +16,12 @@
     if (self) {
         [self setDefaults];
         [self configureActivityIndicatorView];
-        [self configureAccessoryType];
         [self configureTextField];
         [self configureLabel];
+        [self configureBindings];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(textFieldTextDidEndEditing:)
+                                                     name:UITextFieldTextDidEndEditingNotification object:nil];
     }
     return self;
 }
@@ -51,31 +54,6 @@
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textField.textColor = [UIColor blackColor];
     [self addSubview:self.textField];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textFieldTextDidEndEditing:)
-                                                 name:UITextFieldTextDidEndEditingNotification object:nil];
-
-    @weakify(self);
-    RAC(self.textField, textColor) =
-    [RACObserve(self, validationState) map:^UIColor *(NSNumber *validationState) {
-        @strongify(self);
-        if (self.textField.editing || self.textField.isFirstResponder) {
-            return [UIColor blackColor];
-        }
-        switch (validationState.integerValue) {
-            case BZGValidationStateInvalid:
-                return [UIColor redColor];
-                break;
-            case BZGValidationStateValid:
-            case BZGValidationStateValidating:
-            case BZGValidationStateWarning:
-            case BZGValidationStateNone:
-            default:
-                return [UIColor blackColor];
-                break;
-        }
-    }];
 }
 
 - (void)configureLabel
@@ -103,7 +81,33 @@
     self.activityIndicatorView.hidden = YES;
     [self addSubview:self.activityIndicatorView];
 
+
+}
+
+- (void)configureBindings
+{
     @weakify(self);
+
+    RAC(self.textField, textColor) =
+    [RACObserve(self, validationState) map:^UIColor *(NSNumber *validationState) {
+        @strongify(self);
+        if (self.textField.editing || self.textField.isFirstResponder) {
+            return [UIColor blackColor];
+        }
+        switch (validationState.integerValue) {
+            case BZGValidationStateInvalid:
+                return [UIColor redColor];
+                break;
+            case BZGValidationStateValid:
+            case BZGValidationStateValidating:
+            case BZGValidationStateWarning:
+            case BZGValidationStateNone:
+            default:
+                return [UIColor blackColor];
+                break;
+        }
+    }];
+
     RAC(self.activityIndicatorView, hidden) =
     [RACObserve(self, validationState) map:^NSNumber *(NSNumber *validationState) {
         @strongify(self);
@@ -115,11 +119,7 @@
             return @YES;
         }
     }];
-}
 
-- (void)configureAccessoryType
-{
-    @weakify(self);
     RAC(self, accessoryType) =
     [RACObserve(self, validationState) map:^NSNumber *(NSNumber *validationState) {
         @strongify(self);
@@ -130,7 +130,6 @@
             return @(UITableViewCellAccessoryNone);
         }
     }];
-
 }
 
 

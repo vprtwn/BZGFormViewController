@@ -44,6 +44,12 @@
 
 - (void)setup
 {
+    [self configureTableView];
+}
+
+- (void)configureTableView
+{
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     [self.tableView setTableFooterView:[UIView new]];
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];

@@ -38,4 +38,5 @@
  */
 - (BZGFormFieldCell *)firstInvalidFormFieldCell;
 
+
 @end

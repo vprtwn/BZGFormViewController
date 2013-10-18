@@ -2,6 +2,7 @@ platform :ios, '5.0'
 pod 'ReactiveCocoa', '~>2.1.1'
 pod 'libextobjc', '~>0.3'
 pod 'BZGMailgunEmailValidation', '~>1.0.0'
+pod 'JVFloatLabeledTextField', '~>0.0.2'
 
 target :SignupFormTests do
     pod 'Expecta', '~>0.2.2'

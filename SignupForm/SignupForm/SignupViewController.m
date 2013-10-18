@@ -6,6 +6,7 @@
 
 #import "SignupViewController.h"
 #import "BZGFormFieldCell.h"
+#import "BZGFloatingPlaceholderFormFieldCell.h"
 #import "BZGMailgunEmailValidator.h"
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
@@ -19,27 +20,30 @@
 
 @implementation SignupViewController
 
+- (void)configureTableView
+{
+    [self.tableView setTableFooterView:[UIView new]];
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 100)];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 100)];
-    
-    self.usernameFieldCell = [[BZGFormFieldCell alloc] init];
-    self.usernameFieldCell.label.text = NSLocalizedString(@"Username", nil);
-    self.usernameFieldCell.textField.placeholder = NSLocalizedString(@"username", nil);
+    self.usernameFieldCell = [[BZGFloatingPlaceholderFormFieldCell alloc] init];
+    self.usernameFieldCell.textField.placeholder = NSLocalizedString(@"Username", nil);
     self.usernameFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.usernameFieldCell.textField.delegate = self;
 
-    self.emailFieldCell = [[BZGFormFieldCell alloc] init];
-    self.emailFieldCell.label.text = NSLocalizedString(@"Email", nil);
-    self.emailFieldCell.textField.placeholder = NSLocalizedString(@"name@example.com", nil);
+    self.emailFieldCell = [[BZGFloatingPlaceholderFormFieldCell alloc] init];
+    self.emailFieldCell.textField.placeholder = NSLocalizedString(@"Email", nil);
     self.emailFieldCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
     self.emailFieldCell.textField.delegate = self;
 
-    self.passwordFieldCell = [[BZGFormFieldCell alloc] init];
-    self.passwordFieldCell.label.text = NSLocalizedString(@"Password", nil);
-    self.passwordFieldCell.textField.placeholder = NSLocalizedString(@"Required", nil);
+    self.passwordFieldCell = [[BZGFloatingPlaceholderFormFieldCell alloc] init];
+    self.passwordFieldCell.textField.placeholder = NSLocalizedString(@"Password", nil);
     self.passwordFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordFieldCell.textField.secureTextEntry = YES;
     self.passwordFieldCell.textField.delegate = self;

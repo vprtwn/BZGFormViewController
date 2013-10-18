@@ -1,6 +1,7 @@
 PODS:
   - BZGMailgunEmailValidation (1.0.0)
   - Expecta (0.2.2)
+  - JVFloatLabeledTextField (0.0.2)
   - libextobjc (0.3):
     - libextobjc/EXTADT
     - libextobjc/EXTAnnotation
@@ -99,6 +100,7 @@ PODS:
 DEPENDENCIES:
   - BZGMailgunEmailValidation (~> 1.0.0)
   - Expecta (~> 0.2.2)
+  - JVFloatLabeledTextField (~> 0.0.2)
   - libextobjc (~> 0.3)
   - OCMockito (~> 1.0.0)
   - ReactiveCocoa (~> 2.1.1)
@@ -106,6 +108,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   BZGMailgunEmailValidation: 7dc589ad0c982fa9d1f087c14edcf8419f5a5a98
   Expecta: 99adbb2e366a02796477523bfd426143350d9caf
+  JVFloatLabeledTextField: a74984afa47f8f18e59361590f64768f37fd16c1
   libextobjc: 820a79dbbbc498611e04fffd07d2d52a5588e7ac
   libffi: 64ef39353e747bb2b25e1026afd96a157bf9231c
   OCHamcrest: 739added27df87b26adb60ab5aa14b7e3cf58afe
