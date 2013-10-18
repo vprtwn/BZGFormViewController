@@ -52,6 +52,7 @@
                                        self.bounds.size.height);
     self.textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.textField.textColor = [UIColor blackColor];
     [self addSubview:self.textField];
 }
