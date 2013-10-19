@@ -72,21 +72,16 @@
 }
 
 - (void)showInfoCellBelowFormFieldCell:(BZGFormFieldCell *)fieldCell
-                                  text:(NSString *)text
 {
     NSUInteger cellIndex = [self.formFieldCells indexOfObject:fieldCell];
     if (cellIndex == NSNotFound) return;
 
-    // if an info cell is already showing, update the cell's text
+    // if an info cell is already showing, do nothing
     BZGFormInfoCell *infoCell = [self infoCellBelowFormFieldCell:fieldCell];
-    if (infoCell) {
-        infoCell.infoLabel.text = text;
-        return;
-    }
+    if (infoCell) return;
 
-    // otherwise, create a new cell
-    infoCell = [[BZGFormInfoCell alloc] initWithText:text];
-    [self.formFieldCells insertObject:infoCell atIndex:cellIndex+1];
+    // otherwise, add the field cell's info cell to the table view
+    [self.formFieldCells insertObject:fieldCell.infoCell atIndex:cellIndex+1];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cellIndex+1
                                                 inSection:self.formSection];
     [self.tableView insertRowsAtIndexPaths:@[indexPath]
@@ -113,7 +108,7 @@
 {
     if (fieldCell.validationState == BZGValidationStateInvalid || fieldCell.validationState == BZGValidationStateWarning) {
         if (!fieldCell.textField.editing) {
-            [self showInfoCellBelowFormFieldCell:fieldCell text:fieldCell.infoText];
+            [self showInfoCellBelowFormFieldCell:fieldCell];
         }
     } else {
         [self removeInfoCellBelowFormFieldCell:fieldCell];

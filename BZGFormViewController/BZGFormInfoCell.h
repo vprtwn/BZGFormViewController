@@ -16,4 +16,9 @@
  */
 - (id)initWithText:(NSString *)text;
 
+/**
+ * Sets the cell's info text, resizing the cell and label as necessary.
+ */
+- (void)setText:(NSString *)text;
+
 @end

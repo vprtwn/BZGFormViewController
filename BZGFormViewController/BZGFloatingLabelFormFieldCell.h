@@ -1,11 +1,11 @@
 //
-//  BZGFloatingPlaceholderFormFieldCell.h
+//  BZGFloatingLabelFormFieldCell.h
 //
 //  https://github.com/benzguo/BZGFormViewController
 //
 
 #import "BZGFormFieldCell.h"
 
-@interface BZGFloatingPlaceholderFormFieldCell : BZGFormFieldCell
+@interface BZGFloatingLabelFormFieldCell : BZGFormFieldCell
 
 @end

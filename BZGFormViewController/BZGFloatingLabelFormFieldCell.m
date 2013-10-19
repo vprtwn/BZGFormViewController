@@ -1,13 +1,13 @@
 //
-//  BZGFloatingPlaceholderFormFieldCell.m
+//  BZGFloatingLabelFormFieldCell.m
 //
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-#import "BZGFloatingPlaceholderFormFieldCell.h"
+#import "BZGFloatingLabelFormFieldCell.h"
 #import "JVFloatLabeledTextField.h"
 
-@implementation BZGFloatingPlaceholderFormFieldCell
+@implementation BZGFloatingLabelFormFieldCell
 
 - (void)configureTextField
 {

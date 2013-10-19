@@ -5,6 +5,7 @@
 //
 
 #import "BZGFormFieldCell.h"
+#import "BZGFormInfoCell.h"
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
 
@@ -15,13 +16,15 @@
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     if (self) {
         [self setDefaults];
+        [self configureInfoCell];
         [self configureActivityIndicatorView];
         [self configureTextField];
         [self configureLabel];
         [self configureBindings];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(textFieldTextDidEndEditing:)
-                                                     name:UITextFieldTextDidEndEditingNotification object:nil];
+                                                     name:UITextFieldTextDidEndEditingNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -40,7 +43,11 @@
     self.imageView.hidden = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.validationState = BZGValidationStateNone;
-    self.infoText = @"";
+}
+
+- (void)configureInfoCell
+{
+    self.infoCell = [[BZGFormInfoCell alloc] init];
 }
 
 - (void)configureTextField
@@ -131,6 +138,8 @@
             return @(UITableViewCellAccessoryNone);
         }
     }];
+    
+#warning TODO flush values
 }
 
 

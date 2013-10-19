@@ -72,7 +72,7 @@
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
     [formViewController.tableView reloadData];
     cell1.validationState = BZGValidationStateInvalid;
-    cell1.infoText = @"cell1 info text";
+    [cell1.infoCell setText:@"cell1 info text"];
     [formViewController updateInfoCellBelowFormFieldCell:cell1];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
     NSIndexPath *infoCellIndexPath = [NSIndexPath indexPathForRow:1 inSection:formViewController.formSection];
@@ -93,7 +93,7 @@
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
     [formViewController.tableView reloadData];
     cell1.validationState = BZGValidationStateInvalid;
-    cell1.infoText = @"cell1 info text";
+    [cell1.infoCell setText:@"cell1 info text"];
     [formViewController updateInfoCellBelowFormFieldCell:cell1];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
     NSIndexPath *infoCellIndexPath = [NSIndexPath indexPathForRow:1 inSection:formViewController.formSection];
@@ -115,7 +115,7 @@
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
     [formViewController.tableView reloadData];
     cell2.validationState = BZGValidationStateInvalid;
-    cell2.infoText = @"cell2 info text";
+    [cell2.infoCell setText:@"cell2 info text"];
     [formViewController updateInfoCellBelowFormFieldCell:cell2];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
     NSIndexPath *infoCellIndexPath = [NSIndexPath indexPathForRow:2 inSection:formViewController.formSection];
@@ -124,7 +124,7 @@
     expect(((BZGFormInfoCell *)infoCell).infoLabel.text).to.equal(@"cell2 info text");
 
     cell2.validationState = BZGValidationStateWarning;
-    cell2.infoText = @"cell2 info text changed";
+    [cell2.infoCell setText:@"cell2 info text changed"];
     [formViewController updateInfoCellBelowFormFieldCell:cell2];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
     infoCellIndexPath = [NSIndexPath indexPathForRow:2 inSection:formViewController.formSection];
