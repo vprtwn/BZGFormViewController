@@ -6,7 +6,7 @@
 
 #import "SignupViewController.h"
 #import "BZGFormFieldCell.h"
-#import "BZGFloatingPlaceholderFormFieldCell.h"
+#import "BZGFloatingLabelFormFieldCell.h"
 #import "BZGMailgunEmailValidator.h"
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
@@ -32,17 +32,17 @@
 {
     [super viewDidLoad];
 
-    self.usernameFieldCell = [[BZGFloatingPlaceholderFormFieldCell alloc] init];
+    self.usernameFieldCell = [[BZGFloatingLabelFormFieldCell alloc] init];
     self.usernameFieldCell.textField.placeholder = NSLocalizedString(@"Username", nil);
     self.usernameFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.usernameFieldCell.textField.delegate = self;
 
-    self.emailFieldCell = [[BZGFloatingPlaceholderFormFieldCell alloc] init];
+    self.emailFieldCell = [[BZGFloatingLabelFormFieldCell alloc] init];
     self.emailFieldCell.textField.placeholder = NSLocalizedString(@"Email", nil);
     self.emailFieldCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
     self.emailFieldCell.textField.delegate = self;
 
-    self.passwordFieldCell = [[BZGFloatingPlaceholderFormFieldCell alloc] init];
+    self.passwordFieldCell = [[BZGFloatingLabelFormFieldCell alloc] init];
     self.passwordFieldCell.textField.placeholder = NSLocalizedString(@"Password", nil);
     self.passwordFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordFieldCell.textField.secureTextEntry = YES;
