@@ -6,6 +6,7 @@
 
 #import "SignupViewController.h"
 #import "BZGFormFieldCell.h"
+#import "BZGFormInfoCell.h"
 #import "BZGFloatingLabelFormFieldCell.h"
 #import "BZGMailgunEmailValidator.h"
 #import "ReactiveCocoa.h"
@@ -154,7 +155,7 @@
     else if ([cell isEqual:self.usernameFieldCell]) {
         if (newText.length < 5) {
             cell.validationState = BZGValidationStateInvalid;
-            cell.infoText = NSLocalizedString(@"Username must be at least 5 characters long.", nil);
+            [cell.infoCell setText:@"Username must be at least 5 characters long."];
         } else {
             cell.validationState = BZGValidationStateValid;
         }
@@ -165,7 +166,7 @@
     else if ([cell isEqual:self.passwordFieldCell]) {
         if (newText.length < 8) {
             cell.validationState = BZGValidationStateInvalid;
-            cell.infoText = NSLocalizedString(@"Password must be at least 8 characters long.", nil);
+            [cell.infoCell setText:@"Password must be at least 8 characters long."];
         } else {
             cell.validationState = BZGValidationStateValid;
         }
@@ -195,11 +196,11 @@
                                                   cell.validationState = BZGValidationStateValid;
                                               } else {
                                                   cell.validationState = BZGValidationStateInvalid;
-                                                  cell.infoText = @"Email address is invalid.";
+                                                  [cell.infoCell setText:@"Email address is invalid."];
                                               }
                                               if (didYouMean) {
                                                   cell.validationState = BZGValidationStateWarning;
-                                                  cell.infoText = [NSString stringWithFormat:@"Did you mean %@?", didYouMean];
+                                                  [cell.infoCell setText:[NSString stringWithFormat:@"Did you mean %@?", didYouMean]];
                                               }
                                               [self updateInfoCellBelowFormFieldCell:cell];
                                           } failure:^(NSError *error) {
