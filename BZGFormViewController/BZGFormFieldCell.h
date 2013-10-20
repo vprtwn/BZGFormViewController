@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 
 @class BZGFormInfoCell;
 
-@interface BZGFormFieldCell : UITableViewCell
+@interface BZGFormFieldCell : UITableViewCell <UITextFieldDelegate>
 
 @property (strong, nonatomic) UILabel *label;
 @property (strong, nonatomic) UITextField *textField;

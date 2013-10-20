@@ -148,7 +148,7 @@
 {
     BZGFormFieldCell *cell = [BZGFormFieldCell parentCellForTextField:textField];
     if (!cell) return;
-
+    
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
@@ -160,7 +160,7 @@
 
     NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
 
-    // validation state should be None if the field is empty
+    // validation state should be None if the field is empty.
     if (newText.length == 0) {
         cell.validationState = BZGValidationStateNone;
         cell.shouldShowInfoCell = NO;
@@ -180,6 +180,8 @@
         cell.shouldShowInfoCell = NO;
     }
     else if ([cell isEqual:self.passwordFieldCell]) {
+        // because this is a secure text field, reset the validation state every time.
+        cell.validationState = BZGValidationStateNone;
         if (newText.length < 8) {
             cell.validationState = BZGValidationStateInvalid;
             [cell.infoCell setText:@"Password must be at least 8 characters long."];

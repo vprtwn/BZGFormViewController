@@ -166,6 +166,15 @@
     UITextField *textField = (UITextField *)notification.object;
     if ([textField isEqual:self.textField]) {
         self.validationState = self.validationState;
+        
+        // Secure text fields clear on begin editing on iOS6+.
+        // If it seems like the text field has been cleared,
+        // invoke the text change delegate method again to ensure proper validation.
+        if (textField.secureTextEntry && textField.text.length <= 1) {
+            [self.textField.delegate textField:self.textField
+                 shouldChangeCharactersInRange:NSMakeRange(0, textField.text.length)
+                             replacementString:textField.text];
+        }
     }
 }
 
@@ -176,6 +185,5 @@
         self.validationState = self.validationState;
     }
 }
-
 
 @end
