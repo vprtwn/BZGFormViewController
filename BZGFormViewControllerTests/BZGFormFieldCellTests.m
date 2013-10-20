@@ -64,16 +64,6 @@
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
 }
 
-- (void)testFormFieldWarningState
-{
-    formFieldCell.validationState = BZGValidationStateWarning;
-    expect(formFieldCell.validationState).to.equal(BZGValidationStateWarning);
-    expect(formFieldCell.textField.textColor).to.equal([UIColor blackColor]);
-    expect(formFieldCell.activityIndicatorView.hidden).to.beTruthy;
-    expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
-}
-
-
 - (void)testFormFieldNoneState
 {
     formFieldCell.validationState = BZGValidationStateNone;

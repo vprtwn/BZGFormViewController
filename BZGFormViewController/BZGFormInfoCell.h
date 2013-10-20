@@ -6,6 +6,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef BOOL (^BZGTapGestureBlock)();
+
 @interface BZGFormInfoCell : UITableViewCell
 
 /// The cell's label.
@@ -20,5 +22,10 @@
  * Sets the cell's info text, resizing the cell and label as necessary.
  */
 - (void)setText:(NSString *)text;
+
+/**
+ * Sets the block executed when the cell is tapped.
+ */
+- (void)setTapGestureBlock:(BZGTapGestureBlock)block;
 
 @end

@@ -67,11 +67,11 @@
 }
 
 // Expect an info cell to be displayed and then removed.
-- (void)testUpdateInfoCellBelowFormFieldCell_invalidToValid
+- (void)testUpdateInfoCellBelowFormFieldCell_showToNoShow
 {
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
     [formViewController.tableView reloadData];
-    cell1.validationState = BZGValidationStateInvalid;
+    cell1.shouldShowInfoCell = YES;
     [cell1.infoCell setText:@"cell1 info text"];
     [formViewController updateInfoCellBelowFormFieldCell:cell1];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
@@ -80,7 +80,7 @@
     expect(infoCell).to.beKindOf([BZGFormInfoCell class]);
     expect(((BZGFormInfoCell *)infoCell).infoLabel.text).to.equal(@"cell1 info text");
 
-    cell1.validationState = BZGValidationStateValid;
+    cell1.shouldShowInfoCell = NO;
     [formViewController updateInfoCellBelowFormFieldCell:cell1];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
     infoCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:formViewController.formSection];
@@ -88,33 +88,11 @@
 }
 
 // Expect an info cell to be displayed and then updated.
-- (void)testUpdateInfoCellBelowFormFieldCell_invalidToWarning
+- (void)testUpdateInfoCellBelowFormFieldCell_showThenChangeText
 {
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
     [formViewController.tableView reloadData];
-    cell1.validationState = BZGValidationStateInvalid;
-    [cell1.infoCell setText:@"cell1 info text"];
-    [formViewController updateInfoCellBelowFormFieldCell:cell1];
-    expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
-    NSIndexPath *infoCellIndexPath = [NSIndexPath indexPathForRow:1 inSection:formViewController.formSection];
-    UITableViewCell *infoCell = [formViewController.tableView cellForRowAtIndexPath:infoCellIndexPath];
-    expect(infoCell).to.beKindOf([BZGFormInfoCell class]);
-    expect(((BZGFormInfoCell *)infoCell).infoLabel.text).to.equal(@"cell1 info text");
-
-    cell1.validationState = BZGValidationStateWarning;
-    [formViewController updateInfoCellBelowFormFieldCell:cell1];
-    expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
-    infoCellIndexPath = [NSIndexPath indexPathForRow:1 inSection:formViewController.formSection];
-    infoCell = [formViewController.tableView cellForRowAtIndexPath:infoCellIndexPath];
-    expect(infoCell).to.beKindOf([BZGFormInfoCell class]);
-}
-
-// Expect an info cell to be displayed and then updated.
-- (void)testUpdateInfoCellBelowFormFieldCell_warningChangeText
-{
-    formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
-    [formViewController.tableView reloadData];
-    cell2.validationState = BZGValidationStateInvalid;
+    cell2.shouldShowInfoCell = YES;
     [cell2.infoCell setText:@"cell2 info text"];
     [formViewController updateInfoCellBelowFormFieldCell:cell2];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
@@ -123,7 +101,6 @@
     expect(infoCell).to.beKindOf([BZGFormInfoCell class]);
     expect(((BZGFormInfoCell *)infoCell).infoLabel.text).to.equal(@"cell2 info text");
 
-    cell2.validationState = BZGValidationStateWarning;
     [cell2.infoCell setText:@"cell2 info text changed"];
     [formViewController updateInfoCellBelowFormFieldCell:cell2];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
@@ -134,7 +111,7 @@
 }
 
 // Expect no info cell to be displayed.
-- (void)testUpdateInfoCellBelowFormFieldCell_invalid_editing
+- (void)testUpdateInfoCellBelowFormFieldCell_showWhileEditing
 {
     UITextField *mockEditingTextField = mock([UITextField class]);
     [given([mockEditingTextField isEditing]) willReturnBool:YES];
@@ -142,26 +119,10 @@
 
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
     [formViewController.tableView reloadData];
-    cell1.validationState = BZGValidationStateInvalid;
+    cell1.shouldShowInfoCell = YES;
 
     [formViewController updateInfoCellBelowFormFieldCell:cell1];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
 }
-
-// Expect no info cell to be displayed.
-- (void)testUpdateInfoCellBelowFormFieldCell_warning_editing
-{
-    UITextField *mockEditingTextField = mock([UITextField class]);
-    [given([mockEditingTextField isEditing]) willReturnBool:YES];
-    cell3.textField = mockEditingTextField;
-
-    formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
-    [formViewController.tableView reloadData];
-    cell3.validationState = BZGValidationStateWarning;
-
-    [formViewController updateInfoCellBelowFormFieldCell:cell1];
-    expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
-}
-
 
 @end

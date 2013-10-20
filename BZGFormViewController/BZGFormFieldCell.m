@@ -21,9 +21,14 @@
         [self configureTextField];
         [self configureLabel];
         [self configureBindings];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(textFieldTextDidEndEditing:)
                                                      name:UITextFieldTextDidEndEditingNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(textFieldTextDidChange:)
+                                                     name:UITextFieldTextDidChangeNotification
                                                    object:nil];
     }
     return self;
@@ -43,6 +48,7 @@
     self.imageView.hidden = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.validationState = BZGValidationStateNone;
+    self.shouldShowInfoCell = NO;
 }
 
 - (void)configureInfoCell
@@ -108,7 +114,6 @@
                 break;
             case BZGValidationStateValid:
             case BZGValidationStateValidating:
-            case BZGValidationStateWarning:
             case BZGValidationStateNone:
             default:
                 return [UIColor blackColor];
@@ -138,8 +143,6 @@
             return @(UITableViewCellAccessoryNone);
         }
     }];
-    
-#warning TODO flush values
 }
 
 
@@ -153,9 +156,19 @@
 }
 
 
-#pragma mark - UITextField notifications
+#pragma mark - UITextField notification selectors
 
-// Flush validation state signal
+// I'm using these notifications to flush the validation state signal.
+// It works, but seems hacky. Is there a better way?
+
+- (void)textFieldTextDidChange:(NSNotification *)notification
+{
+    UITextField *textField = (UITextField *)notification.object;
+    if ([textField isEqual:self.textField]) {
+        self.validationState = self.validationState;
+    }
+}
+
 - (void)textFieldTextDidEndEditing:(NSNotification *)notification
 {
     UITextField *textField = (UITextField *)notification.object;

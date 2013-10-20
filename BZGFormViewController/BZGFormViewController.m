@@ -75,6 +75,9 @@
 {
     NSUInteger cellIndex = [self.formFieldCells indexOfObject:fieldCell];
     if (cellIndex == NSNotFound) return;
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cellIndex+1
+                                                inSection:self.formSection];
 
     // if an info cell is already showing, do nothing
     BZGFormInfoCell *infoCell = [self infoCellBelowFormFieldCell:fieldCell];
@@ -82,8 +85,6 @@
 
     // otherwise, add the field cell's info cell to the table view
     [self.formFieldCells insertObject:fieldCell.infoCell atIndex:cellIndex+1];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cellIndex+1
-                                                inSection:self.formSection];
     [self.tableView insertRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -106,10 +107,8 @@
 
 - (void)updateInfoCellBelowFormFieldCell:(BZGFormFieldCell *)fieldCell
 {
-    if (fieldCell.validationState == BZGValidationStateInvalid || fieldCell.validationState == BZGValidationStateWarning) {
-        if (!fieldCell.textField.editing) {
-            [self showInfoCellBelowFormFieldCell:fieldCell];
-        }
+    if (fieldCell.shouldShowInfoCell && !fieldCell.textField.editing) {
+        [self showInfoCellBelowFormFieldCell:fieldCell];
     } else {
         [self removeInfoCellBelowFormFieldCell:fieldCell];
     }

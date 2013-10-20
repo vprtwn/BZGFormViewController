@@ -4,8 +4,15 @@
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-
 #import "BZGFormInfoCell.h"
+
+@interface BZGFormInfoCell () {
+    BZGTapGestureBlock _tapGestureBlock;
+}
+
+@property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
+
+@end
 
 @implementation BZGFormInfoCell
 
@@ -35,6 +42,11 @@
     [self updateSize];
 }
 
+- (void)setTapGestureBlock:(BZGTapGestureBlock)block
+{
+    _tapGestureBlock = block;
+}
+
 - (void)setup
 {
     self.textLabel.hidden = YES;
@@ -49,13 +61,24 @@
     self.infoLabel.numberOfLines = 0;
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     self.infoLabel.text = @"";
+    
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction)];
+    [self addGestureRecognizer:self.tapGestureRecognizer];
+}
+
+- (void)tapGestureAction
+{
+    if (_tapGestureBlock) {
+        _tapGestureBlock();
+    }
 }
 
 - (void)updateSize
 {
-    CGFloat verticalPadding = self.frame.size.height * 0.3;
-    CGFloat currentHeight = self.infoLabel.frame.size.height;
-    CGFloat heightThatFits = [self.infoLabel sizeThatFits:self.infoLabel.frame.size].height;
+    CGFloat verticalPadding = 10;
+    CGSize currentSize = self.infoLabel.frame.size;
+    CGFloat currentHeight = currentSize.height;
+    CGFloat heightThatFits = [self.infoLabel sizeThatFits:currentSize].height;
     CGFloat adjustedHeightThatFits = heightThatFits + verticalPadding*2;
     CGFloat newHeight = currentHeight;
     CGFloat yPadding = 0;
@@ -63,9 +86,9 @@
         newHeight = adjustedHeightThatFits;
         yPadding = 0;
     }
-    [self.infoLabel setFrame:CGRectMake(self.infoLabel.frame.origin.x,
-                                        self.infoLabel.frame.origin.y + yPadding,
-                                        self.infoLabel.frame.size.width,
+    [self.infoLabel setFrame:CGRectMake(0,
+                                        yPadding,
+                                        self.frame.size.width,
                                         newHeight)];
     [self addSubview:self.infoLabel];
     [self setFrame:CGRectMake(self.frame.origin.x,

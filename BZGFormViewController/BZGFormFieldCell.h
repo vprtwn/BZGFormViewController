@@ -10,7 +10,6 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
     BZGValidationStateInvalid,
     BZGValidationStateValid,
     BZGValidationStateValidating,
-    BZGValidationStateWarning,
     BZGValidationStateNone
 };
 
@@ -22,14 +21,19 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 @property (strong, nonatomic) UITextField *textField;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
 
-/// The form field's current validation state. Default is BZGValidationStateNone. A BZGFormViewController will use this property to display a BZGFormInfoCell if the cell is in a 'valid' or 'warning' state.
+/// The current validation state. Default is BZGValidationStateNone.
 @property (assign, nonatomic) BZGValidationState validationState;
 
-/// A BZGFormViewController can show this info cell below the field cell.
+/// A BZGFormInfoCell instance belonging to this form field cell.
 @property (strong, nonatomic) BZGFormInfoCell *infoCell;
+
+/// A value indicating whether or not the cell's info cell should be shown.
+@property (assign, nonatomic) BOOL shouldShowInfoCell;
 
 /**
  * Returns the parent BZGFormFieldCell for the given text field. If no cell is found, returns nil.
+ * 
+ * @param textField A UITextField instance that may or may not belong to this BZGFormFieldCell instance.
  */
 + (BZGFormFieldCell *)parentCellForTextField:(UITextField *)textField;
 

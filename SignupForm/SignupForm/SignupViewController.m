@@ -17,6 +17,8 @@
 
 @interface SignupViewController ()
 
+@property (strong, nonatomic) UITableViewCell *signupCell;
+
 @end
 
 @implementation SignupViewController
@@ -80,24 +82,32 @@
     if (cell) {
         return cell;
     } else {
-        UITableViewCell *signupCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        signupCell.textLabel.text = @"Sign Up";
-        signupCell.textLabel.textAlignment = NSTextAlignmentCenter;
-        RAC(signupCell, selectionStyle) =
+        return self.signupCell;
+    }
+}
+
+- (UITableViewCell *)signupCell
+{
+    UITableViewCell *cell = _signupCell;
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell.textLabel.text = @"Sign Up";
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        RAC(cell, selectionStyle) =
         [RACSignal combineLatest:@[[RACObserve(self.usernameFieldCell,validationState) skip:1],
                                    [RACObserve(self.emailFieldCell, validationState) skip:1],
                                    [RACObserve(self.passwordFieldCell, validationState) skip:1]]
-         reduce:^NSNumber *(NSNumber *u, NSNumber *e, NSNumber *p){
-             if (u.integerValue == BZGValidationStateValid
-                 && e.integerValue == BZGValidationStateValid
-                 && p.integerValue == BZGValidationStateValid) {
-                 return @(UITableViewCellSelectionStyleDefault);
-             } else {
-                 return @(UITableViewCellEditingStyleNone);
-             }
-         }];
-
-        RAC(signupCell.textLabel, textColor) =
+                          reduce:^NSNumber *(NSNumber *u, NSNumber *e, NSNumber *p){
+                              if (u.integerValue == BZGValidationStateValid
+                                  && e.integerValue == BZGValidationStateValid
+                                  && p.integerValue == BZGValidationStateValid) {
+                                  return @(UITableViewCellSelectionStyleDefault);
+                              } else {
+                                  return @(UITableViewCellEditingStyleNone);
+                              }
+                          }];
+        
+        RAC(cell.textLabel, textColor) =
         [RACSignal combineLatest:@[[RACObserve(self.usernameFieldCell,validationState) skip:1],
                                    [RACObserve(self.emailFieldCell, validationState) skip:1],
                                    [RACObserve(self.passwordFieldCell, validationState) skip:1]]
@@ -110,9 +120,11 @@
                                   return [UIColor lightGrayColor];
                               }
                           }];
-
-        return signupCell;
+        self.usernameFieldCell.validationState = BZGValidationStateNone;
+        self.emailFieldCell.validationState = BZGValidationStateNone;
+        self.passwordFieldCell.validationState = BZGValidationStateNone;
     }
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -151,24 +163,30 @@
     // validation state should be None if the field is empty
     if (newText.length == 0) {
         cell.validationState = BZGValidationStateNone;
+        cell.shouldShowInfoCell = NO;
     }
     else if ([cell isEqual:self.usernameFieldCell]) {
         if (newText.length < 5) {
             cell.validationState = BZGValidationStateInvalid;
             [cell.infoCell setText:@"Username must be at least 5 characters long."];
+            cell.shouldShowInfoCell = YES;
         } else {
             cell.validationState = BZGValidationStateValid;
+            cell.shouldShowInfoCell = NO;
         }
     }
     else if ([cell isEqual:self.emailFieldCell]) {
         cell.validationState = BZGValidationStateNone;
+        cell.shouldShowInfoCell = NO;
     }
     else if ([cell isEqual:self.passwordFieldCell]) {
         if (newText.length < 8) {
             cell.validationState = BZGValidationStateInvalid;
             [cell.infoCell setText:@"Password must be at least 8 characters long."];
+            cell.shouldShowInfoCell = YES;
         } else {
             cell.validationState = BZGValidationStateValid;
+            cell.shouldShowInfoCell = NO;
         }
     }
     [self updateInfoCellBelowFormFieldCell:cell];
@@ -194,17 +212,28 @@
                                           success:^(BOOL isValid, NSString *didYouMean) {
                                               if (isValid) {
                                                   cell.validationState = BZGValidationStateValid;
+                                                  cell.shouldShowInfoCell = NO;
                                               } else {
                                                   cell.validationState = BZGValidationStateInvalid;
                                                   [cell.infoCell setText:@"Email address is invalid."];
+                                                  cell.shouldShowInfoCell = YES;
                                               }
                                               if (didYouMean) {
-                                                  cell.validationState = BZGValidationStateWarning;
                                                   [cell.infoCell setText:[NSString stringWithFormat:@"Did you mean %@?", didYouMean]];
+                                                  @weakify(cell);
+                                                  @weakify(self);
+                                                  [cell.infoCell setTapGestureBlock:^BOOL{
+                                                      @strongify(cell);
+                                                      @strongify(self);
+                                                      [cell.textField setText:didYouMean];
+                                                      [self textFieldDidEndEditing:cell.textField];
+                                                  }];
+                                                  cell.shouldShowInfoCell = YES;
                                               }
                                               [self updateInfoCellBelowFormFieldCell:cell];
                                           } failure:^(NSError *error) {
                                               cell.validationState = BZGValidationStateNone;
+                                              cell.shouldShowInfoCell = NO;
                                               [self updateInfoCellBelowFormFieldCell:cell];
                                           }];
         return;
