@@ -1,10 +1,6 @@
 BZGFormViewController
 =====================
 
-*Started this mostly as an experiment in cloning the Twitter-for-iOS signup form. 
-When I added [JVFloatLabeledTextField](https://github.com/jverdi/JVFloatLabeledTextField) it reached an unprecedented level of hotness, so I made the repo private.
-If we think this is worth open sourcing later, I'd be down for re-namespacing everything and adding it to Venmo's public github.*
-
 BZGFormViewController is a lightweight UITableViewController subclass inspired by the dynamic form validation UX in Twitter's iOS app.
 
 ![alt tag](https://raw.github.com/benzguo/BZGFormViewController/master/Screenshots/1.png)
