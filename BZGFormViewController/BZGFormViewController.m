@@ -21,20 +21,6 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) [self setup];
-    return self;
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) [self setup];
-    return self;
-}
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -146,31 +132,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == self.formSection) {
-        if (self.formFieldCells) {
-            return self.formFieldCells.count;
-        }
+    if (self.formFieldCells) {
+        return self.formFieldCells.count;
     }
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == self.formSection) {
-        if (self.formFieldCells) {
-            return [self.formFieldCells objectAtIndex:indexPath.row];
-        }
+    if (self.formFieldCells) {
+        return [self.formFieldCells objectAtIndex:indexPath.row];
     }
     return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == self.formSection) {
-        if (self.formFieldCells) {
-            UITableViewCell *cell = [self.formFieldCells objectAtIndex:indexPath.row];
-            return cell.frame.size.height;
-        }
+    if (self.formFieldCells) {
+        UITableViewCell *cell = [self.formFieldCells objectAtIndex:indexPath.row];
+        return cell.frame.size.height;
     }
     return 0;
 }

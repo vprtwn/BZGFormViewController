@@ -68,9 +68,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger rowCount = [super tableView:tableView numberOfRowsInSection:section];
-    if (rowCount) {
-        return rowCount;
+    if (section == self.formSection) {
+        return [super tableView:tableView numberOfRowsInSection:section];
     } else {
         return 1;
     }
@@ -78,9 +77,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    if (cell) {
-        return cell;
+    if (indexPath.section == self.formSection) {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     } else {
         return self.signupCell;
     }
@@ -134,9 +132,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = [super tableView:tableView heightForRowAtIndexPath:indexPath];
-    if (height) {
-        return height;
+    if (indexPath.section == self.formSection) {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     } else {
         return 44;
     }
