@@ -21,7 +21,7 @@
         [self configureTextField];
         [self configureLabel];
         [self configureBindings];
-        
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(textFieldTextDidEndEditing:)
                                                      name:UITextFieldTextDidEndEditingNotification

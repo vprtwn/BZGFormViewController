@@ -101,7 +101,7 @@
                                   && p.integerValue == BZGValidationStateValid) {
                                   return @(UITableViewCellSelectionStyleDefault);
                               } else {
-                                  return @(UITableViewCellEditingStyleNone);
+                                  return @(UITableViewCellSelectionStyleNone);
                               }
                           }];
         
@@ -118,9 +118,8 @@
                                   return [UIColor lightGrayColor];
                               }
                           }];
-        self.usernameFieldCell.validationState = BZGValidationStateNone;
-        self.emailFieldCell.validationState = BZGValidationStateNone;
-        self.passwordFieldCell.validationState = BZGValidationStateNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.textColor = [UIColor lightGrayColor];
     }
     return cell;
 }
