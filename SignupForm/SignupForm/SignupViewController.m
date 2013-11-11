@@ -56,7 +56,7 @@
                                                            self.passwordFieldCell]];
     self.formSection = 0;
 
-    self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY operationQueue:[NSOperationQueue mainQueue]];
+    self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
 }
 
 #pragma mark - UITableViewDataSource
@@ -227,6 +227,8 @@
                                                       [self textFieldDidEndEditing:cell.textField];
                                                   }];
                                                   cell.shouldShowInfoCell = YES;
+                                              } else {
+                                                  [cell.infoCell setTapGestureBlock:nil];
                                               }
                                               [self updateInfoCellBelowFormFieldCell:cell];
                                           } failure:^(NSError *error) {
