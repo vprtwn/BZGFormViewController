@@ -59,8 +59,13 @@
 - (void)configureTextField
 {
     CGFloat textFieldX = self.bounds.size.width * 0.35;
+//    CGFloat textFieldY = 0;
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+//        textFieldY = 5;
+//    }
+    self.textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     CGRect textFieldFrame = CGRectMake(textFieldX,
-                                       0,
+                                       12,
                                        self.bounds.size.width - textFieldX - self.activityIndicatorView.frame.size.width,
                                        self.bounds.size.height);
     self.textField = [[UITextField alloc] initWithFrame:textFieldFrame];

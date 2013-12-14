@@ -7,7 +7,6 @@
 #import "SignupViewController.h"
 #import "BZGFormFieldCell.h"
 #import "BZGFormInfoCell.h"
-#import "BZGFloatingLabelFormFieldCell.h"
 #import "BZGMailgunEmailValidator.h"
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
@@ -26,7 +25,10 @@
 - (void)configureTableView
 {
     [self.tableView setTableFooterView:[UIView new]];
-    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    }
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 100)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
@@ -35,17 +37,20 @@
 {
     [super viewDidLoad];
 
-    self.usernameFieldCell = [[BZGFloatingLabelFormFieldCell alloc] init];
+    self.usernameFieldCell = [[BZGFormFieldCell alloc] init];
+    self.usernameFieldCell.label.text = @"Username";
     self.usernameFieldCell.textField.placeholder = NSLocalizedString(@"Username", nil);
     self.usernameFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.usernameFieldCell.textField.delegate = self;
 
-    self.emailFieldCell = [[BZGFloatingLabelFormFieldCell alloc] init];
+    self.emailFieldCell = [[BZGFormFieldCell alloc] init];
+    self.emailFieldCell.label.text = @"Email";
     self.emailFieldCell.textField.placeholder = NSLocalizedString(@"Email", nil);
     self.emailFieldCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
     self.emailFieldCell.textField.delegate = self;
 
-    self.passwordFieldCell = [[BZGFloatingLabelFormFieldCell alloc] init];
+    self.passwordFieldCell = [[BZGFormFieldCell alloc] init];
+    self.passwordFieldCell.label.text = @"Password";
     self.passwordFieldCell.textField.placeholder = NSLocalizedString(@"Password", nil);
     self.passwordFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordFieldCell.textField.secureTextEntry = YES;

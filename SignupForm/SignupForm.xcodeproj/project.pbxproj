@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		30709D4AA1994EF090749611 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F90CF32A864DEC854302D2 /* libPods.a */; };
 		799AEBE944DD4B758103BA7E /* libPods-SignupFormTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */; };
-		EB1BBC3C1811D46600C8BA37 /* BZGFloatingLabelFormFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBC3B1811D46600C8BA37 /* BZGFloatingLabelFormFieldCell.m */; };
 		EB59ED58180B2D9200DAA992 /* BZGFormFieldCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED55180B2D9200DAA992 /* BZGFormFieldCellTests.m */; };
 		EB59ED63180B2DB100DAA992 /* BZGFormFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED5D180B2DB100DAA992 /* BZGFormFieldCell.m */; };
 		EB59ED64180B2DB100DAA992 /* BZGFormInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED5F180B2DB100DAA992 /* BZGFormInfoCell.m */; };
@@ -45,8 +44,6 @@
 		36501D3196434BDDACC01A05 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SignupFormTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F90CF32A864DEC854302D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB1BBC3A1811D46600C8BA37 /* BZGFloatingLabelFormFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGFloatingLabelFormFieldCell.h; path = ../../BZGFormViewController/BZGFloatingLabelFormFieldCell.h; sourceTree = "<group>"; };
-		EB1BBC3B1811D46600C8BA37 /* BZGFloatingLabelFormFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFloatingLabelFormFieldCell.m; path = ../../BZGFormViewController/BZGFloatingLabelFormFieldCell.m; sourceTree = "<group>"; };
 		EB59ED55180B2D9200DAA992 /* BZGFormFieldCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFormFieldCellTests.m; path = ../../BZGFormViewControllerTests/BZGFormFieldCellTests.m; sourceTree = "<group>"; };
 		EB59ED57180B2D9200DAA992 /* BZGTestsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGTestsBase.h; path = ../../BZGFormViewControllerTests/BZGTestsBase.h; sourceTree = "<group>"; };
 		EB59ED5C180B2DB100DAA992 /* BZGFormFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGFormFieldCell.h; path = ../../BZGFormViewController/BZGFormFieldCell.h; sourceTree = "<group>"; };
@@ -107,8 +104,6 @@
 			children = (
 				EB59ED5C180B2DB100DAA992 /* BZGFormFieldCell.h */,
 				EB59ED5D180B2DB100DAA992 /* BZGFormFieldCell.m */,
-				EB1BBC3A1811D46600C8BA37 /* BZGFloatingLabelFormFieldCell.h */,
-				EB1BBC3B1811D46600C8BA37 /* BZGFloatingLabelFormFieldCell.m */,
 				EB59ED5E180B2DB100DAA992 /* BZGFormInfoCell.h */,
 				EB59ED5F180B2DB100DAA992 /* BZGFormInfoCell.m */,
 				EB59ED6A180B2F0800DAA992 /* BZGFormViewController.h */,
@@ -360,7 +355,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB59ED6C180B2F0800DAA992 /* BZGFormViewController.m in Sources */,
-				EB1BBC3C1811D46600C8BA37 /* BZGFloatingLabelFormFieldCell.m in Sources */,
 				EB59ED63180B2DB100DAA992 /* BZGFormFieldCell.m in Sources */,
 				EB59ED64180B2DB100DAA992 /* BZGFormInfoCell.m in Sources */,
 				EB83D531180B2CA9001037F5 /* AppDelegate.m in Sources */,
@@ -442,7 +436,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -475,7 +469,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
