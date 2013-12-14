@@ -13,7 +13,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    SignupViewController *signupVC = [[SignupViewController alloc] initWithStyle:UITableViewStylePlain];
+    SignupViewController *signupVC = [[SignupViewController alloc] initWithStyle:UITableViewStyleGrouped];
     self.window.rootViewController = signupVC;
     [self.window makeKeyAndVisible];
     return YES;

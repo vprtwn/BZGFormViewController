@@ -59,31 +59,36 @@
 - (void)configureTextField
 {
     CGFloat textFieldX = self.bounds.size.width * 0.35;
-//    CGFloat textFieldY = 0;
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
-//        textFieldY = 5;
-//    }
+    CGFloat textFieldY = 0;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+        textFieldY = 12;
+    }
     self.textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     CGRect textFieldFrame = CGRectMake(textFieldX,
-                                       12,
+                                       textFieldY,
                                        self.bounds.size.width - textFieldX - self.activityIndicatorView.frame.size.width,
                                        self.bounds.size.height);
     self.textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.textField.textColor = [UIColor blackColor];
+    self.textField.font = [UIFont systemFontOfSize:15];
     [self addSubview:self.textField];
 }
 
 - (void)configureLabel
 {
     CGFloat labelX = 10;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+        labelX = 15;
+    }
     CGRect labelFrame = CGRectMake(labelX,
                                    0,
                                    self.textField.frame.origin.x - labelX,
                                    self.bounds.size.height);
     self.label = [[UILabel alloc] initWithFrame:labelFrame];
-    self.label.font = [UIFont boldSystemFontOfSize:self.label.font.pointSize];
+    self.label.font = [UIFont boldSystemFontOfSize:15];
+    self.label.backgroundColor = [UIColor clearColor];
     [self addSubview:self.label];
 }
 

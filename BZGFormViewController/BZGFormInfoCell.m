@@ -53,13 +53,14 @@
     self.detailTextLabel.hidden = YES;
     self.imageView.hidden = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.backgroundColor = [UIColor clearColor];
     
     self.infoLabel = [[UILabel alloc] initWithFrame:self.bounds];
     self.infoLabel.font = [UIFont systemFontOfSize:14];
     self.infoLabel.adjustsFontSizeToFitWidth = NO;
     self.infoLabel.numberOfLines = 0;
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
+    self.infoLabel.backgroundColor = [UIColor clearColor];
     self.infoLabel.text = @"";
     
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction)];
