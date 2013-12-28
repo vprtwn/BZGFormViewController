@@ -8,7 +8,6 @@ BZGFormViewController is a lightweight UITableViewController subclass inspired b
 ### Classes
 
 + **BZGFormFieldCell**: A `UITableViewCell` subclass for displaying form fields.
-+ **BZGFloatingPlaceholderFormFieldCell**: A subclass of `BZGFormFieldCell` with a [JVFloatLabeledTextField](https://github.com/jverdi/JVFloatLabeledTextField)
 + **BZGFormFieldInfoCell**: A `UITableViewCell` subclass for displaying form field info.
 + **BZGFormViewController**: A `UITableViewController` subclass that handles the display of form field cells and their corresponding form info cells.
 
