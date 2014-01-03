@@ -11,7 +11,8 @@
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
 
-#define MAILGUN_PUBLIC_KEY @""
+//#define MAILGUN_PUBLIC_KEY @""
+static NSString *const MAILGUN_PUBLIC_KEY = @"";
 #warning Add your Mailgun public key ^^^
 
 @interface SignupViewController ()
@@ -22,14 +23,13 @@
 
 @implementation SignupViewController
 
-- (void)configureTableView
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    [self.tableView setTableFooterView:[UIView new]];
-    self.tableView.backgroundColor = [UIColor whiteColor];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self = [super initWithStyle:style];
+    if (self) {
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    return self;
 }
 
 - (void)viewDidLoad
@@ -43,7 +43,6 @@
                                                            self.emailFieldCell,
                                                            self.passwordFieldCell]];
     self.formSection = 0;
-
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
 }
 

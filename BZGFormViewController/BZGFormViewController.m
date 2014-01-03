@@ -15,23 +15,13 @@
 
 @implementation BZGFormViewController
 
-- (id)init
-{
-    self = [super init];
-    if (self) [self setup];
-    return self;
-}
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) [self setup];
+    if (self) {
+        [self configureTableView];
+    }
     return self;
-}
-
-- (void)setup
-{
-    [self configureTableView];
 }
 
 - (void)configureTableView
@@ -39,6 +29,7 @@
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = BZG_TABLEVIEW_BACKGROUND_COLOR;
 }
 

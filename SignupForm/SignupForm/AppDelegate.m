@@ -16,6 +16,7 @@
     SignupViewController *signupVC = [[SignupViewController alloc] initWithStyle:UITableViewStyleGrouped];
     self.window.rootViewController = signupVC;
     [self.window makeKeyAndVisible];
+    [application setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
     return YES;
 }
 
