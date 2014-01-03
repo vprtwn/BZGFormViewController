@@ -24,14 +24,11 @@ Cocoapods recommended. You can also copy the contents of /BZGFormViewController 
 ## Quick start
 
 First, subclass `BZGFormViewController`.
-
-```objective-c
+```objc
 @interface SignupViewController : BZGFormViewController
 ```
-
 Next, import "BZGFormFieldCell.h" and create a cell.
-
-```objective-c
+```objc
 #import "BZGFormFieldCell.h"
 
 // ...
@@ -41,16 +38,23 @@ self.usernameFieldCell.label.text = @"Username";
 self.usernameFieldCell.textField.placeholder = @"Username";
 self.usernameFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
 ```
-
 To validate text, first register as a delegate of the text field.
-
-```objective-c
+```objc
 self.usernameFieldCell.textField.delegate = self;
 ```
-
-To validate the text and update the form when the text field's text changes, use the cell's `shouldChangeTextBlock`
-
-```objective-c
+To validate the text and update the cell whenever the field's text changes, use the cell's `shouldChangeTextBlock`.
+```objc
+self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *newText) {
+    if (newText.length < 5) {
+        cell.validationState = BZGValidationStateInvalid;
+    } else {
+        cell.validationState = BZGValidationStateValid;
+    }
+    return YES;
+};
+```
+Each `BZGFormFieldCell` has a `BZGFormInfoCell` property. If there's a validation error, you should set the info cell's text using `setText:`. To show the info cell, set `shouldShowInfoCell` to `YES`. Don't forget to hide the info cell when you have nothing to show.
+```objc
 self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *newText) {
     if (newText.length < 5) {
         cell.validationState = BZGValidationStateInvalid;
@@ -62,7 +66,10 @@ self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSS
     }
     return YES;
 };
-    
+```
+You can also use `didBeginEditingBlock`, `didEndEditingBlock`, and `shouldReturnBlock` for any logic you would usually put in `UITextFieldDelegate` methods. 
+
+
 
 
 
