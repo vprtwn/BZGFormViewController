@@ -17,6 +17,9 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 
 @interface BZGFormFieldCell : UITableViewCell <UITextFieldDelegate>
 
+typedef void (^voidEditingEventBlock)(BZGFormFieldCell *cell, NSString *text);
+typedef BOOL (^boolEditingEventBlock)(BZGFormFieldCell *cell, NSString *text);
+
 @property (strong, nonatomic) UILabel *label;
 @property (strong, nonatomic) UITextField *textField;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
@@ -31,16 +34,19 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 @property (assign, nonatomic) BOOL shouldShowInfoCell;
 
 /// The block called when the text field's text begins editing.
-@property (copy, nonatomic) void (^didBeginEditingBlock)(BZGFormFieldCell *cell, NSString *text);
+@property (copy, nonatomic) voidEditingEventBlock didBeginEditingBlock;
 
-/// The block called before the text field's text changes. Return NO if the text shouldn't change.
-@property (copy, nonatomic) BOOL (^shouldChangeTextBlock)(BZGFormFieldCell *cell, NSString *newText);
+/**
+ * The block called before the text field's text changes.
+ * The block's text parameter is the new text. Return NO if the text shouldn't change.
+ */
+@property (copy, nonatomic) boolEditingEventBlock shouldChangeTextBlock;
 
 /// The block called when the text field's text ends editing.
-@property (copy, nonatomic) void (^didEndEditingBlock) (BZGFormFieldCell *cell, NSString *text);
+@property (copy, nonatomic) voidEditingEventBlock didEndEditingBlock;
 
 /// The block called before the text field returns. Return NO if the text field shouldn't return.
-@property (copy, nonatomic) BOOL (^shouldReturnBlock)(BZGFormFieldCell *cell, NSString *Text);
+@property (copy, nonatomic) boolEditingEventBlock shouldReturnBlock;
 
 /**
  * Returns the parent BZGFormFieldCell for the given text field. If no cell is found, returns nil.

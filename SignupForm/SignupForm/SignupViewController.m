@@ -119,10 +119,10 @@
     self.passwordFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordFieldCell.textField.secureTextEntry = YES;
     self.passwordFieldCell.textField.delegate = self;
-    self.passwordFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *newText) {
+    self.passwordFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *text) {
         // because this is a secure text field, reset the validation state every time.
         cell.validationState = BZGValidationStateNone;
-        if (newText.length < 8) {
+        if (text.length < 8) {
             cell.validationState = BZGValidationStateInvalid;
             [cell.infoCell setText:@"Password must be at least 8 characters long."];
             cell.shouldShowInfoCell = YES;
