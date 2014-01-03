@@ -157,5 +157,76 @@
     return 0;
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    BZGFormFieldCell *cell = [BZGFormFieldCell parentCellForTextField:textField];
+    if (!cell) {
+        return;
+    }
+    if (cell.didBeginEditingBlock) {
+        cell.didBeginEditingBlock(cell, textField.text);
+    }
+    [self updateInfoCellBelowFormFieldCell:cell];
+
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    BOOL shouldChange = YES;
+    BZGFormFieldCell *cell = [BZGFormFieldCell parentCellForTextField:textField];
+    if (!cell) {
+        return YES;
+    }
+
+    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (cell.shouldChangeTextBlock) {
+        shouldChange = cell.shouldChangeTextBlock(cell, newText);
+    }
+
+    [self updateInfoCellBelowFormFieldCell:cell];
+    return shouldChange;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    BZGFormFieldCell *cell = [BZGFormFieldCell parentCellForTextField:textField];
+    if (!cell) {
+        return;
+    }
+    if (cell.didEndEditingBlock) {
+        cell.didEndEditingBlock(cell, textField.text);
+    }
+
+    [self updateInfoCellBelowFormFieldCell:cell];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    BOOL shouldReturn = YES;
+    BZGFormFieldCell *cell = [BZGFormFieldCell parentCellForTextField:textField];
+    if (!cell) {
+        return YES;
+    }
+
+    if (cell.shouldReturnBlock) {
+        shouldReturn = cell.shouldReturnBlock(cell, textField.text);
+    }
+
+    BZGFormFieldCell *nextCell = [self nextFormFieldCell:cell];
+    if (!nextCell) {
+        [cell.textField resignFirstResponder];
+    }
+    else {
+        [nextCell.textField becomeFirstResponder];
+    }
+
+    [self updateInfoCellBelowFormFieldCell:cell];
+    return shouldReturn;
+}
+
 
 @end
