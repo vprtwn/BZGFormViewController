@@ -8,7 +8,7 @@
 
 @class BZGFormFieldCell, BZGFormInfoCell;
 
-@interface BZGFormViewController : UITableViewController
+@interface BZGFormViewController : UITableViewController <UITextFieldDelegate>
 
 /// An array of BZGFormFieldCells used as the table view's data source in the specified section.
 @property (nonatomic, strong) NSMutableArray *formFieldCells;

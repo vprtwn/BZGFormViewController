@@ -125,4 +125,65 @@
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
 }
 
+// Expect the block to be called when the text field begins editing.
+- (void)testDidBeginEditingBlock
+{
+    formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1]];
+    [formViewController.tableView reloadData];
+    cell1.textField.text = @"cell1 textfield text";
+    cell1.didBeginEditingBlock = ^(BZGFormFieldCell *cell, NSString *text) {
+        cell.infoCell.textLabel.text = text;
+    };
+    [formViewController textFieldDidBeginEditing:cell1.textField];
+    expect(cell1.infoCell.textLabel.text).to.equal(@"cell1 textfield text");
+}
+
+// Expect the block to be called when the text field's text changes.
+- (void)testShouldChangeTextBlock
+{
+    formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1]];
+    [formViewController.tableView reloadData];
+    cell1.textField.text = @"foo";
+    cell1.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *text) {
+        cell.infoCell.textLabel.text = text;
+        return YES;
+    };
+
+    expect(cell1.infoCell.textLabel.text).toNot.equal(@"foo");
+    [formViewController textField:cell1.textField shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@""];
+    expect(cell1.infoCell.textLabel.text).to.equal(@"foo");
+}
+
+// Expect the block to be called when the text field ends editing.
+- (void)testDidEndEditingBlock
+{
+    formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1]];
+    [formViewController.tableView reloadData];
+    cell1.textField.text = @"foo";
+    cell1.didEndEditingBlock = ^(BZGFormFieldCell *cell, NSString *text) {
+        cell.infoCell.textLabel.text = text;
+    };
+
+    expect(cell1.infoCell.textLabel.text).toNot.equal(@"foo");
+    [formViewController textFieldDidEndEditing:cell1.textField];
+    expect(cell1.infoCell.textLabel.text).to.equal(@"foo");
+}
+
+// Expect the block to be called when the text field returns.
+- (void)testShouldReturnBlock
+{
+    formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1]];
+    [formViewController.tableView reloadData];
+    cell1.textField.text = @"foo";
+    cell1.shouldReturnBlock = ^BOOL(BZGFormFieldCell *cell, NSString *text) {
+        cell.infoCell.textLabel.text = text;
+        return YES;
+    };
+
+    expect(cell1.infoCell.textLabel.text).toNot.equal(@"foo");
+    [formViewController textFieldShouldReturn:cell1.textField];
+    [cell1.textField sendActionsForControlEvents:UIControlEventAllEditingEvents];
+    expect(cell1.infoCell.textLabel.text).to.equal(@"foo");
+}
+
 @end

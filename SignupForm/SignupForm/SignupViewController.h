@@ -8,7 +8,7 @@
 
 @class BZGMailgunEmailValidator;
 
-@interface SignupViewController : BZGFormViewController <UITextFieldDelegate>
+@interface SignupViewController : BZGFormViewController //<UITextFieldDelegate>
 
 @property (nonatomic, strong) BZGFormFieldCell *usernameFieldCell;
 @property (nonatomic, strong) BZGFormFieldCell *emailFieldCell;
