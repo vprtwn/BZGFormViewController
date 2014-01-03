@@ -94,13 +94,9 @@ Finally, override the `UITableViewDataSource` methods. Be sure to use the values
     }
 }
 ```
+## Configuration
+If you want to customize things like fonts and colors, [fork](https://help.github.com/articles/fork-a-repo) and edit `/BZGFormViewController/Constants.h`. If you have any ideas for making configuration easier, please submit an issue or a pull request!
 
-
-
-
-
-
-
-
-
+## Contributing
+Please include tests! I'll add Travis soon, but for now, you can run all tests from the demo project in `/SignupForm`.
 
