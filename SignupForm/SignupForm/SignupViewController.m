@@ -47,7 +47,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lc
 
 - (void)configureUsernameFieldCell
 {
-    self.usernameFieldCell = [[BZGFormFieldCell alloc] init];
+    self.usernameFieldCell = [BZGFormFieldCell new];
     self.usernameFieldCell.label.text = @"Username";
     self.usernameFieldCell.textField.placeholder = NSLocalizedString(@"Username", nil);
     self.usernameFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
@@ -67,7 +67,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lc
 
 - (void)configureEmailFieldCell
 {
-    self.emailFieldCell = [[BZGFormFieldCell alloc] init];
+    self.emailFieldCell = [BZGFormFieldCell new];
     self.emailFieldCell.label.text = @"Email";
     self.emailFieldCell.textField.placeholder = NSLocalizedString(@"Email", nil);
     self.emailFieldCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
@@ -117,7 +117,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lc
 
 - (void)configurePasswordFieldCell
 {
-    self.passwordFieldCell = [[BZGFormFieldCell alloc] init];
+    self.passwordFieldCell = [BZGFormFieldCell new];
     self.passwordFieldCell.label.text = @"Password";
     self.passwordFieldCell.textField.placeholder = NSLocalizedString(@"Password", nil);
     self.passwordFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
