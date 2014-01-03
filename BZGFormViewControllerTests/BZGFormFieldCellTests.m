@@ -6,6 +6,7 @@
 
 #import "BZGTestsBase.h"
 #import "BZGFormFieldCell.h"
+#import "Constants.h"
 
 @interface BZGFormFieldCellTests : XCTestCase {
     BZGFormFieldCell *formFieldCell;
@@ -31,7 +32,7 @@
 {
     expect(formFieldCell.selectionStyle).to.equal(UITableViewCellSelectionStyleNone);
     expect(formFieldCell.validationState).to.equal(BZGValidationStateNone);
-    expect(formFieldCell.textField.textColor).to.equal([UIColor blackColor]);
+    expect(formFieldCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
     expect(formFieldCell.activityIndicatorView.hidden).to.beTruthy;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
 }
@@ -40,7 +41,7 @@
 {
     formFieldCell.validationState = BZGValidationStateValid;
     expect(formFieldCell.validationState).to.equal(BZGValidationStateValid);
-    expect(formFieldCell.textField.textColor).to.equal([UIColor blackColor]);
+    expect(formFieldCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
     expect(formFieldCell.activityIndicatorView.hidden).to.beTruthy;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryCheckmark);
 }
@@ -49,7 +50,7 @@
 {
     formFieldCell.validationState = BZGValidationStateInvalid;
     expect(formFieldCell.validationState).to.equal(BZGValidationStateInvalid);
-    expect(formFieldCell.textField.textColor).to.equal([UIColor redColor]);
+    expect(formFieldCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_INVALID_COLOR);
     expect(formFieldCell.activityIndicatorView.hidden).to.beTruthy;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
 }
@@ -58,7 +59,7 @@
 {
     formFieldCell.validationState = BZGValidationStateValidating;
     expect(formFieldCell.validationState).to.equal(BZGValidationStateValidating);
-    expect(formFieldCell.textField.textColor).to.equal([UIColor blackColor]);
+    expect(formFieldCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
     expect(formFieldCell.activityIndicatorView.hidden).to.beFalsy;
     expect(formFieldCell.activityIndicatorView.isAnimating).to.beTruthy;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
@@ -68,7 +69,7 @@
 {
     formFieldCell.validationState = BZGValidationStateNone;
     expect(formFieldCell.validationState).to.equal(BZGValidationStateNone);
-    expect(formFieldCell.textField.textColor).to.equal([UIColor blackColor]);
+    expect(formFieldCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
     expect(formFieldCell.activityIndicatorView.hidden).to.beTruthy;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
 }
