@@ -70,7 +70,7 @@ If you're using a table view with multiple sections, specify the section your fo
 self.formSection = 0
 ```
 Finally, override the `UITableViewDataSource` methods. Be sure to use the values from `super` when you're dealing with the table view's form section.
-```
+```objc
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
