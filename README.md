@@ -1,33 +1,73 @@
 BZGFormViewController
 =====================
 
-BZGFormViewController is a lightweight UITableViewController subclass inspired by the dynamic form validation UX in Twitter's iOS app.
+BZGFormViewController is a library for making dynamic forms.
 
-![alt tag](https://raw.github.com/benzguo/BZGFormViewController/master/Screenshots/1.png)
+![alt tag](https://raw.github.com/benzguo/BZGFormViewController/master/Screenshots/SignupForm.gif)
 
-### Classes
+## Demo app
+Navigate to /SignupForm, run `pod install`, and open `SignupForm.xcworkspace` to see the dynamic signup form used to make the above gif.
 
-+ **BZGFormFieldCell**: A `UITableViewCell` subclass for displaying form fields.
-+ **BZGFormFieldInfoCell**: A `UITableViewCell` subclass for displaying form field info.
-+ **BZGFormViewController**: A `UITableViewController` subclass that handles the display of form field cells and their corresponding form info cells.
+## Installation
 
-### Installation
+Cocoapods recommended. You can also copy the contents of /BZGFormViewController into your project.
 
-If you're using cocoapods, just add ```pod 'BZGFormViewController'``` to your Podfile.
-Otherwise, add the contents of ```BZGFormViewController``` to your project.
+## Overview
 
-### Example project
++ **BZGFormFieldCell**
+    + A `UITableViewCell` subclass for displaying form fields.
++ **BZGFormInfoCell**
+    + A `UITableViewCell` subclass for displaying form field info. Each form field cell has a corresponding info cell.
++ **BZGFormViewController**
+    + A `UITableViewController` subclass that handles the display of field cells and info cells.
 
-For an example of how to subclass `BZGFormViewController`, check out the ```SignupViewController``` in the included project.
-For email validation, you'll have to sign up for Mailgun and add your public API key to ```SignupViewController.m```.
-When you're ready, ```pod install```, open the workspace, and run. All unit tests should be run from the example project.
+## Quick start
 
-### Links
+First, subclass `BZGFormViewController`.
 
-[ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa)
+```objective-c
+@interface SignupViewController : BZGFormViewController
+```
 
-[Mailgun email validation](http://blog.mailgun.com/post/free-email-validation-api-for-web-forms/)
+Next, import "BZGFormFieldCell.h" and create a cell.
 
-[BZGMailgunEmailValidation](https://github.com/benzguo/BZGMailgunEmailValidation)
+```objective-c
+#import "BZGFormFieldCell.h"
+
+// ...
+
+self.usernameFieldCell = [BZGFormFieldCell new];
+self.usernameFieldCell.label.text = @"Username";
+self.usernameFieldCell.textField.placeholder = @"Username";
+self.usernameFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
+```
+
+To validate text, first register as a delegate of the text field.
+
+```objective-c
+self.usernameFieldCell.textField.delegate = self;
+```
+
+To validate the text and update the form when the text field's text changes, use the cell's `shouldChangeTextBlock`
+
+```objective-c
+self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *newText) {
+    if (newText.length < 5) {
+        cell.validationState = BZGValidationStateInvalid;
+        [cell.infoCell setText:@"Username must be at least 5 characters long."];
+        cell.shouldShowInfoCell = YES;
+    } else {
+        cell.validationState = BZGValidationStateValid;
+        cell.shouldShowInfoCell = NO;
+    }
+    return YES;
+};
+    
+
+
+
+
+
+
 
 
