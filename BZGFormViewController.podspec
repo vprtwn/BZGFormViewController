@@ -2,12 +2,12 @@ Pod::Spec.new do |s|
   s.name     = 'BZGFormViewController'
   s.version  = '1.0'
   s.license  = 'MIT'
-  s.summary  = 'A lightweight UITableViewController subclass for creating dynamic validating forms.'
+  s.summary  = 'A library for creating dynamic forms.'
   s.homepage = 'https://github.com/benzguo/BZGFormViewController'
   s.author   = { 'Ben Guo' => 'benzguo@gmail.com' }
   s.source   = {
     :git => 'https://github.com/benzguo/BZGFormViewController.git',
-    :tag => '0.1.2'
+    :tag => '1.0'
   }
   s.dependency 'ReactiveCocoa', '~>2.1.8'
   s.dependency 'libextobjc', '~>0.3'
