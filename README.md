@@ -10,7 +10,7 @@ Navigate to /SignupForm, run `pod install`, and open `SignupForm.xcworkspace` to
 
 ## Installation
 
-Cocoapods recommended. You can also copy the contents of /BZGFormViewController into your project.
+Cocoapods, or copy the contents of /BZGFormViewController into your project.
 
 ## Quick start
 
