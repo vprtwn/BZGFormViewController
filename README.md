@@ -1,12 +1,12 @@
 BZGFormViewController
 =====================
 
-BZGFormViewController is a library for making dynamic forms.
+BZGFormViewController is a simple library for making beautiful dynamic forms.
 
 ![alt tag](https://raw.github.com/benzguo/BZGFormViewController/master/Screenshots/SignupForm.gif)
 
 ## Demo app
-Navigate to /SignupForm, run `pod install`, and open `SignupForm.xcworkspace` to see the dynamic signup form used to make the above gif.
+Navigate to /SignupForm, run `pod install`, and open `SignupForm.xcworkspace` to see the signup form above in action.
 
 ## Installation
 
@@ -59,6 +59,42 @@ self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSS
 };
 ```
 You can also use `didBeginEditingBlock`, `didEndEditingBlock`, and `shouldReturnBlock` for any logic you would usually put in `UITextFieldDelegate` methods. 
+
+After you've configured your cells, set `formFieldCells` to an array containing your form's cells.
+```objc
+self.formFieldCells = [NSMutableArray arrayWithArray:@[self.usernameFieldCell,
+                                                       self.emailFieldCell,
+                                                       self.passwordFieldCell]];
+```
+If you're using a table view with multiple sections, specify the section your form (i.e. the cells in `self.formFieldCells`) should appear in.
+```objc
+self.formSection = 0
+```
+Finally, override the `UITableViewDataSource` methods. Be sure to use the values from `super` when you're dealing with the table view's form section.
+```
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == self.formSection) {
+        return [super tableView:tableView numberOfRowsInSection:section];
+    } else {
+        return 1;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == self.formSection) {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    } else {
+        return self.signupCell;
+    }
+}
+```
 
 
 
