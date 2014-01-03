@@ -7,6 +7,7 @@
 #import "BZGFormViewController.h"
 #import "BZGFormFieldCell.h"
 #import "BZGFormInfoCell.h"
+#import "Constants.h"
 
 @interface BZGFormViewController ()
 
@@ -35,12 +36,10 @@
 
 - (void)configureTableView
 {
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
-    [self.tableView setTableFooterView:[UIView new]];
-    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.tableView.backgroundColor = BZG_TABLEVIEW_BACKGROUND_COLOR;
 }
 
 #pragma mark - Showing/hiding info cells
