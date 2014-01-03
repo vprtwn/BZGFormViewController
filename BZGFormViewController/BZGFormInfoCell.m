@@ -5,6 +5,7 @@
 //
 
 #import "BZGFormInfoCell.h"
+#import "Constants.h"
 
 @interface BZGFormInfoCell () {
     BZGTapGestureBlock _tapGestureBlock;
@@ -53,10 +54,10 @@
     self.detailTextLabel.hidden = YES;
     self.imageView.hidden = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = BZG_FORMINFO_BACKGROUND_COLOR;
     
     self.infoLabel = [[UILabel alloc] initWithFrame:self.bounds];
-    self.infoLabel.font = [UIFont systemFontOfSize:14];
+    self.infoLabel.font = BZG_FORMINFO_LABEL_FONT;
     self.infoLabel.adjustsFontSizeToFitWidth = NO;
     self.infoLabel.numberOfLines = 0;
     self.infoLabel.textAlignment = NSTextAlignmentCenter;

@@ -5,9 +5,11 @@
 //
 
 #import "BZGFormFieldCell.h"
+
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <libextobjc/EXTScope.h>
 #import "BZGFormInfoCell.h"
-#import "ReactiveCocoa.h"
-#import "EXTScope.h"
+#import "Constants.h"
 
 @implementation BZGFormFieldCell
 
@@ -42,7 +44,7 @@
 
 - (void)setDefaults
 {
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = BZG_FORMFIELD_BACKGROUND_COLOR;
     self.textLabel.hidden = YES;
     self.detailTextLabel.hidden = YES;
     self.imageView.hidden = YES;
@@ -71,8 +73,9 @@
     self.textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.textField.textColor = [UIColor blackColor];
-    self.textField.font = [UIFont systemFontOfSize:15];
+    self.textField.textColor = BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+    self.textField.font = BZG_FORMFIELD_TEXTFIELD_FONT;
+    self.textField.backgroundColor = [UIColor clearColor];
     [self addSubview:self.textField];
 }
 
@@ -87,7 +90,8 @@
                                    self.textField.frame.origin.x - labelX,
                                    self.bounds.size.height);
     self.label = [[UILabel alloc] initWithFrame:labelFrame];
-    self.label.font = [UIFont boldSystemFontOfSize:15];
+    self.label.font = BZG_FORMFIELD_LABEL_FONT;
+    self.label.textColor = BZG_FORMFIELD_LABEL_COLOR;
     self.label.backgroundColor = [UIColor clearColor];
     [self addSubview:self.label];
 }
@@ -104,8 +108,6 @@
     self.activityIndicatorView.hidesWhenStopped = NO;
     self.activityIndicatorView.hidden = YES;
     [self addSubview:self.activityIndicatorView];
-
-
 }
 
 - (void)configureBindings
@@ -116,17 +118,17 @@
     [RACObserve(self, validationState) map:^UIColor *(NSNumber *validationState) {
         @strongify(self);
         if (self.textField.editing || self.textField.isFirstResponder) {
-            return [UIColor blackColor];
+            return BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
         }
         switch (validationState.integerValue) {
             case BZGValidationStateInvalid:
-                return [UIColor redColor];
+                return BZG_FORMFIELD_TEXTFIELD_INVALID_COLOR;
                 break;
             case BZGValidationStateValid:
             case BZGValidationStateValidating:
             case BZGValidationStateNone:
             default:
-                return [UIColor blackColor];
+                return BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
                 break;
         }
     }];
@@ -167,7 +169,6 @@
 
 
 #pragma mark - UITextField notification selectors
-
 // I'm using these notifications to flush the validation state signal.
 // It works, but seems hacky. Is there a better way?
 
