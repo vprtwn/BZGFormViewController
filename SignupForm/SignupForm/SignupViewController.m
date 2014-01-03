@@ -6,7 +6,6 @@
 
 #import "SignupViewController.h"
 #import "BZGFormFieldCell.h"
-#import "BZGFormInfoCell.h"
 #import "BZGMailgunEmailValidator.h"
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"

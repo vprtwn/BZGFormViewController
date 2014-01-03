@@ -5,6 +5,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BZGFormInfoCell.h"
 
 typedef NS_ENUM(NSInteger, BZGValidationState) {
     BZGValidationStateInvalid,
@@ -12,8 +13,6 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
     BZGValidationStateValidating,
     BZGValidationStateNone
 };
-
-@class BZGFormInfoCell;
 
 @interface BZGFormFieldCell : UITableViewCell <UITextFieldDelegate>
 
