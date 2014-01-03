@@ -12,7 +12,7 @@
 #import "EXTScope.h"
 
 //#define MAILGUN_PUBLIC_KEY @""
-static NSString *const MAILGUN_PUBLIC_KEY = @"";
+static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lct2uk5";
 #warning Add your Mailgun public key ^^^
 
 @interface SignupViewController ()
@@ -76,6 +76,12 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"";
     @weakify(self)
     self.emailFieldCell.didEndEditingBlock = ^(BZGFormFieldCell *cell, NSString *text) {
         @strongify(self);
+        if (text.length == 0) {
+            cell.validationState = BZGValidationStateNone;
+            cell.shouldShowInfoCell = NO;
+            [self updateInfoCellBelowFormFieldCell:cell];
+            return;
+        }
         cell.validationState = BZGValidationStateValidating;
         [self.emailValidator validateEmailAddress:self.emailFieldCell.textField.text
                                           success:^(BOOL isValid, NSString *didYouMean) {
