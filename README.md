@@ -12,15 +12,6 @@ Navigate to /SignupForm, run `pod install`, and open `SignupForm.xcworkspace` to
 
 Cocoapods recommended. You can also copy the contents of /BZGFormViewController into your project.
 
-## Overview
-
-+ **BZGFormFieldCell**
-    + A `UITableViewCell` subclass for displaying form fields.
-+ **BZGFormInfoCell**
-    + A `UITableViewCell` subclass for displaying form field info. Each form field cell has a corresponding info cell.
-+ **BZGFormViewController**
-    + A `UITableViewController` subclass that handles the display of field cells and info cells.
-
 ## Quick start
 
 First, subclass `BZGFormViewController`.
