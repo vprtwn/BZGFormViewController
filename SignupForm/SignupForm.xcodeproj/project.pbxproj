@@ -71,7 +71,7 @@
 		EB83D539180B2CA9001037F5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		EB83D541180B2CA9001037F5 /* SignupFormTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SignupFormTests-Info.plist"; sourceTree = "<group>"; };
 		EB83D543180B2CA9001037F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EBDC9F3F18763ACF002EB25F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		EBDC9F3F18763ACF002EB25F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../../BZGFormViewController/Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
