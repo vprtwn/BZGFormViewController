@@ -1,7 +1,7 @@
 BZGFormViewController
 =====================
 
-BZGFormViewController is a simple library for making beautiful dynamic forms.
+BZGFormViewController is a simple library for making dynamic forms.
 
 ![alt tag](https://raw.github.com/benzguo/BZGFormViewController/master/Screenshots/SignupForm.gif)
 
@@ -29,12 +29,9 @@ self.usernameFieldCell.label.text = @"Username";
 self.usernameFieldCell.textField.placeholder = @"Username";
 self.usernameFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
 ```
-To validate text, first register as a delegate of the text field.
+To validate text and update the cell whenever the field's text changes, use the cell's `shouldChangeTextBlock`.
 ```objc
 self.usernameFieldCell.textField.delegate = self;
-```
-To validate the text and update the cell whenever the field's text changes, use the cell's `shouldChangeTextBlock`.
-```objc
 self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *newText) {
     if (newText.length < 5) {
         cell.validationState = BZGValidationStateInvalid;
@@ -44,7 +41,7 @@ self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSS
     return YES;
 };
 ```
-Each `BZGFormFieldCell` has a `BZGFormInfoCell` property. If there's a validation error, you should set the info cell's text using `setText:`. To show the info cell, set `shouldShowInfoCell` to `YES`. Don't forget to hide the info cell when you have nothing to show.
+Each `BZGFormFieldCell` has a `BZGFormInfoCell` property. If validation fails, you should set the info cell's text using `setText:`. To show the info cell, set `shouldShowInfoCell` to `YES`. Don't forget to hide the info cell when you have nothing to show.
 ```objc
 self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *newText) {
     if (newText.length < 5) {
@@ -58,7 +55,9 @@ self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSS
     return YES;
 };
 ```
-You can also use `didBeginEditingBlock`, `didEndEditingBlock`, and `shouldReturnBlock` for any logic you would usually put in `UITextFieldDelegate` methods. 
+You should use `shouldChangeTextBlock`, `didBeginEditingBlock`, `didEndEditingBlock`, and `shouldReturnBlock` for validation and any logic you would usually put in `UITextFieldDelegate` methods. 
+
+`BZGFormViewController` automatically scrolls the tableview when you begin editing a field and jumps to the next field when you hit return.
 
 After you've configured your cells, set `formFieldCells` to an array containing your form's cells.
 ```objc
