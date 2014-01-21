@@ -42,6 +42,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)setDefaults
 {
     self.backgroundColor = BZG_FORMFIELD_BACKGROUND_COLOR;
