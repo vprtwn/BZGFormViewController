@@ -96,7 +96,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lc
                                                   [cell.infoCell setText:[NSString stringWithFormat:@"Did you mean %@?", didYouMean]];
                                                   @weakify(cell);
                                                   @weakify(self);
-                                                  [cell.infoCell setTapGestureBlock:^BOOL{
+                                                  [cell.infoCell setTapGestureBlock:^{
                                                       @strongify(cell);
                                                       @strongify(self);
                                                       [cell.textField setText:didYouMean];

@@ -1,6 +1,6 @@
 platform :ios, '5.0'
-pod 'ReactiveCocoa', '~>2.1.1'
-pod 'libextobjc', '~>0.3'
+pod 'ReactiveCocoa', '~>2.2.4'
+pod 'libextobjc', '~>0.4'
 pod 'BZGMailgunEmailValidation', '~>1.1.0'
 
 target :SignupFormTests do

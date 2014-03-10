@@ -6,7 +6,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef BOOL (^BZGTapGestureBlock)();
+typedef void (^BZGTapGestureBlock)();
 
 @interface BZGFormInfoCell : UITableViewCell
 
