@@ -35,6 +35,8 @@
     expect(formFieldCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
     expect(formFieldCell.activityIndicatorView.hidden).to.beTruthy;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
+    expect(formFieldCell.showsCheckmark).to.equal(YES);
+    expect(formFieldCell.showsValidationWhileEditing).to.equal(NO);
 }
 
 - (void)testFormFieldValidState
@@ -85,11 +87,15 @@
     expect(cell).to.equal(formFieldCell);
 }
 
-- (void)testShowsCheckmark
+- (void)testShowsCheckmarkNO
 {
     formFieldCell.showsCheckmark = NO;
     formFieldCell.validationState = BZGValidationStateValid;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
+}
+
+- (void)testShowsCheckmarkYES
+{
     formFieldCell.showsCheckmark = YES;
     formFieldCell.validationState = BZGValidationStateValid;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryCheckmark);

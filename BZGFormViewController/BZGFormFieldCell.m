@@ -57,6 +57,7 @@
     self.validationState = BZGValidationStateNone;
     self.shouldShowInfoCell = NO;
     self.showsCheckmark = YES;
+    self.showsValidationWhileEditing = NO;
 }
 
 - (void)configureInfoCell
@@ -123,7 +124,8 @@
     RAC(self.textField, textColor) =
     [RACObserve(self, validationState) map:^UIColor *(NSNumber *validationState) {
         @strongify(self);
-        if (self.textField.editing || self.textField.isFirstResponder) {
+        if ((self.textField.editing || self.textField.isFirstResponder) &&
+            !self.showsValidationWhileEditing) {
             return BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
         }
         switch (validationState.integerValue) {
@@ -155,7 +157,7 @@
     [RACObserve(self, validationState) map:^NSNumber *(NSNumber *validationState) {
         @strongify(self);
         if (validationState.integerValue == BZGValidationStateValid &&
-            !self.textField.editing &&
+            (!self.textField.editing || self.showsValidationWhileEditing) &&
             self.showsCheckmark) {
             return @(UITableViewCellAccessoryCheckmark);
         } else {
