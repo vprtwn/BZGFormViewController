@@ -32,6 +32,9 @@ typedef BOOL (^boolEditingEventBlock)(BZGFormFieldCell *cell, NSString *text);
 /// A value indicating whether or not the cell's info cell should be shown.
 @property (assign, nonatomic) BOOL shouldShowInfoCell;
 
+/// A value indicating whether or not the cell shows a checkmark when valid.
+@property (assign, nonatomic) BOOL showsCheckmark;
+
 /// The block called when the text field's text begins editing.
 @property (copy, nonatomic) voidEditingEventBlock didBeginEditingBlock;
 

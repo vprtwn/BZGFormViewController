@@ -56,6 +56,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.validationState = BZGValidationStateNone;
     self.shouldShowInfoCell = NO;
+    self.showsCheckmark = YES;
 }
 
 - (void)configureInfoCell
@@ -153,8 +154,9 @@
     RAC(self, accessoryType) =
     [RACObserve(self, validationState) map:^NSNumber *(NSNumber *validationState) {
         @strongify(self);
-        if (validationState.integerValue == BZGValidationStateValid
-            && !self.textField.editing) {
+        if (validationState.integerValue == BZGValidationStateValid &&
+            !self.textField.editing &&
+            self.showsCheckmark) {
             return @(UITableViewCellAccessoryCheckmark);
         } else {
             return @(UITableViewCellAccessoryNone);

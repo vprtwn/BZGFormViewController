@@ -85,4 +85,14 @@
     expect(cell).to.equal(formFieldCell);
 }
 
+- (void)testShowsCheckmark
+{
+    formFieldCell.showsCheckmark = NO;
+    formFieldCell.validationState = BZGValidationStateValid;
+    expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
+    formFieldCell.showsCheckmark = YES;
+    formFieldCell.validationState = BZGValidationStateValid;
+    expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryCheckmark);
+}
+
 @end
