@@ -6,14 +6,14 @@
 
 #import "BZGTestsBase.h"
 #import "BZGFormViewController.h"
-#import "BZGFormFieldCell.h"
+#import "BZGTextFieldFormCell.h"
 #import "BZGFormInfoCell.h"
 
 @interface BZGFormViewControllerTests : XCTestCase {
     BZGFormViewController *formViewController;
-    BZGFormFieldCell *cell1;
-    BZGFormFieldCell *cell2;
-    BZGFormFieldCell *cell3;
+    BZGTextFieldFormCell *cell1;
+    BZGTextFieldFormCell *cell2;
+    BZGTextFieldFormCell *cell3;
 }
 
 @end
@@ -24,9 +24,9 @@
 {
     [super setUp];
     formViewController = [[BZGFormViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    cell1 = [[BZGFormFieldCell alloc] init];
-    cell2 = [[BZGFormFieldCell alloc] init];
-    cell3 = [[BZGFormFieldCell alloc] init];
+    cell1 = [[BZGTextFieldFormCell alloc] init];
+    cell2 = [[BZGTextFieldFormCell alloc] init];
+    cell3 = [[BZGTextFieldFormCell alloc] init];
 }
 
 - (void)tearDown
@@ -84,7 +84,7 @@
     [formViewController updateInfoCellBelowFormFieldCell:cell1];
     expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
     infoCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:formViewController.formSection];
-    expect([formViewController.tableView cellForRowAtIndexPath:infoCellIndexPath]).to.beKindOf([BZGFormFieldCell class]);
+    expect([formViewController.tableView cellForRowAtIndexPath:infoCellIndexPath]).to.beKindOf([BZGTextFieldFormCell class]);
 }
 
 // Expect an info cell to be displayed and then updated.
@@ -131,7 +131,7 @@
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1]];
     [formViewController.tableView reloadData];
     cell1.textField.text = @"cell1 textfield text";
-    cell1.didBeginEditingBlock = ^(BZGFormFieldCell *cell, NSString *text) {
+    cell1.didBeginEditingBlock = ^(BZGTextFieldFormCell *cell, NSString *text) {
         cell.infoCell.textLabel.text = text;
     };
     [formViewController textFieldDidBeginEditing:cell1.textField];
@@ -144,7 +144,7 @@
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1]];
     [formViewController.tableView reloadData];
     cell1.textField.text = @"foo";
-    cell1.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *text) {
+    cell1.shouldChangeTextBlock = ^BOOL(BZGTextFieldFormCell *cell, NSString *text) {
         cell.infoCell.textLabel.text = text;
         return YES;
     };
@@ -160,7 +160,7 @@
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1]];
     [formViewController.tableView reloadData];
     cell1.textField.text = @"foo";
-    cell1.didEndEditingBlock = ^(BZGFormFieldCell *cell, NSString *text) {
+    cell1.didEndEditingBlock = ^(BZGTextFieldFormCell *cell, NSString *text) {
         cell.infoCell.textLabel.text = text;
     };
 
@@ -175,7 +175,7 @@
     formViewController.formFieldCells = [NSMutableArray arrayWithArray:@[cell1]];
     [formViewController.tableView reloadData];
     cell1.textField.text = @"foo";
-    cell1.shouldReturnBlock = ^BOOL(BZGFormFieldCell *cell, NSString *text) {
+    cell1.shouldReturnBlock = ^BOOL(BZGTextFieldFormCell *cell, NSString *text) {
         cell.infoCell.textLabel.text = text;
         return YES;
     };

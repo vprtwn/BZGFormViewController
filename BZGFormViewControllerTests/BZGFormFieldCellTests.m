@@ -5,11 +5,11 @@
 //
 
 #import "BZGTestsBase.h"
-#import "BZGFormFieldCell.h"
+#import "BZGTextFieldFormCell.h"
 #import "Constants.h"
 
 @interface BZGFormFieldCellTests : XCTestCase {
-    BZGFormFieldCell *formFieldCell;
+    BZGTextFieldFormCell *formFieldCell;
 }
 
 @end
@@ -19,7 +19,7 @@
 - (void)setUp
 {
     [super setUp];
-    formFieldCell = [[BZGFormFieldCell alloc] init];
+    formFieldCell = [[BZGTextFieldFormCell alloc] init];
 }
 
 - (void)tearDown
@@ -35,7 +35,7 @@
     expect(formFieldCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
     expect(formFieldCell.activityIndicatorView.hidden).to.beTruthy;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
-    expect(formFieldCell.showsCheckmark).to.equal(YES);
+    expect(formFieldCell.showsCheckmarkWhenValid).to.equal(YES);
     expect(formFieldCell.showsValidationWhileEditing).to.equal(NO);
 }
 
@@ -79,24 +79,24 @@
 - (void)testParentCellForTextField
 {
     UITextField *textField = [[UITextField alloc] init];
-    BZGFormFieldCell *cell = [BZGFormFieldCell parentCellForTextField:textField];
+    BZGTextFieldFormCell *cell = [BZGTextFieldFormCell parentCellForTextField:textField];
     expect(cell).to.beNil;
 
-    cell = [BZGFormFieldCell parentCellForTextField:formFieldCell.textField];
+    cell = [BZGTextFieldFormCell parentCellForTextField:formFieldCell.textField];
     expect(cell).toNot.beNil;
     expect(cell).to.equal(formFieldCell);
 }
 
 - (void)testShowsCheckmarkNO
 {
-    formFieldCell.showsCheckmark = NO;
+    formFieldCell.showsCheckmarkWhenValid = NO;
     formFieldCell.validationState = BZGValidationStateValid;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
 }
 
 - (void)testShowsCheckmarkYES
 {
-    formFieldCell.showsCheckmark = YES;
+    formFieldCell.showsCheckmarkWhenValid = YES;
     formFieldCell.validationState = BZGValidationStateValid;
     expect(formFieldCell.accessoryType).to.equal(UITableViewCellAccessoryCheckmark);
 }

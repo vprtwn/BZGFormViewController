@@ -10,7 +10,7 @@
 		30709D4AA1994EF090749611 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F90CF32A864DEC854302D2 /* libPods.a */; };
 		799AEBE944DD4B758103BA7E /* libPods-SignupFormTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */; };
 		EB59ED58180B2D9200DAA992 /* BZGFormFieldCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED55180B2D9200DAA992 /* BZGFormFieldCellTests.m */; };
-		EB59ED63180B2DB100DAA992 /* BZGFormFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED5D180B2DB100DAA992 /* BZGFormFieldCell.m */; };
+		EB59ED63180B2DB100DAA992 /* BZGTextFieldFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED5D180B2DB100DAA992 /* BZGTextFieldFormCell.m */; };
 		EB59ED64180B2DB100DAA992 /* BZGFormInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED5F180B2DB100DAA992 /* BZGFormInfoCell.m */; };
 		EB59ED6C180B2F0800DAA992 /* BZGFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED6B180B2F0800DAA992 /* BZGFormViewController.m */; };
 		EB59ED6F180B313000DAA992 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED6E180B313000DAA992 /* SignupViewController.m */; };
@@ -46,8 +46,8 @@
 		90F90CF32A864DEC854302D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB59ED55180B2D9200DAA992 /* BZGFormFieldCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFormFieldCellTests.m; path = ../../BZGFormViewControllerTests/BZGFormFieldCellTests.m; sourceTree = "<group>"; };
 		EB59ED57180B2D9200DAA992 /* BZGTestsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGTestsBase.h; path = ../../BZGFormViewControllerTests/BZGTestsBase.h; sourceTree = "<group>"; };
-		EB59ED5C180B2DB100DAA992 /* BZGFormFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGFormFieldCell.h; path = ../../BZGFormViewController/BZGFormFieldCell.h; sourceTree = "<group>"; };
-		EB59ED5D180B2DB100DAA992 /* BZGFormFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFormFieldCell.m; path = ../../BZGFormViewController/BZGFormFieldCell.m; sourceTree = "<group>"; };
+		EB59ED5C180B2DB100DAA992 /* BZGTextFieldFormCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGTextFieldFormCell.h; path = ../../BZGFormViewController/BZGTextFieldFormCell.h; sourceTree = "<group>"; };
+		EB59ED5D180B2DB100DAA992 /* BZGTextFieldFormCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGTextFieldFormCell.m; path = ../../BZGFormViewController/BZGTextFieldFormCell.m; sourceTree = "<group>"; };
 		EB59ED5E180B2DB100DAA992 /* BZGFormInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGFormInfoCell.h; path = ../../BZGFormViewController/BZGFormInfoCell.h; sourceTree = "<group>"; };
 		EB59ED5F180B2DB100DAA992 /* BZGFormInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFormInfoCell.m; path = ../../BZGFormViewController/BZGFormInfoCell.m; sourceTree = "<group>"; };
 		EB59ED6A180B2F0800DAA992 /* BZGFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGFormViewController.h; path = ../../BZGFormViewController/BZGFormViewController.h; sourceTree = "<group>"; };
@@ -103,8 +103,8 @@
 		EB59ED66180B2DB900DAA992 /* BZGFormViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EB59ED5C180B2DB100DAA992 /* BZGFormFieldCell.h */,
-				EB59ED5D180B2DB100DAA992 /* BZGFormFieldCell.m */,
+				EB59ED5C180B2DB100DAA992 /* BZGTextFieldFormCell.h */,
+				EB59ED5D180B2DB100DAA992 /* BZGTextFieldFormCell.m */,
 				EB59ED5E180B2DB100DAA992 /* BZGFormInfoCell.h */,
 				EB59ED5F180B2DB100DAA992 /* BZGFormInfoCell.m */,
 				EB59ED6A180B2F0800DAA992 /* BZGFormViewController.h */,
@@ -357,7 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB59ED6C180B2F0800DAA992 /* BZGFormViewController.m in Sources */,
-				EB59ED63180B2DB100DAA992 /* BZGFormFieldCell.m in Sources */,
+				EB59ED63180B2DB100DAA992 /* BZGTextFieldFormCell.m in Sources */,
 				EB59ED64180B2DB100DAA992 /* BZGFormInfoCell.m in Sources */,
 				EB83D531180B2CA9001037F5 /* AppDelegate.m in Sources */,
 				EB83D52D180B2CA9001037F5 /* main.m in Sources */,

@@ -6,7 +6,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class BZGFormFieldCell, BZGFormInfoCell;
+@class BZGTextFieldFormCell, BZGFormInfoCell;
 
 @interface BZGFormViewController : UITableViewController <UITextFieldDelegate>
 
@@ -21,7 +21,7 @@
  *
  * @param cell an instance of BZGFormFieldCell in a BZGFormViewController's formFieldCells
  */
-- (void)updateInfoCellBelowFormFieldCell:(BZGFormFieldCell *)fieldCell;
+- (void)updateInfoCellBelowFormFieldCell:(BZGTextFieldFormCell *)fieldCell;
 
 /**
  * Returns the next form field cell. (Useful for implementing textFieldShouldReturn.)
@@ -29,14 +29,14 @@
  * @param cell The starting form field cell.
  * @return The next form field cell or nil if no cell is found.
  */
-- (BZGFormFieldCell *)nextFormFieldCell:(BZGFormFieldCell *)fieldCell;
+- (BZGTextFieldFormCell *)nextFormFieldCell:(BZGTextFieldFormCell *)fieldCell;
 
 /**
  * Returns the first invalid form field cell.
  *
  * @return The first form field cell with state 'BZGValidationStateInvalid' or nil if no cell is found.
  */
-- (BZGFormFieldCell *)firstInvalidFormFieldCell;
+- (BZGTextFieldFormCell *)firstInvalidFormFieldCell;
 
 
 @end
