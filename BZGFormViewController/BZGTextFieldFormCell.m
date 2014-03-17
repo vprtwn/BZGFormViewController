@@ -134,6 +134,7 @@
                 break;
             case BZGValidationStateValid:
             case BZGValidationStateValidating:
+            case BZGValidationStateWarning:
             case BZGValidationStateNone:
             default:
                 return self.textFieldNormalColor;
