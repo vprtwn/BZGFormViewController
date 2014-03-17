@@ -10,9 +10,9 @@
 
 @interface SignupViewController : BZGFormViewController
 
-@property (nonatomic, strong) BZGFormFieldCell *usernameFieldCell;
-@property (nonatomic, strong) BZGFormFieldCell *emailFieldCell;
-@property (nonatomic, strong) BZGFormFieldCell *passwordFieldCell;
+@property (nonatomic, strong) BZGTextFieldFormCell *usernameFieldCell;
+@property (nonatomic, strong) BZGTextFieldFormCell *emailFieldCell;
+@property (nonatomic, strong) BZGTextFieldFormCell *passwordFieldCell;
 
 @property (nonatomic, strong) BZGMailgunEmailValidator *emailValidator;
 

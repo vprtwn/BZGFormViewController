@@ -1,11 +1,5 @@
-//
-//  BZGTestsBase.h
-//
-//  https://github.com/benzguo/BZGFormViewController
-//
-
-#ifndef BZG_BZGTestsBase_h
-#define BZG_BZGTestsBase_h
+#ifndef SignupFormTests_Prefix_pch
+#define SignupFormTests_Prefix_pch
 
 #import <XCTest/XCTest.h>
 
@@ -17,5 +11,7 @@
 
 #define EXP_SHORTHAND
 #import "Expecta.h"
+
+#import <Specta/Specta.h>
 
 #endif

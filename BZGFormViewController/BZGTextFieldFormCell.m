@@ -4,14 +4,14 @@
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-#import "BZGFormFieldCell.h"
+#import "BZGTextFieldFormCell.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <libextobjc/EXTScope.h>
 #import "BZGFormInfoCell.h"
 #import "Constants.h"
 
-@implementation BZGFormFieldCell
+@implementation BZGTextFieldFormCell
 
 - (id)init
 {
@@ -55,8 +55,7 @@
     self.imageView.hidden = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.validationState = BZGValidationStateNone;
-    self.shouldShowInfoCell = NO;
-    self.showsCheckmark = YES;
+    self.showsCheckmarkWhenValid = YES;
     self.showsValidationWhileEditing = NO;
 }
 
@@ -80,7 +79,8 @@
     self.textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.textField.textColor = BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+    self.textFieldNormalColor = BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+    self.textFieldInvalidColor = BZG_FORMFIELD_TEXTFIELD_INVALID_COLOR;
     self.textField.font = BZG_FORMFIELD_TEXTFIELD_FONT;
     self.textField.backgroundColor = [UIColor clearColor];
     [self addSubview:self.textField];
@@ -126,17 +126,18 @@
         @strongify(self);
         if ((self.textField.editing || self.textField.isFirstResponder) &&
             !self.showsValidationWhileEditing) {
-            return BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+            return self.textFieldNormalColor;
         }
         switch (validationState.integerValue) {
             case BZGValidationStateInvalid:
-                return BZG_FORMFIELD_TEXTFIELD_INVALID_COLOR;
+                return self.textFieldInvalidColor;
                 break;
             case BZGValidationStateValid:
             case BZGValidationStateValidating:
+            case BZGValidationStateWarning:
             case BZGValidationStateNone:
             default:
-                return BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+                return self.textFieldNormalColor;
                 break;
         }
     }];
@@ -158,7 +159,7 @@
         @strongify(self);
         if (validationState.integerValue == BZGValidationStateValid &&
             (!self.textField.editing || self.showsValidationWhileEditing) &&
-            self.showsCheckmark) {
+            self.showsCheckmarkWhenValid) {
             return @(UITableViewCellAccessoryCheckmark);
         } else {
             return @(UITableViewCellAccessoryNone);
@@ -167,13 +168,13 @@
 }
 
 
-+ (BZGFormFieldCell *)parentCellForTextField:(UITextField *)textField
++ (BZGTextFieldFormCell *)parentCellForTextField:(UITextField *)textField
 {
     UIView *view = textField;
     while ((view = view.superview)) {
-        if ([view isKindOfClass:[BZGFormFieldCell class]]) break;
+        if ([view isKindOfClass:[BZGTextFieldFormCell class]]) break;
     }
-    return (BZGFormFieldCell *)view;
+    return (BZGTextFieldFormCell *)view;
 }
 
 
