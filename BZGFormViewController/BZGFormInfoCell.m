@@ -8,7 +8,7 @@
 #import "Constants.h"
 
 @interface BZGFormInfoCell () {
-    BZGTapGestureBlock _tapGestureBlock;
+    void (^_tapGestureBlock) ();
 }
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
@@ -43,7 +43,7 @@
     [self updateSize];
 }
 
-- (void)setTapGestureBlock:(BZGTapGestureBlock)block
+- (void)setTapGestureBlock:(void(^)())block
 {
     _tapGestureBlock = block;
 }
@@ -63,7 +63,7 @@
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     self.infoLabel.backgroundColor = [UIColor clearColor];
     self.infoLabel.text = @"";
-    
+
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction)];
     [self addGestureRecognizer:self.tapGestureRecognizer];
 }
