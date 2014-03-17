@@ -4,7 +4,6 @@
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-#import "BZGTestsBase.h"
 #import "BZGFormInfoCell.h"
 
 @interface BZGFormInfoCellTests : XCTestCase

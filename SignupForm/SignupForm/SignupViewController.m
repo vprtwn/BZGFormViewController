@@ -36,7 +36,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     [self configureEmailFieldCell];
     [self configurePasswordFieldCell];
 
-    self.formFieldCells = [NSMutableArray arrayWithArray:@[self.usernameFieldCell,
+    self.formCells = [NSMutableArray arrayWithArray:@[self.usernameFieldCell,
                                                            self.emailFieldCell,
                                                            self.passwordFieldCell]];
     self.formSection = 0;
@@ -73,7 +73,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
         @strongify(self);
         if (text.length == 0) {
             cell.validationState = BZGValidationStateNone;
-            [self updateInfoCellBelowFormFieldCell:cell];
+            [self updateInfoCellBelowFormCell:cell];
             return;
         }
         cell.validationState = BZGValidationStateValidating;
@@ -99,10 +99,10 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
                                               } else {
                                                   [cell.infoCell setTapGestureBlock:nil];
                                               }
-                                              [self updateInfoCellBelowFormFieldCell:cell];
+                                              [self updateInfoCellBelowFormCell:cell];
                                           } failure:^(NSError *error) {
                                               cell.validationState = BZGValidationStateNone;
-                                              [self updateInfoCellBelowFormFieldCell:cell];
+                                              [self updateInfoCellBelowFormCell:cell];
                                           }];
     };
 }

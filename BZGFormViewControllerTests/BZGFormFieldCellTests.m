@@ -1,10 +1,9 @@
 //
-//  BZGFormFieldCellTests.m
+//  BZGTextFieldFormCell.m
 //
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-#import "BZGTestsBase.h"
 #import "BZGTextFieldFormCell.h"
 #import "Constants.h"
 

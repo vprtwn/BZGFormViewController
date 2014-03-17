@@ -35,13 +35,13 @@
 
 #pragma mark - Showing/hiding info cells
 
-- (BZGFormInfoCell *)infoCellBelowFormFieldCell:(BZGTextFieldFormCell *)fieldCell
+- (BZGFormInfoCell *)infoCellBelowFormCell:(BZGTextFieldFormCell *)cell
 {
-    NSUInteger cellIndex = [self.formFieldCells indexOfObject:fieldCell];
+    NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return nil;
-    if (cellIndex + 1 >= self.formFieldCells.count) return nil;
+    if (cellIndex + 1 >= self.formCells.count) return nil;
 
-    UITableViewCell *cellBelow = self.formFieldCells[cellIndex + 1];
+    UITableViewCell *cellBelow = self.formCells[cellIndex + 1];
     if ([cellBelow isKindOfClass:[BZGFormInfoCell class]]) {
         return (BZGFormInfoCell *)cellBelow;
     }
@@ -49,56 +49,56 @@
     return nil;
 }
 
-- (void)showInfoCellBelowFormFieldCell:(BZGTextFieldFormCell *)fieldCell
+- (void)showInfoCellBelowFormCell:(BZGTextFieldFormCell *)cell
 {
-    NSUInteger cellIndex = [self.formFieldCells indexOfObject:fieldCell];
+    NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return;
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cellIndex+1
                                                 inSection:self.formSection];
 
     // if an info cell is already showing, do nothing
-    BZGFormInfoCell *infoCell = [self infoCellBelowFormFieldCell:fieldCell];
+    BZGFormInfoCell *infoCell = [self infoCellBelowFormCell:cell];
     if (infoCell) return;
 
     // otherwise, add the cell's info cell to the table view
-    [self.formFieldCells insertObject:fieldCell.infoCell atIndex:cellIndex+1];
+    [self.formCells insertObject:cell.infoCell atIndex:cellIndex+1];
     [self.tableView insertRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (void)removeInfoCellBelowFormFieldCell:(BZGTextFieldFormCell *)fieldCell
+- (void)removeInfoCellBelowFormFieldCell:(BZGTextFieldFormCell *)cell
 {
-    NSUInteger cellIndex = [self.formFieldCells indexOfObject:fieldCell];
+    NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return;
 
     // if no info cell is showing, do nothing
-    BZGFormInfoCell *infoCell = [self infoCellBelowFormFieldCell:fieldCell];
+    BZGFormInfoCell *infoCell = [self infoCellBelowFormCell:cell];
     if (!infoCell) return;
 
     // otherwise, remove it
-    [self.formFieldCells removeObjectAtIndex:cellIndex+1];
+    [self.formCells removeObjectAtIndex:cellIndex+1];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cellIndex+1
                                                 inSection:self.formSection];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (void)updateInfoCellBelowFormFieldCell:(BZGTextFieldFormCell *)fieldCell
+- (void)updateInfoCellBelowFormCell:(BZGTextFieldFormCell *)cell
 {
-    if (!fieldCell.textField.editing &&
-        (fieldCell.validationState == BZGValidationStateInvalid ||
-         fieldCell.validationState == BZGValidationStateWarning)) {
-        [self showInfoCellBelowFormFieldCell:fieldCell];
+    if (!cell.textField.editing &&
+        (cell.validationState == BZGValidationStateInvalid ||
+         cell.validationState == BZGValidationStateWarning)) {
+        [self showInfoCellBelowFormCell:cell];
     } else {
-        [self removeInfoCellBelowFormFieldCell:fieldCell];
+        [self removeInfoCellBelowFormFieldCell:cell];
     }
 }
 
 #pragma mark - Finding cells
 
-- (BZGTextFieldFormCell *)firstInvalidFormFieldCell
+- (BZGTextFieldFormCell *)firstInvalidFormCell
 {
-    for (UITableViewCell *cell in self.formFieldCells) {
+    for (UITableViewCell *cell in self.formCells) {
         if ([cell isKindOfClass:[BZGTextFieldFormCell class]]) {
             if (((BZGTextFieldFormCell *)cell).validationState == BZGValidationStateInvalid) {
                 return (BZGTextFieldFormCell *)cell;
@@ -108,13 +108,13 @@
     return nil;
 }
 
-- (BZGTextFieldFormCell *)nextFormFieldCell:(BZGTextFieldFormCell *)fieldCell
+- (BZGTextFieldFormCell *)nextFormCell:(BZGTextFieldFormCell *)cell
 {
-    NSUInteger cellIndex = [self.formFieldCells indexOfObject:fieldCell];
+    NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return nil;
 
-    for (NSUInteger i = cellIndex + 1; i < self.formFieldCells.count; ++i) {
-        UITableViewCell *cell = self.formFieldCells[i];
+    for (NSUInteger i = cellIndex + 1; i < self.formCells.count; ++i) {
+        UITableViewCell *cell = self.formCells[i];
         if ([cell isKindOfClass:[BZGTextFieldFormCell class]]) {
             return (BZGTextFieldFormCell *)cell;
         }
@@ -126,24 +126,24 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.formFieldCells) {
-        return self.formFieldCells.count;
+    if (self.formCells) {
+        return self.formCells.count;
     }
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.formFieldCells) {
-        return [self.formFieldCells objectAtIndex:indexPath.row];
+    if (self.formCells) {
+        return [self.formCells objectAtIndex:indexPath.row];
     }
     return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.formFieldCells) {
-        UITableViewCell *cell = [self.formFieldCells objectAtIndex:indexPath.row];
+    if (self.formCells) {
+        UITableViewCell *cell = [self.formCells objectAtIndex:indexPath.row];
         return cell.frame.size.height;
     }
     return 0;
@@ -160,7 +160,7 @@
     if (cell.didBeginEditingBlock) {
         cell.didBeginEditingBlock(cell, textField.text);
     }
-    [self updateInfoCellBelowFormFieldCell:cell];
+    [self updateInfoCellBelowFormCell:cell];
 
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
@@ -179,7 +179,7 @@
         shouldChange = cell.shouldChangeTextBlock(cell, newText);
     }
 
-    [self updateInfoCellBelowFormFieldCell:cell];
+    [self updateInfoCellBelowFormCell:cell];
     return shouldChange;
 }
 
@@ -193,7 +193,7 @@
         cell.didEndEditingBlock(cell, textField.text);
     }
 
-    [self updateInfoCellBelowFormFieldCell:cell];
+    [self updateInfoCellBelowFormCell:cell];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -208,7 +208,7 @@
         shouldReturn = cell.shouldReturnBlock(cell, textField.text);
     }
 
-    BZGTextFieldFormCell *nextCell = [self nextFormFieldCell:cell];
+    BZGTextFieldFormCell *nextCell = [self nextFormCell:cell];
     if (!nextCell) {
         [cell.textField resignFirstResponder];
     }
@@ -216,7 +216,7 @@
         [nextCell.textField becomeFirstResponder];
     }
 
-    [self updateInfoCellBelowFormFieldCell:cell];
+    [self updateInfoCellBelowFormCell:cell];
     return shouldReturn;
 }
 
