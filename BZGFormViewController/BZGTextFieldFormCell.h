@@ -19,6 +19,13 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 
 @property (strong, nonatomic) UILabel *label;
 @property (strong, nonatomic) UITextField *textField;
+
+/// The color of the text field's text when the cell's state is not invalid.
+@property (strong, nonatomic) UIColor *textFieldNormalColor;
+
+/// The color of the text field's text when the cell's state is invalid.
+@property (strong, nonatomic) UIColor *textFieldInvalidColor;
+
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
 
 /// The current validation state. Default is BZGValidationStateNone.

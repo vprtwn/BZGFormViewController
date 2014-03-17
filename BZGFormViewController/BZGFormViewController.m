@@ -160,7 +160,6 @@
     if (cell.didBeginEditingBlock) {
         cell.didBeginEditingBlock(cell, textField.text);
     }
-    [self updateInfoCellBelowFormCell:cell];
 
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];

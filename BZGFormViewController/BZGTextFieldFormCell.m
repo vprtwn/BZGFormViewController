@@ -79,7 +79,8 @@
     self.textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.textField.textColor = BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+    self.textFieldNormalColor = BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+    self.textFieldInvalidColor = BZG_FORMFIELD_TEXTFIELD_INVALID_COLOR;
     self.textField.font = BZG_FORMFIELD_TEXTFIELD_FONT;
     self.textField.backgroundColor = [UIColor clearColor];
     [self addSubview:self.textField];
@@ -125,17 +126,17 @@
         @strongify(self);
         if ((self.textField.editing || self.textField.isFirstResponder) &&
             !self.showsValidationWhileEditing) {
-            return BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+            return self.textFieldNormalColor;
         }
         switch (validationState.integerValue) {
             case BZGValidationStateInvalid:
-                return BZG_FORMFIELD_TEXTFIELD_INVALID_COLOR;
+                return self.textFieldInvalidColor;
                 break;
             case BZGValidationStateValid:
             case BZGValidationStateValidating:
             case BZGValidationStateNone:
             default:
-                return BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+                return self.textFieldNormalColor;
                 break;
         }
     }];
