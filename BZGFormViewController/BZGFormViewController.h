@@ -16,20 +16,23 @@
 /// The table view section where the form should be displayed.
 @property (nonatomic, assign) NSUInteger formSection;
 
+/// Returns a boolean value indicating whether all the form's cells are valid
+@property (nonatomic, assign) BOOL isValid;
+
 /**
- * Updates the display state of the info cell below a form field cell.
+ * Updates the display state of the info cell below a form cell.
  *
  * @param cell an instance of BZGFormFieldCell in a BZGFormViewController's formFieldCells
  */
-- (void)updateInfoCellBelowFormCell:(BZGTextFieldFormCell *)fieldCell;
+- (void)updateInfoCellBelowFormCell:(BZGTextFieldFormCell *)cell;
 
 /**
- * Returns the next form field cell. (Useful for implementing textFieldShouldReturn.)
+ * Returns the next form cell.
  *
  * @param cell The starting form field cell.
  * @return The next form field cell or nil if no cell is found.
  */
-- (BZGTextFieldFormCell *)nextFormCell:(BZGTextFieldFormCell *)fieldCell;
+- (BZGTextFieldFormCell *)nextFormCell:(BZGTextFieldFormCell *)cell;
 
 /**
  * Returns the first invalid form field cell.

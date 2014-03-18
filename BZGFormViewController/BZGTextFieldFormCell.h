@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 
 /**
  * The block called before the text field's text changes.
- * The block's text parameter is the new text. Return NO if the text shouldn't change.
+ * The block's newText parameter will be the text field's text after changing. Return NO if the text shouldn't change.
  */
 @property (copy, nonatomic) BOOL (^shouldChangeTextBlock)(BZGTextFieldFormCell *cell, NSString *newText);
 
@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 
 /**
  * Returns the parent BZGFormFieldCell for the given text field. If no cell is found, returns nil.
- * 
+ *
  * @param textField A UITextField instance that may or may not belong to this BZGFormFieldCell instance.
  */
 + (BZGTextFieldFormCell *)parentCellForTextField:(UITextField *)textField;
