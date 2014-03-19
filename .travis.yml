@@ -1,6 +1,6 @@
 language: objective-c
 before_install: gem install cocoapods
 script:
-    - pod install
+    - sh -c 'cd SignupForm' && pod install
     - xcodebuild -workspace SignupForm/SignupForm.xcworkspace -scheme SignupForm -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
     - xcodebuild test -workspace SignupForm/SignupForm.xcworkspace -scheme SignupFormTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
