@@ -1,12 +1,12 @@
 //
-//  BZGFormInfoCell.h
+//  BZGInfoCell.h
 //
 //  https://github.com/benzguo/BZGFormViewController
 //
 
 #import <UIKit/UIKit.h>
 
-@interface BZGFormInfoCell : UITableViewCell
+@interface BZGInfoCell : UITableViewCell
 
 /// The cell's label.
 @property (nonatomic, strong) UILabel *infoLabel;

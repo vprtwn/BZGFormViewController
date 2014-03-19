@@ -5,7 +5,7 @@
 //
 
 #import "SignupViewController.h"
-#import "BZGTextFieldFormCell.h"
+#import "BZGTextFieldCell.h"
 #import "BZGMailgunEmailValidator.h"
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
@@ -36,12 +36,12 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (void)configureUsernameFieldCell
 {
-    self.usernameFieldCell = [BZGTextFieldFormCell new];
+    self.usernameFieldCell = [BZGTextFieldCell new];
     self.usernameFieldCell.label.text = @"Username";
     self.usernameFieldCell.textField.placeholder = NSLocalizedString(@"Username", nil);
     self.usernameFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.usernameFieldCell.textField.delegate = self;
-    self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldFormCell *cell, NSString *newText) {
+    self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
         if (newText.length < 5) {
             cell.validationState = BZGValidationStateInvalid;
             [cell.infoCell setText:@"Username must be at least 5 characters long."];
@@ -54,13 +54,13 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (void)configureEmailFieldCell
 {
-    self.emailFieldCell = [BZGTextFieldFormCell new];
+    self.emailFieldCell = [BZGTextFieldCell new];
     self.emailFieldCell.label.text = @"Email";
     self.emailFieldCell.textField.placeholder = NSLocalizedString(@"Email", nil);
     self.emailFieldCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
     self.emailFieldCell.textField.delegate = self;
     @weakify(self)
-    self.emailFieldCell.didEndEditingBlock = ^(BZGTextFieldFormCell *cell, NSString *text) {
+    self.emailFieldCell.didEndEditingBlock = ^(BZGTextFieldCell *cell, NSString *text) {
         @strongify(self);
         if (text.length == 0) {
             cell.validationState = BZGValidationStateNone;
@@ -100,13 +100,13 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (void)configurePasswordFieldCell
 {
-    self.passwordFieldCell = [BZGTextFieldFormCell new];
+    self.passwordFieldCell = [BZGTextFieldCell new];
     self.passwordFieldCell.label.text = @"Password";
     self.passwordFieldCell.textField.placeholder = NSLocalizedString(@"Password", nil);
     self.passwordFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordFieldCell.textField.secureTextEntry = YES;
     self.passwordFieldCell.textField.delegate = self;
-    self.passwordFieldCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldFormCell *cell, NSString *text) {
+    self.passwordFieldCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *text) {
         // because this is a secure text field, reset the validation state every time.
         cell.validationState = BZGValidationStateNone;
         if (text.length < 8) {

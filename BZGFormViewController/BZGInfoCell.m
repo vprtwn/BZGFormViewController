@@ -1,13 +1,13 @@
 //
-//  BZGFormInfoCell.m
+//  BZGInfoCell.m
 //
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-#import "BZGFormInfoCell.h"
+#import "BZGInfoCell.h"
 #import "Constants.h"
 
-@interface BZGFormInfoCell () {
+@interface BZGInfoCell () {
     void (^_tapGestureBlock) ();
 }
 
@@ -15,7 +15,7 @@
 
 @end
 
-@implementation BZGFormInfoCell
+@implementation BZGInfoCell
 
 - (id)init
 {

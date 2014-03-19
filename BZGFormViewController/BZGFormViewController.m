@@ -5,8 +5,8 @@
 //
 
 #import "BZGFormViewController.h"
-#import "BZGTextFieldFormCell.h"
-#import "BZGFormInfoCell.h"
+#import "BZGTextFieldCell.h"
+#import "BZGInfoCell.h"
 #import "Constants.h"
 
 @interface BZGFormViewController ()
@@ -56,21 +56,21 @@
 
 #pragma mark - Showing/hiding info cells
 
-- (BZGFormInfoCell *)infoCellBelowFormCell:(BZGTextFieldFormCell *)cell
+- (BZGInfoCell *)infoCellBelowFormCell:(BZGTextFieldCell *)cell
 {
     NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return nil;
     if (cellIndex + 1 >= self.formCells.count) return nil;
 
     UITableViewCell *cellBelow = self.formCells[cellIndex + 1];
-    if ([cellBelow isKindOfClass:[BZGFormInfoCell class]]) {
-        return (BZGFormInfoCell *)cellBelow;
+    if ([cellBelow isKindOfClass:[BZGInfoCell class]]) {
+        return (BZGInfoCell *)cellBelow;
     }
 
     return nil;
 }
 
-- (void)showInfoCellBelowFormCell:(BZGTextFieldFormCell *)cell
+- (void)showInfoCellBelowFormCell:(BZGTextFieldCell *)cell
 {
     NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return;
@@ -79,7 +79,7 @@
                                                 inSection:self.formSection];
 
     // if an info cell is already showing, do nothing
-    BZGFormInfoCell *infoCell = [self infoCellBelowFormCell:cell];
+    BZGInfoCell *infoCell = [self infoCellBelowFormCell:cell];
     if (infoCell) return;
 
     // otherwise, add the cell's info cell to the table view
@@ -88,13 +88,13 @@
                           withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (void)removeInfoCellBelowFormFieldCell:(BZGTextFieldFormCell *)cell
+- (void)removeInfoCellBelowFormFieldCell:(BZGTextFieldCell *)cell
 {
     NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return;
 
     // if no info cell is showing, do nothing
-    BZGFormInfoCell *infoCell = [self infoCellBelowFormCell:cell];
+    BZGInfoCell *infoCell = [self infoCellBelowFormCell:cell];
     if (!infoCell) return;
 
     // otherwise, remove it
@@ -104,7 +104,7 @@
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (void)updateInfoCellBelowFormCell:(BZGTextFieldFormCell *)cell
+- (void)updateInfoCellBelowFormCell:(BZGTextFieldCell *)cell
 {
     if (!cell.textField.editing &&
         (cell.validationState == BZGValidationStateInvalid ||
@@ -117,27 +117,27 @@
 
 #pragma mark - Finding cells
 
-- (BZGTextFieldFormCell *)firstInvalidFormCell
+- (BZGTextFieldCell *)firstInvalidFormCell
 {
     for (UITableViewCell *cell in self.formCells) {
-        if ([cell isKindOfClass:[BZGTextFieldFormCell class]]) {
-            if (((BZGTextFieldFormCell *)cell).validationState == BZGValidationStateInvalid) {
-                return (BZGTextFieldFormCell *)cell;
+        if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
+            if (((BZGTextFieldCell *)cell).validationState == BZGValidationStateInvalid) {
+                return (BZGTextFieldCell *)cell;
             }
         }
     }
     return nil;
 }
 
-- (BZGTextFieldFormCell *)nextFormCell:(BZGTextFieldFormCell *)cell
+- (BZGTextFieldCell *)nextFormCell:(BZGTextFieldCell *)cell
 {
     NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return nil;
 
     for (NSUInteger i = cellIndex + 1; i < self.formCells.count; ++i) {
         UITableViewCell *cell = self.formCells[i];
-        if ([cell isKindOfClass:[BZGTextFieldFormCell class]]) {
-            return (BZGTextFieldFormCell *)cell;
+        if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
+            return (BZGTextFieldCell *)cell;
         }
     }
     return nil;
@@ -174,7 +174,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    BZGTextFieldFormCell *cell = [BZGTextFieldFormCell parentCellForTextField:textField];
+    BZGTextFieldCell *cell = [BZGTextFieldCell parentCellForTextField:textField];
     if (!cell) {
         return;
     }
@@ -189,7 +189,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     BOOL shouldChange = YES;
-    BZGTextFieldFormCell *cell = [BZGTextFieldFormCell parentCellForTextField:textField];
+    BZGTextFieldCell *cell = [BZGTextFieldCell parentCellForTextField:textField];
     if (!cell) {
         return YES;
     }
@@ -205,7 +205,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    BZGTextFieldFormCell *cell = [BZGTextFieldFormCell parentCellForTextField:textField];
+    BZGTextFieldCell *cell = [BZGTextFieldCell parentCellForTextField:textField];
     if (!cell) {
         return;
     }
@@ -219,7 +219,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     BOOL shouldReturn = YES;
-    BZGTextFieldFormCell *cell = [BZGTextFieldFormCell parentCellForTextField:textField];
+    BZGTextFieldCell *cell = [BZGTextFieldCell parentCellForTextField:textField];
     if (!cell) {
         return YES;
     }
@@ -228,7 +228,7 @@
         shouldReturn = cell.shouldReturnBlock(cell, textField.text);
     }
 
-    BZGTextFieldFormCell *nextCell = [self nextFormCell:cell];
+    BZGTextFieldCell *nextCell = [self nextFormCell:cell];
     if (!nextCell) {
         [cell.textField resignFirstResponder];
     }

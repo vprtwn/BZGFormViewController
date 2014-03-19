@@ -1,17 +1,17 @@
 //
-//  BZGFormFieldCell.m
+//  BZGTextFieldCell.m
 //
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-#import "BZGTextFieldFormCell.h"
+#import "BZGTextFieldCell.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <libextobjc/EXTScope.h>
-#import "BZGFormInfoCell.h"
+#import "BZGInfoCell.h"
 #import "Constants.h"
 
-@implementation BZGTextFieldFormCell
+@implementation BZGTextFieldCell
 
 - (id)init
 {
@@ -61,7 +61,7 @@
 
 - (void)configureInfoCell
 {
-    self.infoCell = [[BZGFormInfoCell alloc] init];
+    self.infoCell = [[BZGInfoCell alloc] init];
 }
 
 - (void)configureTextField
@@ -124,7 +124,7 @@
     RAC(self.textField, textColor) =
     [RACObserve(self, validationState) map:^UIColor *(NSNumber *validationState) {
         @strongify(self);
-        if ((self.textField.editing || self.textField.isFirstResponder) &&
+        if (self.textField.editing &&
             !self.showsValidationWhileEditing) {
             return self.textFieldNormalColor;
         }
@@ -168,13 +168,13 @@
 }
 
 
-+ (BZGTextFieldFormCell *)parentCellForTextField:(UITextField *)textField
++ (BZGTextFieldCell *)parentCellForTextField:(UITextField *)textField
 {
     UIView *view = textField;
     while ((view = view.superview)) {
-        if ([view isKindOfClass:[BZGTextFieldFormCell class]]) break;
+        if ([view isKindOfClass:[BZGTextFieldCell class]]) break;
     }
-    return (BZGTextFieldFormCell *)view;
+    return (BZGTextFieldCell *)view;
 }
 
 

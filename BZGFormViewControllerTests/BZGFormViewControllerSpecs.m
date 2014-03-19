@@ -1,11 +1,11 @@
 #import "BZGFormViewController.h"
-#import "BZGTextFieldFormCell.h"
+#import "BZGTextFieldCell.h"
 
 UIWindow *window;
 BZGFormViewController *formViewController;
-BZGTextFieldFormCell *cell1;
-BZGTextFieldFormCell *cell2;
-BZGTextFieldFormCell *cell3;
+BZGTextFieldCell *cell1;
+BZGTextFieldCell *cell2;
+BZGTextFieldCell *cell3;
 
 SpecBegin(BZGFormViewController)
 
@@ -13,9 +13,9 @@ before(^{
     [super setUp];
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     formViewController = [[BZGFormViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    cell1 = [[BZGTextFieldFormCell alloc] init];
-    cell2 = [[BZGTextFieldFormCell alloc] init];
-    cell3 = [[BZGTextFieldFormCell alloc] init];
+    cell1 = [[BZGTextFieldCell alloc] init];
+    cell2 = [[BZGTextFieldCell alloc] init];
+    cell3 = [[BZGTextFieldCell alloc] init];
     window.rootViewController = formViewController;
     [window makeKeyAndVisible];
 });
@@ -69,8 +69,8 @@ describe(@"updateInfoCellBelowFormCell", ^{
         expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
         NSIndexPath *infoCellIndexPath = [NSIndexPath indexPathForRow:1 inSection:formViewController.formSection];
         UITableViewCell *infoCell = [formViewController.tableView cellForRowAtIndexPath:infoCellIndexPath];
-        expect(infoCell).to.beKindOf([BZGFormInfoCell class]);
-        expect(((BZGFormInfoCell *)infoCell).infoLabel.text).to.equal(@"cell1 info text");
+        expect(infoCell).to.beKindOf([BZGInfoCell class]);
+        expect(((BZGInfoCell *)infoCell).infoLabel.text).to.equal(@"cell1 info text");
     });
 
     it(@"should show an info cell when the field has state BZGValidationStateWarning", ^{
@@ -82,8 +82,8 @@ describe(@"updateInfoCellBelowFormCell", ^{
         expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
         NSIndexPath *infoCellIndexPath = [NSIndexPath indexPathForRow:1 inSection:formViewController.formSection];
         UITableViewCell *infoCell = [formViewController.tableView cellForRowAtIndexPath:infoCellIndexPath];
-        expect(infoCell).to.beKindOf([BZGFormInfoCell class]);
-        expect(((BZGFormInfoCell *)infoCell).infoLabel.text).to.equal(@"cell1 info text");
+        expect(infoCell).to.beKindOf([BZGInfoCell class]);
+        expect(((BZGInfoCell *)infoCell).infoLabel.text).to.equal(@"cell1 info text");
     });
 
     it(@"should not show an info cell when the field has state BZGValidationStateValid", ^{
@@ -91,6 +91,19 @@ describe(@"updateInfoCellBelowFormCell", ^{
         [formViewController.tableView reloadData];
         [cell1.infoCell setText:@"cell1 info text"];
         cell1.validationState = BZGValidationStateValid;
+        [formViewController updateInfoCellBelowFormCell:cell1];
+        expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
+    });
+
+    it(@"should not show an info cell when the text field is editing", ^{
+        UITextField *mockEditingTextField = mock([UITextField class]);
+        [given([mockEditingTextField isEditing]) willReturnBool:YES];
+        cell1.textField = mockEditingTextField;
+        cell1.validationState = BZGValidationStateInvalid;
+
+        formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+        [formViewController.tableView reloadData];
+
         [formViewController updateInfoCellBelowFormCell:cell1];
         expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
     });
@@ -104,16 +117,16 @@ describe(@"updateInfoCellBelowFormCell", ^{
         expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
         NSIndexPath *infoCellIndexPath = [NSIndexPath indexPathForRow:2 inSection:formViewController.formSection];
         UITableViewCell *infoCell = [formViewController.tableView cellForRowAtIndexPath:infoCellIndexPath];
-        expect(infoCell).to.beKindOf([BZGFormInfoCell class]);
-        expect(((BZGFormInfoCell *)infoCell).infoLabel.text).to.equal(@"cell2 info text");
+        expect(infoCell).to.beKindOf([BZGInfoCell class]);
+        expect(((BZGInfoCell *)infoCell).infoLabel.text).to.equal(@"cell2 info text");
 
         [cell2.infoCell setText:@"cell2 info text changed"];
         [formViewController updateInfoCellBelowFormCell:cell2];
         expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(4);
         infoCellIndexPath = [NSIndexPath indexPathForRow:2 inSection:formViewController.formSection];
         infoCell = [formViewController.tableView cellForRowAtIndexPath:infoCellIndexPath];
-        expect(infoCell).to.beKindOf([BZGFormInfoCell class]);
-        expect(((BZGFormInfoCell *)infoCell).infoLabel.text).to.equal(@"cell2 info text changed");
+        expect(infoCell).to.beKindOf([BZGInfoCell class]);
+        expect(((BZGInfoCell *)infoCell).infoLabel.text).to.equal(@"cell2 info text changed");
     });
 });
 
@@ -122,7 +135,7 @@ describe(@"UITextFieldDelegate blocks", ^{
         formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1]];
         [formViewController.tableView reloadData];
         cell1.textField.text = @"cell1 textfield text";
-        cell1.didBeginEditingBlock = ^(BZGTextFieldFormCell *cell, NSString *text) {
+        cell1.didBeginEditingBlock = ^(BZGTextFieldCell *cell, NSString *text) {
             cell.infoCell.textLabel.text = text;
         };
         [formViewController textFieldDidBeginEditing:cell1.textField];
@@ -133,7 +146,7 @@ describe(@"UITextFieldDelegate blocks", ^{
         formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1]];
         [formViewController.tableView reloadData];
         cell1.textField.text = @"foo";
-        cell1.shouldChangeTextBlock = ^BOOL(BZGTextFieldFormCell *cell, NSString *text) {
+        cell1.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *text) {
             cell.infoCell.textLabel.text = text;
             return YES;
         };
@@ -147,7 +160,7 @@ describe(@"UITextFieldDelegate blocks", ^{
         formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1]];
         [formViewController.tableView reloadData];
         cell1.textField.text = @"foo";
-        cell1.didEndEditingBlock = ^(BZGTextFieldFormCell *cell, NSString *text) {
+        cell1.didEndEditingBlock = ^(BZGTextFieldCell *cell, NSString *text) {
             cell.infoCell.textLabel.text = text;
         };
 
@@ -160,7 +173,7 @@ describe(@"UITextFieldDelegate blocks", ^{
         formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1]];
         [formViewController.tableView reloadData];
         cell1.textField.text = @"foo";
-        cell1.shouldReturnBlock = ^BOOL(BZGTextFieldFormCell *cell, NSString *text) {
+        cell1.shouldReturnBlock = ^BOOL(BZGTextFieldCell *cell, NSString *text) {
             cell.infoCell.textLabel.text = text;
             return YES;
         };

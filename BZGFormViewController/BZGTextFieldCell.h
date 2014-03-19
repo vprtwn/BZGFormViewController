@@ -1,11 +1,11 @@
 //
-//  BZGFormFieldCell.h
+//  BZGTextFieldCell.h
 //
 //  https://github.com/benzguo/BZGFormViewController
 //
 
 #import <UIKit/UIKit.h>
-#import "BZGFormInfoCell.h"
+#import "BZGInfoCell.h"
 
 typedef NS_ENUM(NSInteger, BZGValidationState) {
     BZGValidationStateInvalid,
@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
     BZGValidationStateNone
 };
 
-@interface BZGTextFieldFormCell : UITableViewCell <UITextFieldDelegate>
+@interface BZGTextFieldCell : UITableViewCell <UITextFieldDelegate>
 
 @property (strong, nonatomic) UILabel *label;
 @property (strong, nonatomic) UITextField *textField;
@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 @property (assign, nonatomic) BZGValidationState validationState;
 
 /// The cell displayed when the cell's validation state is Invalid or Warning.
-@property (strong, nonatomic) BZGFormInfoCell *infoCell;
+@property (strong, nonatomic) BZGInfoCell *infoCell;
 
 /// A value indicating whether or not the cell shows a checkmark when valid. Default is YES.
 @property (assign, nonatomic) BOOL showsCheckmarkWhenValid;
@@ -41,25 +41,25 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 @property (assign, nonatomic) BOOL showsValidationWhileEditing;
 
 /// The block called when the text field's text begins editing.
-@property (copy, nonatomic) void (^didBeginEditingBlock)(BZGTextFieldFormCell *cell, NSString *text);
+@property (copy, nonatomic) void (^didBeginEditingBlock)(BZGTextFieldCell *cell, NSString *text);
 
 /**
  * The block called before the text field's text changes.
  * The block's newText parameter will be the text field's text after changing. Return NO if the text shouldn't change.
  */
-@property (copy, nonatomic) BOOL (^shouldChangeTextBlock)(BZGTextFieldFormCell *cell, NSString *newText);
+@property (copy, nonatomic) BOOL (^shouldChangeTextBlock)(BZGTextFieldCell *cell, NSString *newText);
 
 /// The block called when the text field's text ends editing.
-@property (copy, nonatomic) void (^didEndEditingBlock)(BZGTextFieldFormCell *cell, NSString *text);
+@property (copy, nonatomic) void (^didEndEditingBlock)(BZGTextFieldCell *cell, NSString *text);
 
 /// The block called before the text field returns. Return NO if the text field shouldn't return.
-@property (copy, nonatomic) BOOL (^shouldReturnBlock)(BZGTextFieldFormCell *cell, NSString *text);
+@property (copy, nonatomic) BOOL (^shouldReturnBlock)(BZGTextFieldCell *cell, NSString *text);
 
 /**
  * Returns the parent BZGFormFieldCell for the given text field. If no cell is found, returns nil.
  *
  * @param textField A UITextField instance that may or may not belong to this BZGFormFieldCell instance.
  */
-+ (BZGTextFieldFormCell *)parentCellForTextField:(UITextField *)textField;
++ (BZGTextFieldCell *)parentCellForTextField:(UITextField *)textField;
 
 @end

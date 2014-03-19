@@ -1,10 +1,10 @@
-#import "BZGFormInfoCell.h"
+#import "BZGInfoCell.h"
 
-SpecBegin(BZGFormInfoCell)
+SpecBegin(BZGInfoCell)
 
 describe(@"Initialization", ^{
     it(@"should correctly initialize with text", ^{
-        BZGFormInfoCell *cell = [[BZGFormInfoCell alloc] initWithText:@"foo"];
+        BZGInfoCell *cell = [[BZGInfoCell alloc] initWithText:@"foo"];
         expect(cell.selectionStyle).to.equal(UITableViewCellSelectionStyleNone);
         expect(cell.infoLabel.text).to.equal(@"foo");
     });
@@ -12,18 +12,18 @@ describe(@"Initialization", ^{
 
 describe(@"Resizing", ^{
     it(@"should correctly resize to fit large text", ^{
-        BZGFormInfoCell *cell1 = [[BZGFormInfoCell alloc] initWithText:@"foo"];
+        BZGInfoCell *cell1 = [[BZGInfoCell alloc] initWithText:@"foo"];
         expect(cell1.infoLabel.text).to.equal(@"foo");
 
         NSString *longText = @"foo foo foo foo foo foo foo foo. foo foo foo foo foo foo foo foo. fooo foo foo foo foo foo foo foo.";
-        BZGFormInfoCell *cell2 = [[BZGFormInfoCell alloc] initWithText:longText];
+        BZGInfoCell *cell2 = [[BZGInfoCell alloc] initWithText:longText];
         expect(cell1.frame.size.height).to.beLessThan(cell2.frame.size.height);
     });
 });
 
 describe(@"Setting text", ^{
     it(@"should correctly update when setting text", ^{
-        BZGFormInfoCell *cell = [[BZGFormInfoCell alloc] init];
+        BZGInfoCell *cell = [[BZGInfoCell alloc] init];
         expect(cell.infoLabel.text).to.equal(@"");
         [cell setText:@"foo"];
         expect(cell.infoLabel.text).to.equal(@"foo");
