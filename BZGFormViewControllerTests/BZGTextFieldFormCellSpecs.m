@@ -17,7 +17,7 @@ describe(@"Initialization", ^{
     it(@"should initialize with correct defaults", ^{
         expect(formCell.selectionStyle).to.equal(UITableViewCellSelectionStyleNone);
         expect(formCell.validationState).to.equal(BZGValidationStateNone);
-        expect(formCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
+        expect(formCell.textField.textColor).to.equal(BZG_TEXTFIELD_NORMAL_COLOR);
         expect(formCell.activityIndicatorView.hidden).to.beTruthy;
         expect(formCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
         expect(formCell.showsCheckmarkWhenValid).to.equal(YES);
@@ -29,7 +29,7 @@ describe(@"Validation states", ^{
     it(@"should behave correctly when state is BZGValidationStateValid", ^{
         formCell.validationState = BZGValidationStateValid;
         expect(formCell.validationState).to.equal(BZGValidationStateValid);
-        expect(formCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
+        expect(formCell.textField.textColor).to.equal(BZG_TEXTFIELD_NORMAL_COLOR);
         expect(formCell.activityIndicatorView.hidden).to.beTruthy;
         expect(formCell.accessoryType).to.equal(UITableViewCellAccessoryCheckmark);
     });
@@ -37,7 +37,7 @@ describe(@"Validation states", ^{
     it(@"should behave correctly when state is BZGValidationStateInvalid", ^{
         formCell.validationState = BZGValidationStateInvalid;
         expect(formCell.validationState).to.equal(BZGValidationStateInvalid);
-        expect(formCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_INVALID_COLOR);
+        expect(formCell.textField.textColor).to.equal(BZG_TEXTFIELD_INVALID_COLOR);
         expect(formCell.activityIndicatorView.hidden).to.beTruthy;
         expect(formCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
     });
@@ -45,7 +45,7 @@ describe(@"Validation states", ^{
     it(@"should behave correctly when state is BZGValidationStateWarning", ^{
         formCell.validationState = BZGValidationStateWarning;
         expect(formCell.validationState).to.equal(BZGValidationStateWarning);
-        expect(formCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
+        expect(formCell.textField.textColor).to.equal(BZG_TEXTFIELD_NORMAL_COLOR);
         expect(formCell.activityIndicatorView.hidden).to.beTruthy;
         expect(formCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
     });
@@ -53,7 +53,7 @@ describe(@"Validation states", ^{
     it(@"should behave correctly when state is BZGValidationStateNone", ^{
         formCell.validationState = BZGValidationStateNone;
         expect(formCell.validationState).to.equal(BZGValidationStateNone);
-        expect(formCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
+        expect(formCell.textField.textColor).to.equal(BZG_TEXTFIELD_NORMAL_COLOR);
         expect(formCell.activityIndicatorView.hidden).to.beTruthy;
         expect(formCell.accessoryType).to.equal(UITableViewCellAccessoryNone);
     });
@@ -61,7 +61,7 @@ describe(@"Validation states", ^{
     it(@"should behave correctly when state is BZGValidationStateValidating", ^{
         formCell.validationState = BZGValidationStateValidating;
         expect(formCell.validationState).to.equal(BZGValidationStateValidating);
-        expect(formCell.textField.textColor).to.equal(BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR);
+        expect(formCell.textField.textColor).to.equal(BZG_TEXTFIELD_NORMAL_COLOR);
         expect(formCell.activityIndicatorView.hidden).to.beFalsy;
         expect(formCell.activityIndicatorView.isAnimating).to.beTruthy;
         expect(formCell.accessoryType).to.equal(UITableViewCellAccessoryNone);

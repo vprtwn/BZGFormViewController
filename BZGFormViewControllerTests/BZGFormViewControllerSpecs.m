@@ -1,6 +1,7 @@
 #import "BZGFormViewController.h"
 #import "BZGTextFieldFormCell.h"
 
+UIWindow *window;
 BZGFormViewController *formViewController;
 BZGTextFieldFormCell *cell1;
 BZGTextFieldFormCell *cell2;
@@ -10,10 +11,13 @@ SpecBegin(BZGFormViewController)
 
 before(^{
     [super setUp];
+    window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     formViewController = [[BZGFormViewController alloc] initWithStyle:UITableViewStyleGrouped];
     cell1 = [[BZGTextFieldFormCell alloc] init];
     cell2 = [[BZGTextFieldFormCell alloc] init];
     cell3 = [[BZGTextFieldFormCell alloc] init];
+    window.rootViewController = formViewController;
+    [window makeKeyAndVisible];
 });
 
 after(^{

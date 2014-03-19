@@ -20,15 +20,6 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 @implementation SignupViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -37,8 +28,8 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     [self configurePasswordFieldCell];
 
     self.formCells = [NSMutableArray arrayWithArray:@[self.usernameFieldCell,
-                                                           self.emailFieldCell,
-                                                           self.passwordFieldCell]];
+                                                      self.emailFieldCell,
+                                                      self.passwordFieldCell]];
     self.formSection = 0;
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
 }

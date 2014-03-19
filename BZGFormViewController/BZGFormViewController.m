@@ -11,26 +11,47 @@
 
 @interface BZGFormViewController ()
 
+@property (nonatomic, assign) UITableViewStyle style;
+
 @end
 
 @implementation BZGFormViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
+- (id)init {
+    self = [super init];
     if (self) {
-        [self configureTableView];
+        self.style = UITableViewStyleGrouped;
     }
     return self;
 }
 
-- (void)configureTableView
+- (id)initWithStyle:(UITableViewStyle)style {
+    self = [super init];
+    if (self) {
+        self.style = style;
+    }
+    return self;
+}
+
+- (void)loadView
 {
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:self.style];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.autoresizesSubviews = YES;
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
+    }   
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = BZG_TABLEVIEW_BACKGROUND_COLOR;
+
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
+    contentView.autoresizesSubviews = YES;
+    contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [contentView addSubview:self.tableView];
+
+    self.view = contentView;
 }
 
 #pragma mark - Showing/hiding info cells

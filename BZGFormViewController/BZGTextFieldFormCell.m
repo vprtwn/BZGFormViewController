@@ -49,7 +49,7 @@
 
 - (void)setDefaults
 {
-    self.backgroundColor = BZG_FORMFIELD_BACKGROUND_COLOR;
+    self.backgroundColor = BZG_TEXTFIELD_BACKGROUND_COLOR;
     self.textLabel.hidden = YES;
     self.detailTextLabel.hidden = YES;
     self.imageView.hidden = YES;
@@ -79,9 +79,9 @@
     self.textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.textFieldNormalColor = BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
-    self.textFieldInvalidColor = BZG_FORMFIELD_TEXTFIELD_INVALID_COLOR;
-    self.textField.font = BZG_FORMFIELD_TEXTFIELD_FONT;
+    self.textFieldNormalColor = BZG_TEXTFIELD_NORMAL_COLOR;
+    self.textFieldInvalidColor = BZG_TEXTFIELD_INVALID_COLOR;
+    self.textField.font = BZG_TEXTFIELD_FONT;
     self.textField.backgroundColor = [UIColor clearColor];
     [self addSubview:self.textField];
 }
@@ -97,8 +97,8 @@
                                    self.textField.frame.origin.x - labelX,
                                    self.bounds.size.height);
     self.label = [[UILabel alloc] initWithFrame:labelFrame];
-    self.label.font = BZG_FORMFIELD_LABEL_FONT;
-    self.label.textColor = BZG_FORMFIELD_LABEL_COLOR;
+    self.label.font = BZG_TEXTFIELD_LABEL_FONT;
+    self.label.textColor = BZG_TEXTFIELD_LABEL_COLOR;
     self.label.backgroundColor = [UIColor clearColor];
     [self addSubview:self.label];
 }
