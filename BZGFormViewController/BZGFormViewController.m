@@ -88,7 +88,7 @@
                           withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (void)removeInfoCellBelowFormFieldCell:(BZGTextFieldCell *)cell
+- (void)removeInfoCellBelowFormCell:(BZGTextFieldCell *)cell
 {
     NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return;
@@ -111,7 +111,7 @@
          cell.validationState == BZGValidationStateWarning)) {
         [self showInfoCellBelowFormCell:cell];
     } else {
-        [self removeInfoCellBelowFormFieldCell:cell];
+        [self removeInfoCellBelowFormCell:cell];
     }
 }
 

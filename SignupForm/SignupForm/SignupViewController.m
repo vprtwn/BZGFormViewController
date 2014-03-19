@@ -27,21 +27,21 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     [self configureEmailFieldCell];
     [self configurePasswordFieldCell];
 
-    self.formCells = [NSMutableArray arrayWithArray:@[self.usernameFieldCell,
-                                                      self.emailFieldCell,
-                                                      self.passwordFieldCell]];
+    self.formCells = [NSMutableArray arrayWithArray:@[self.usernameCell,
+                                                      self.emailCell,
+                                                      self.passwordCell]];
     self.formSection = 0;
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
 }
 
 - (void)configureUsernameFieldCell
 {
-    self.usernameFieldCell = [BZGTextFieldCell new];
-    self.usernameFieldCell.label.text = @"Username";
-    self.usernameFieldCell.textField.placeholder = NSLocalizedString(@"Username", nil);
-    self.usernameFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
-    self.usernameFieldCell.textField.delegate = self;
-    self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
+    self.usernameCell = [BZGTextFieldCell new];
+    self.usernameCell.label.text = @"Username";
+    self.usernameCell.textField.placeholder = NSLocalizedString(@"Username", nil);
+    self.usernameCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
+    self.usernameCell.textField.delegate = self;
+    self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
         if (newText.length < 5) {
             cell.validationState = BZGValidationStateInvalid;
             [cell.infoCell setText:@"Username must be at least 5 characters long."];
@@ -54,13 +54,13 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (void)configureEmailFieldCell
 {
-    self.emailFieldCell = [BZGTextFieldCell new];
-    self.emailFieldCell.label.text = @"Email";
-    self.emailFieldCell.textField.placeholder = NSLocalizedString(@"Email", nil);
-    self.emailFieldCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
-    self.emailFieldCell.textField.delegate = self;
+    self.emailCell = [BZGTextFieldCell new];
+    self.emailCell.label.text = @"Email";
+    self.emailCell.textField.placeholder = NSLocalizedString(@"Email", nil);
+    self.emailCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
+    self.emailCell.textField.delegate = self;
     @weakify(self)
-    self.emailFieldCell.didEndEditingBlock = ^(BZGTextFieldCell *cell, NSString *text) {
+    self.emailCell.didEndEditingBlock = ^(BZGTextFieldCell *cell, NSString *text) {
         @strongify(self);
         if (text.length == 0) {
             cell.validationState = BZGValidationStateNone;
@@ -68,7 +68,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
             return;
         }
         cell.validationState = BZGValidationStateValidating;
-        [self.emailValidator validateEmailAddress:self.emailFieldCell.textField.text
+        [self.emailValidator validateEmailAddress:self.emailCell.textField.text
                                           success:^(BOOL isValid, NSString *didYouMean) {
                                               if (isValid) {
                                                   cell.validationState = BZGValidationStateValid;
@@ -100,13 +100,13 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (void)configurePasswordFieldCell
 {
-    self.passwordFieldCell = [BZGTextFieldCell new];
-    self.passwordFieldCell.label.text = @"Password";
-    self.passwordFieldCell.textField.placeholder = NSLocalizedString(@"Password", nil);
-    self.passwordFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
-    self.passwordFieldCell.textField.secureTextEntry = YES;
-    self.passwordFieldCell.textField.delegate = self;
-    self.passwordFieldCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *text) {
+    self.passwordCell = [BZGTextFieldCell new];
+    self.passwordCell.label.text = @"Password";
+    self.passwordCell.textField.placeholder = NSLocalizedString(@"Password", nil);
+    self.passwordCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
+    self.passwordCell.textField.secureTextEntry = YES;
+    self.passwordCell.textField.delegate = self;
+    self.passwordCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *text) {
         // because this is a secure text field, reset the validation state every time.
         cell.validationState = BZGValidationStateNone;
         if (text.length < 8) {
@@ -152,9 +152,9 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
         cell.textLabel.text = @"Sign Up";
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         RAC(cell, selectionStyle) =
-        [RACSignal combineLatest:@[[RACObserve(self.usernameFieldCell,validationState) skip:1],
-                                   [RACObserve(self.emailFieldCell, validationState) skip:1],
-                                   [RACObserve(self.passwordFieldCell, validationState) skip:1]]
+        [RACSignal combineLatest:@[[RACObserve(self.usernameCell,validationState) skip:1],
+                                   [RACObserve(self.emailCell, validationState) skip:1],
+                                   [RACObserve(self.passwordCell, validationState) skip:1]]
                           reduce:^NSNumber *(NSNumber *u, NSNumber *e, NSNumber *p){
                               if (u.integerValue == BZGValidationStateValid
                                   && e.integerValue == BZGValidationStateValid
@@ -166,9 +166,9 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
                           }];
         
         RAC(cell.textLabel, textColor) =
-        [RACSignal combineLatest:@[[RACObserve(self.usernameFieldCell,validationState) skip:1],
-                                   [RACObserve(self.emailFieldCell, validationState) skip:1],
-                                   [RACObserve(self.passwordFieldCell, validationState) skip:1]]
+        [RACSignal combineLatest:@[[RACObserve(self.usernameCell,validationState) skip:1],
+                                   [RACObserve(self.emailCell, validationState) skip:1],
+                                   [RACObserve(self.passwordCell, validationState) skip:1]]
                           reduce:^UIColor *(NSNumber *u, NSNumber *e, NSNumber *p){
                               if (u.integerValue == BZGValidationStateValid
                                   && e.integerValue == BZGValidationStateValid
