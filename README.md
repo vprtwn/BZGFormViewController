@@ -1,4 +1,4 @@
-BZGFormViewController
+BZGFormViewController [![Build Status](https://travis-ci.org/benzguo/BZGFormViewController.png?branch=master)](https://travis-ci.org/benzguo/BZGFormViewController)
 =====================
 
 BZGFormViewController is a simple library for making dynamic forms.
