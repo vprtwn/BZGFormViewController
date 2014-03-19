@@ -1,14 +1,12 @@
 //
-//  BZGFormInfoCell.h
+//  BZGInfoCell.h
 //
 //  https://github.com/benzguo/BZGFormViewController
 //
 
 #import <UIKit/UIKit.h>
 
-typedef void (^BZGTapGestureBlock)();
-
-@interface BZGFormInfoCell : UITableViewCell
+@interface BZGInfoCell : UITableViewCell
 
 /// The cell's label.
 @property (nonatomic, strong) UILabel *infoLabel;
@@ -26,6 +24,6 @@ typedef void (^BZGTapGestureBlock)();
 /**
  * Sets the block executed when the cell is tapped.
  */
-- (void)setTapGestureBlock:(BZGTapGestureBlock)block;
+- (void)setTapGestureBlock:(void(^)())block;
 
 @end

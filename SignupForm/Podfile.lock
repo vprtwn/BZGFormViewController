@@ -1,6 +1,6 @@
 PODS:
   - BZGMailgunEmailValidation (1.1.0)
-  - Expecta (0.2.2)
+  - Expecta (0.3.0)
   - libextobjc (0.4):
     - libextobjc/EXTADT
     - libextobjc/EXTConcreteProtocol
@@ -37,7 +37,8 @@ PODS:
   - libextobjc/RuntimeExtensions (0.4)
   - libextobjc/UmbrellaHeader (0.4)
   - OCHamcrest (3.0.1)
-  - OCMockito (1.0.0):
+  - OCMock (2.2.3)
+  - OCMockito (1.1.0):
     - OCHamcrest (~> 3.0)
   - ReactiveCocoa (2.2.4):
     - ReactiveCocoa/Core
@@ -45,20 +46,25 @@ PODS:
   - ReactiveCocoa/Core (2.2.4):
     - ReactiveCocoa/no-arc
   - ReactiveCocoa/no-arc (2.2.4)
+  - Specta (0.2.1)
 
 DEPENDENCIES:
   - BZGMailgunEmailValidation (~> 1.1.0)
-  - Expecta (~> 0.2.2)
+  - Expecta (~> 0.3.0)
   - libextobjc (~> 0.4)
-  - OCMockito (~> 1.0.0)
+  - OCMock (~> 2.2.3)
+  - OCMockito (~> 1.1.0)
   - ReactiveCocoa (~> 2.2.4)
+  - Specta (~> 0.2.1)
 
 SPEC CHECKSUMS:
   BZGMailgunEmailValidation: c9ac686fd3139bcf9239c2146654d2a8264ca851
-  Expecta: 99adbb2e366a02796477523bfd426143350d9caf
+  Expecta: 322f1dc42610106a5ba9871b4924cf1635d80833
   libextobjc: 2c9fc8226f0f38e562587f65172f93f0c9b4a47a
   OCHamcrest: 782c52ae8c673e5d6060a65005cfd26d20d519ba
-  OCMockito: 8b6a244d7d81ba3cd2095bc357c20ae7b22c8977
+  OCMock: 74e4ddbcef134170dcc844f91c691f13868075d7
+  OCMockito: 317fa0cf75c9b0d73d2be335789c556537be7fd2
   ReactiveCocoa: 953a45dda30674fe704d1d9c77cc874141742f47
+  Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
 
 COCOAPODS: 0.29.0

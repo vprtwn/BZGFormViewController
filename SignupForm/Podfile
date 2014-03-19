@@ -4,6 +4,8 @@ pod 'libextobjc', '~>0.4'
 pod 'BZGMailgunEmailValidation', '~>1.1.0'
 
 target :SignupFormTests do
-    pod 'Expecta', '~>0.2.2'
-    pod 'OCMockito', '~>1.0.0'
+    pod 'Specta', '~>0.2.1'
+    pod 'Expecta', '~>0.3.0'
+    pod 'OCMockito', '~>1.1.0'
+    pod 'OCMock', '~>2.2.3'
 end

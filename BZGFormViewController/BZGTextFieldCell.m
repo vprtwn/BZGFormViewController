@@ -1,17 +1,17 @@
 //
-//  BZGFormFieldCell.m
+//  BZGTextFieldCell.m
 //
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-#import "BZGFormFieldCell.h"
+#import "BZGTextFieldCell.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <libextobjc/EXTScope.h>
-#import "BZGFormInfoCell.h"
+#import "BZGInfoCell.h"
 #import "Constants.h"
 
-@implementation BZGFormFieldCell
+@implementation BZGTextFieldCell
 
 - (id)init
 {
@@ -49,20 +49,19 @@
 
 - (void)setDefaults
 {
-    self.backgroundColor = BZG_FORMFIELD_BACKGROUND_COLOR;
+    self.backgroundColor = BZG_TEXTFIELD_BACKGROUND_COLOR;
     self.textLabel.hidden = YES;
     self.detailTextLabel.hidden = YES;
     self.imageView.hidden = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.validationState = BZGValidationStateNone;
-    self.shouldShowInfoCell = NO;
-    self.showsCheckmark = YES;
+    self.showsCheckmarkWhenValid = YES;
     self.showsValidationWhileEditing = NO;
 }
 
 - (void)configureInfoCell
 {
-    self.infoCell = [[BZGFormInfoCell alloc] init];
+    self.infoCell = [[BZGInfoCell alloc] init];
 }
 
 - (void)configureTextField
@@ -80,8 +79,9 @@
     self.textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.textField.textColor = BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
-    self.textField.font = BZG_FORMFIELD_TEXTFIELD_FONT;
+    self.textFieldNormalColor = BZG_TEXTFIELD_NORMAL_COLOR;
+    self.textFieldInvalidColor = BZG_TEXTFIELD_INVALID_COLOR;
+    self.textField.font = BZG_TEXTFIELD_FONT;
     self.textField.backgroundColor = [UIColor clearColor];
     [self addSubview:self.textField];
 }
@@ -97,8 +97,8 @@
                                    self.textField.frame.origin.x - labelX,
                                    self.bounds.size.height);
     self.label = [[UILabel alloc] initWithFrame:labelFrame];
-    self.label.font = BZG_FORMFIELD_LABEL_FONT;
-    self.label.textColor = BZG_FORMFIELD_LABEL_COLOR;
+    self.label.font = BZG_TEXTFIELD_LABEL_FONT;
+    self.label.textColor = BZG_TEXTFIELD_LABEL_COLOR;
     self.label.backgroundColor = [UIColor clearColor];
     [self addSubview:self.label];
 }
@@ -124,19 +124,20 @@
     RAC(self.textField, textColor) =
     [RACObserve(self, validationState) map:^UIColor *(NSNumber *validationState) {
         @strongify(self);
-        if ((self.textField.editing || self.textField.isFirstResponder) &&
+        if (self.textField.editing &&
             !self.showsValidationWhileEditing) {
-            return BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+            return self.textFieldNormalColor;
         }
         switch (validationState.integerValue) {
             case BZGValidationStateInvalid:
-                return BZG_FORMFIELD_TEXTFIELD_INVALID_COLOR;
+                return self.textFieldInvalidColor;
                 break;
             case BZGValidationStateValid:
             case BZGValidationStateValidating:
+            case BZGValidationStateWarning:
             case BZGValidationStateNone:
             default:
-                return BZG_FORMFIELD_TEXTFIELD_NORMAL_COLOR;
+                return self.textFieldNormalColor;
                 break;
         }
     }];
@@ -158,7 +159,7 @@
         @strongify(self);
         if (validationState.integerValue == BZGValidationStateValid &&
             (!self.textField.editing || self.showsValidationWhileEditing) &&
-            self.showsCheckmark) {
+            self.showsCheckmarkWhenValid) {
             return @(UITableViewCellAccessoryCheckmark);
         } else {
             return @(UITableViewCellAccessoryNone);
@@ -167,13 +168,13 @@
 }
 
 
-+ (BZGFormFieldCell *)parentCellForTextField:(UITextField *)textField
++ (BZGTextFieldCell *)parentCellForTextField:(UITextField *)textField
 {
     UIView *view = textField;
     while ((view = view.superview)) {
-        if ([view isKindOfClass:[BZGFormFieldCell class]]) break;
+        if ([view isKindOfClass:[BZGTextFieldCell class]]) break;
     }
-    return (BZGFormFieldCell *)view;
+    return (BZGTextFieldCell *)view;
 }
 
 

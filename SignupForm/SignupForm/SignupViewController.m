@@ -5,14 +5,12 @@
 //
 
 #import "SignupViewController.h"
-#import "BZGFormFieldCell.h"
+#import "BZGTextFieldCell.h"
 #import "BZGMailgunEmailValidator.h"
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
 
-//#define MAILGUN_PUBLIC_KEY @""
-static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lct2uk5";
-#warning Add your Mailgun public key ^^^
+static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9crlc28";
 
 @interface SignupViewController ()
 
@@ -22,15 +20,6 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lc
 
 @implementation SignupViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -38,28 +27,26 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lc
     [self configureEmailFieldCell];
     [self configurePasswordFieldCell];
 
-    self.formFieldCells = [NSMutableArray arrayWithArray:@[self.usernameFieldCell,
-                                                           self.emailFieldCell,
-                                                           self.passwordFieldCell]];
+    self.formCells = [NSMutableArray arrayWithArray:@[self.usernameFieldCell,
+                                                      self.emailFieldCell,
+                                                      self.passwordFieldCell]];
     self.formSection = 0;
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
 }
 
 - (void)configureUsernameFieldCell
 {
-    self.usernameFieldCell = [BZGFormFieldCell new];
+    self.usernameFieldCell = [BZGTextFieldCell new];
     self.usernameFieldCell.label.text = @"Username";
     self.usernameFieldCell.textField.placeholder = NSLocalizedString(@"Username", nil);
     self.usernameFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.usernameFieldCell.textField.delegate = self;
-    self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *newText) {
+    self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
         if (newText.length < 5) {
             cell.validationState = BZGValidationStateInvalid;
             [cell.infoCell setText:@"Username must be at least 5 characters long."];
-            cell.shouldShowInfoCell = YES;
         } else {
             cell.validationState = BZGValidationStateValid;
-            cell.shouldShowInfoCell = NO;
         }
         return YES;
     };
@@ -67,18 +54,17 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lc
 
 - (void)configureEmailFieldCell
 {
-    self.emailFieldCell = [BZGFormFieldCell new];
+    self.emailFieldCell = [BZGTextFieldCell new];
     self.emailFieldCell.label.text = @"Email";
     self.emailFieldCell.textField.placeholder = NSLocalizedString(@"Email", nil);
     self.emailFieldCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
     self.emailFieldCell.textField.delegate = self;
     @weakify(self)
-    self.emailFieldCell.didEndEditingBlock = ^(BZGFormFieldCell *cell, NSString *text) {
+    self.emailFieldCell.didEndEditingBlock = ^(BZGTextFieldCell *cell, NSString *text) {
         @strongify(self);
         if (text.length == 0) {
             cell.validationState = BZGValidationStateNone;
-            cell.shouldShowInfoCell = NO;
-            [self updateInfoCellBelowFormFieldCell:cell];
+            [self updateInfoCellBelowFormCell:cell];
             return;
         }
         cell.validationState = BZGValidationStateValidating;
@@ -86,13 +72,12 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lc
                                           success:^(BOOL isValid, NSString *didYouMean) {
                                               if (isValid) {
                                                   cell.validationState = BZGValidationStateValid;
-                                                  cell.shouldShowInfoCell = NO;
                                               } else {
                                                   cell.validationState = BZGValidationStateInvalid;
                                                   [cell.infoCell setText:@"Email address is invalid."];
-                                                  cell.shouldShowInfoCell = YES;
                                               }
                                               if (didYouMean) {
+                                                  cell.validationState = BZGValidationStateWarning;
                                                   [cell.infoCell setText:[NSString stringWithFormat:@"Did you mean %@?", didYouMean]];
                                                   @weakify(cell);
                                                   @weakify(self);
@@ -102,37 +87,33 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-9hog3uh88-xiiqttmbxnsgxz3lc
                                                       [cell.textField setText:didYouMean];
                                                       [self textFieldDidEndEditing:cell.textField];
                                                   }];
-                                                  cell.shouldShowInfoCell = YES;
                                               } else {
                                                   [cell.infoCell setTapGestureBlock:nil];
                                               }
-                                              [self updateInfoCellBelowFormFieldCell:cell];
+                                              [self updateInfoCellBelowFormCell:cell];
                                           } failure:^(NSError *error) {
                                               cell.validationState = BZGValidationStateNone;
-                                              cell.shouldShowInfoCell = NO;
-                                              [self updateInfoCellBelowFormFieldCell:cell];
+                                              [self updateInfoCellBelowFormCell:cell];
                                           }];
     };
 }
 
 - (void)configurePasswordFieldCell
 {
-    self.passwordFieldCell = [BZGFormFieldCell new];
+    self.passwordFieldCell = [BZGTextFieldCell new];
     self.passwordFieldCell.label.text = @"Password";
     self.passwordFieldCell.textField.placeholder = NSLocalizedString(@"Password", nil);
     self.passwordFieldCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordFieldCell.textField.secureTextEntry = YES;
     self.passwordFieldCell.textField.delegate = self;
-    self.passwordFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *text) {
+    self.passwordFieldCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *text) {
         // because this is a secure text field, reset the validation state every time.
         cell.validationState = BZGValidationStateNone;
         if (text.length < 8) {
             cell.validationState = BZGValidationStateInvalid;
             [cell.infoCell setText:@"Password must be at least 8 characters long."];
-            cell.shouldShowInfoCell = YES;
         } else {
             cell.validationState = BZGValidationStateValid;
-            cell.shouldShowInfoCell = NO;
         }
         return YES;
     };

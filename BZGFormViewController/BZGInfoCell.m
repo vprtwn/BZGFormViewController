@@ -1,21 +1,21 @@
 //
-//  BZGFormInfoCell.m
+//  BZGInfoCell.m
 //
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-#import "BZGFormInfoCell.h"
+#import "BZGInfoCell.h"
 #import "Constants.h"
 
-@interface BZGFormInfoCell () {
-    BZGTapGestureBlock _tapGestureBlock;
+@interface BZGInfoCell () {
+    void (^_tapGestureBlock) ();
 }
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 
 @end
 
-@implementation BZGFormInfoCell
+@implementation BZGInfoCell
 
 - (id)init
 {
@@ -43,7 +43,7 @@
     [self updateSize];
 }
 
-- (void)setTapGestureBlock:(BZGTapGestureBlock)block
+- (void)setTapGestureBlock:(void(^)())block
 {
     _tapGestureBlock = block;
 }
@@ -54,16 +54,16 @@
     self.detailTextLabel.hidden = YES;
     self.imageView.hidden = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.backgroundColor = BZG_FORMINFO_BACKGROUND_COLOR;
+    self.backgroundColor = BZG_INFO_BACKGROUND_COLOR;
     
     self.infoLabel = [[UILabel alloc] initWithFrame:self.bounds];
-    self.infoLabel.font = BZG_FORMINFO_LABEL_FONT;
+    self.infoLabel.font = BZG_INFO_LABEL_FONT;
     self.infoLabel.adjustsFontSizeToFitWidth = NO;
     self.infoLabel.numberOfLines = 0;
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     self.infoLabel.backgroundColor = [UIColor clearColor];
     self.infoLabel.text = @"";
-    
+
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction)];
     [self addGestureRecognizer:self.tapGestureRecognizer];
 }
