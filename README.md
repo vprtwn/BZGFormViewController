@@ -32,7 +32,7 @@ self.usernameCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
 To validate text and update the cell when the cell's text changes, use the cell's `shouldChangeTextBlock`.
 ```objc
 self.usernameCell.textField.delegate = self;
-self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *newText) {
+self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
     if (newText.length < 5) {
         cell.validationState = BZGValidationStateInvalid;
     } else {
@@ -43,7 +43,7 @@ self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString
 ```
 Each `BZGTextFieldCell` contains a `BZGInfoCell`. The info cell will be displayed if the cell's `validationState` is `BZGValidationStateInvalid` or `BZGValidationStateWarning`. You can set the info cell's text using `setText:`.
 ```objc
-self.usernameFieldCell.shouldChangeTextBlock = ^BOOL(BZGFormFieldCell *cell, NSString *newText) {
+self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
     if (newText.length < 5) {
         cell.validationState = BZGValidationStateInvalid;
         [cell.infoCell setText:@"Username must be at least 5 characters long."];
@@ -59,9 +59,9 @@ You should use `BZGTextFieldCell`'s `shouldChangeTextBlock`, `didBeginEditingBlo
 
 After you've configured your cells, set `formCells` to an array containing your form's cells.
 ```objc
-self.formCells = [NSMutableArray arrayWithArray:@[self.usernameFieldCell,
-                                                  self.emailFieldCell,
-                                                  self.passwordFieldCell]];
+self.formCells = [NSMutableArray arrayWithArray:@[self.usernameCell,
+                                                  self.emailCell,
+                                                  self.passwordCell]];
 ```
 If you're using a table view with multiple sections, you should specify the section your form should appear in.
 ```objc
