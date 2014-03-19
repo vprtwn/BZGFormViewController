@@ -1,3 +1,4 @@
 language: objective-c
-xcode_workspace: SignupForm/SignupForm.xcworkspace
-xcode_scheme: SignupForm
+script:
+    - xctool -workspace SignupForm/SignupForm.xcworkspace -scheme SignupForm -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+    - xctool test -workspace SignupForm/SignupForm.xcworkspace -scheme SignupFormTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
