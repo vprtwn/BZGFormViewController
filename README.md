@@ -6,11 +6,15 @@ BZGFormViewController is a simple library for making dynamic forms.
 ![alt tag](https://raw.github.com/benzguo/BZGFormViewController/master/Screenshots/SignupForm.gif)
 
 ## Demo app
-Navigate to /SignupForm, run `pod install`, and open `SignupForm.xcworkspace` to see the signup form above in action.
+Navigate to `SignupForm`, run `pod install`, and open `SignupForm.xcworkspace`. Build and run to see `BZGFormViewController` in action.
 
 ## Installation
 
-Cocoapods, or copy the contents of /BZGFormViewController into your project.
+Cocoapods is the recommended method of installing `BZGFormViewController`. Add the following line to your `Podfile`:
+
+```
+pod `BZGFormViewController`
+```
 
 ## Quick start
 
@@ -26,12 +30,9 @@ Next, import "BZGTextFieldCell.h" and create a cell.
 
 self.usernameCell = [BZGTextFieldCell new];
 self.usernameCell.label.text = @"Username";
-self.usernameCell.textField.placeholder = @"Username";
-self.usernameCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
 ```
 To validate text and update the cell when the cell's text changes, use the cell's `shouldChangeTextBlock`.
 ```objc
-self.usernameCell.textField.delegate = self;
 self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
     if (newText.length < 5) {
         cell.validationState = BZGValidationStateInvalid;
@@ -63,11 +64,13 @@ self.formCells = [NSMutableArray arrayWithArray:@[self.usernameCell,
                                                   self.emailCell,
                                                   self.passwordCell]];
 ```
+
+## Customization
 If you're using a table view with multiple sections, you should specify the section your form should appear in.
 ```objc
 self.formSection = 0
 ```
-Finally, override the `UITableViewDataSource` methods. Be sure to use the values from `super` for the table view's form section.
+You'll also need to override the `UITableViewDataSource` methods. Be sure to use the values from `super` for the table view's form section.
 ```objc
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
