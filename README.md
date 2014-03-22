@@ -42,7 +42,7 @@ self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString
     return YES;
 };
 ```
-Each `BZGTextFieldCell` contains a `BZGInfoCell`. The info cell will be displayed if the cell's `validationState` is `BZGValidationStateInvalid` or `BZGValidationStateWarning`. You can set the info cell's text using `setText:`.
+Each `BZGTextFieldCell` contains a `BZGInfoCell`. The info cell will be displayed if the cell's `validationState` is either `BZGValidationStateInvalid` or `BZGValidationStateWarning`. You can set the info cell's text using `setText:`.
 ```objc
 self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
     if (newText.length < 5) {
@@ -54,9 +54,9 @@ self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString
     return YES;
 };
 ```
-You should use `BZGTextFieldCell`'s `shouldChangeTextBlock`, `didBeginEditingBlock`, `didEndEditingBlock`, and `shouldReturnBlock` for validation and any logic you would usually put in `UITextFieldDelegate` methods.
-
 `BZGFormViewController` automatically scrolls the tableview when you begin editing a text field and moves to the next field when you hit return.
+
+You should use `BZGTextFieldCell`'s `shouldChangeTextBlock`, `didBeginEditingBlock`, `didEndEditingBlock`, and `shouldReturnBlock` for validation and any other logic you would usually put in `UITextFieldDelegate` methods.
 
 After you've configured your cells, set `formCells` to an array containing your form's cells.
 ```objc
@@ -65,8 +65,8 @@ self.formCells = [NSMutableArray arrayWithArray:@[self.usernameCell,
                                                   self.passwordCell]];
 ```
 
-## Customization
-If you're using a table view with multiple sections, you should specify the section your form should appear in.
+## Custom sections
+`BZGFormViewController` will only manage one section of your table view. If you want to use a table view with multiple sections, you should specify the section the form view controller should manage.
 ```objc
 self.formSection = 0
 ```
