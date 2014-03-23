@@ -40,7 +40,6 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     self.usernameCell.label.text = @"Username";
     self.usernameCell.textField.placeholder = NSLocalizedString(@"Username", nil);
     self.usernameCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
-    self.usernameCell.textField.delegate = self;
     self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
         if (newText.length < 5) {
             cell.validationState = BZGValidationStateInvalid;
@@ -58,7 +57,6 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     self.emailCell.label.text = @"Email";
     self.emailCell.textField.placeholder = NSLocalizedString(@"Email", nil);
     self.emailCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
-    self.emailCell.textField.delegate = self;
     @weakify(self)
     self.emailCell.didEndEditingBlock = ^(BZGTextFieldCell *cell, NSString *text) {
         @strongify(self);
@@ -105,7 +103,6 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     self.passwordCell.textField.placeholder = NSLocalizedString(@"Password", nil);
     self.passwordCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordCell.textField.secureTextEntry = YES;
-    self.passwordCell.textField.delegate = self;
     self.passwordCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *text) {
         // because this is a secure text field, reset the validation state every time.
         cell.validationState = BZGValidationStateNone;

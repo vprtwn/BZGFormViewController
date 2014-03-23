@@ -32,10 +32,17 @@ describe(@"Initialization", ^{
 });
 
 describe(@"Setting form cells", ^{
-    it(@"should correctly set the view controller's form cells", ^{
+    it(@"should set the form view controller's form cells", ^{
         formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
         [formViewController.tableView reloadData];
         expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
+    });
+
+    it(@"should set the cell's textfield's delegate to the form view controller", ^{
+        formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2]];
+        [formViewController.tableView reloadData];
+        expect(cell1.textField.delegate).to.equal(formViewController);
+        expect(cell2.textField.delegate).to.equal(formViewController);
     });
 });
 

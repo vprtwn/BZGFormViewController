@@ -17,7 +17,8 @@
 
 @implementation BZGFormViewController
 
-- (id)init {
+- (id)init
+{
     self = [super init];
     if (self) {
         self.style = UITableViewStyleGrouped;
@@ -25,7 +26,8 @@
     return self;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style {
+- (id)initWithStyle:(UITableViewStyle)style
+{
     self = [super init];
     if (self) {
         self.style = style;
@@ -52,6 +54,16 @@
     [contentView addSubview:self.tableView];
 
     self.view = contentView;
+}
+
+- (void)setFormCells:(NSMutableArray *)formCells
+{
+    _formCells = formCells;
+    for (id cell in formCells) {
+        if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
+            ((BZGTextFieldCell *)cell).textField.delegate = self;
+        }
+    }
 }
 
 #pragma mark - Showing/hiding info cells
