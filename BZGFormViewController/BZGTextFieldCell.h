@@ -7,14 +7,6 @@
 #import <UIKit/UIKit.h>
 #import "BZGInfoCell.h"
 
-typedef NS_ENUM(NSInteger, BZGValidationState) {
-    BZGValidationStateInvalid,
-    BZGValidationStateWarning,
-    BZGValidationStateValid,
-    BZGValidationStateValidating,
-    BZGValidationStateNone
-};
-
 @interface BZGTextFieldCell : UITableViewCell <UITextFieldDelegate>
 
 @property (strong, nonatomic) UILabel *label;
@@ -27,12 +19,6 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 @property (strong, nonatomic) UIColor *textFieldInvalidColor;
 
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
-
-/// The current validation state. Default is BZGValidationStateNone.
-@property (assign, nonatomic) BZGValidationState validationState;
-
-/// The cell displayed when the cell's validation state is Invalid or Warning.
-@property (strong, nonatomic) BZGInfoCell *infoCell;
 
 /// A value indicating whether or not the cell shows a checkmark when valid. Default is YES.
 @property (assign, nonatomic) BOOL showsCheckmarkWhenValid;
