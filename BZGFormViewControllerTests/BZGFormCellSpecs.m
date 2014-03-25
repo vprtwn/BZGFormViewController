@@ -4,29 +4,31 @@
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-#import <XCTest/XCTest.h>
+#import "BZGFormCell.h"
 
-@interface BZGFormCellSpecs : XCTestCase
+BZGFormCell *cell;
 
-@end
+SpecBegin(BZGFormCell)
 
-@implementation BZGFormCellSpecs
+before(^{
+    cell = [[BZGFormCell alloc] init];
+});
 
-- (void)setUp
-{
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
+after(^{
+    cell = nil;
+});
 
-- (void)tearDown
-{
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
+describe(@"Initialization", ^{
+    it(@"should initialize with correct defaults", ^{
+        expect(cell.validationState).to.equal(BZGValidationStateNone);
+        expect(cell.delegate).to.equal(nil);
+    });
+});
 
-- (void)testExample
-{
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
-}
+describe(@"validationState", ^{
+    it(@"should invoke formCell:didChangeValidationState: when the cell's validation state changes", ^{
+        
+    });
+});
 
-@end
+SpecEnd
