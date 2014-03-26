@@ -5,6 +5,7 @@
 //
 
 #import "BZGFormCell.h"
+#import "Constants.h"
 
 @implementation BZGFormCell
 
