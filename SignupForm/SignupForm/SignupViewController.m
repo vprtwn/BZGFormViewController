@@ -9,6 +9,7 @@
 #import "BZGMailgunEmailValidator.h"
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
+#import "Constants.h"
 
 static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9crlc28";
 
