@@ -5,6 +5,7 @@
 //
 
 #import "BZGInfoCell.h"
+#import "Constants.h"
 
 @interface BZGInfoCell () {
     void (^_tapGestureBlock) ();

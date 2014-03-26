@@ -4,11 +4,12 @@
 //  https://github.com/benzguo/BZGFormViewController
 //
 
-#import "BZGTextFieldCell.h"
-
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <libextobjc/EXTScope.h>
+
+#import "BZGTextFieldCell.h"
 #import "BZGInfoCell.h"
+#import "Constants.h"
 
 @implementation BZGTextFieldCell
 
