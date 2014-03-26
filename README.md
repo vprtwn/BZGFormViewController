@@ -91,7 +91,7 @@ You'll also need to override the `UITableViewDataSource` methods. Be sure to use
     if (indexPath.section == self.formSection) {
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     } else {
-        return self.signupCell;
+        return self.otherCell;
     }
 }
 ```
