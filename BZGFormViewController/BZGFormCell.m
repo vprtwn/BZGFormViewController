@@ -8,6 +8,30 @@
 
 @implementation BZGFormCell
 
+- (id)init
+{
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    if (self) {
+        // Hide default elements
+        self.textLabel.hidden = YES;
+        self.detailTextLabel.hidden = YES;
+        self.imageView.hidden = YES;
+
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.validationState = BZGValidationStateNone;
+        self.backgroundColor = BZG_BACKGROUND_COLOR;
+    }
+    return self;
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style
+    reuseIdentifier:(NSString *)reuseIdentifier
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"%@ is not supported. Please use init instead.", NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
+}
+
 - (void)setValidationState:(BZGValidationState)validationState
 {
     _validationState = validationState;

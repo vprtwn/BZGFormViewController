@@ -68,31 +68,31 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
         cell.validationState = BZGValidationStateValidating;
         [self.emailValidator validateEmailAddress:self.emailCell.textField.text
                                           success:^(BOOL isValid, NSString *didYouMean) {
-                                              if (isValid) {
-                                                  cell.validationState = BZGValidationStateValid;
-                                              } else {
-                                                  cell.validationState = BZGValidationStateInvalid;
-                                                  [cell.infoCell setText:@"Email address is invalid."];
-                                              }
-                                              if (didYouMean) {
-                                                  cell.validationState = BZGValidationStateWarning;
-                                                  [cell.infoCell setText:[NSString stringWithFormat:@"Did you mean %@?", didYouMean]];
-                                                  @weakify(cell);
-                                                  @weakify(self);
-                                                  [cell.infoCell setTapGestureBlock:^{
-                                                      @strongify(cell);
-                                                      @strongify(self);
-                                                      [cell.textField setText:didYouMean];
-                                                      [self textFieldDidEndEditing:cell.textField];
-                                                  }];
-                                              } else {
-                                                  [cell.infoCell setTapGestureBlock:nil];
-                                              }
-                                              [self updateInfoCellBelowFormCell:cell];
-                                          } failure:^(NSError *error) {
-                                              cell.validationState = BZGValidationStateNone;
-                                              [self updateInfoCellBelowFormCell:cell];
-                                          }];
+            if (isValid) {
+                cell.validationState = BZGValidationStateValid;
+            } else {
+                cell.validationState = BZGValidationStateInvalid;
+                [cell.infoCell setText:@"Email address is invalid."];
+            }
+            if (didYouMean) {
+                cell.validationState = BZGValidationStateWarning;
+                [cell.infoCell setText:[NSString stringWithFormat:@"Did you mean %@?", didYouMean]];
+                @weakify(cell);
+                @weakify(self);
+                [cell.infoCell setTapGestureBlock:^{
+                    @strongify(cell);
+                    @strongify(self);
+                    [cell.textField setText:didYouMean];
+                    [self textFieldDidEndEditing:cell.textField];
+                }];
+            } else {
+                [cell.infoCell setTapGestureBlock:nil];
+            }
+            [self updateInfoCellBelowFormCell:cell];
+        } failure:^(NSError *error) {
+            cell.validationState = BZGValidationStateNone;
+            [self updateInfoCellBelowFormCell:cell];
+        }];
     };
 }
 
@@ -149,32 +149,15 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
         cell.textLabel.text = @"Sign Up";
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         RAC(cell, selectionStyle) =
-        [RACSignal combineLatest:@[[RACObserve(self.usernameCell,validationState) skip:1],
-                                   [RACObserve(self.emailCell, validationState) skip:1],
-                                   [RACObserve(self.passwordCell, validationState) skip:1]]
-                          reduce:^NSNumber *(NSNumber *u, NSNumber *e, NSNumber *p){
-                              if (u.integerValue == BZGValidationStateValid
-                                  && e.integerValue == BZGValidationStateValid
-                                  && p.integerValue == BZGValidationStateValid) {
-                                  return @(UITableViewCellSelectionStyleDefault);
-                              } else {
-                                  return @(UITableViewCellSelectionStyleNone);
-                              }
-                          }];
-        
+        [RACObserve(self, isValid) map:^NSNumber *(NSNumber *isValid) {
+            return isValid.boolValue ? @(UITableViewCellSelectionStyleDefault) : @(UITableViewCellSelectionStyleNone);
+        }];
+
         RAC(cell.textLabel, textColor) =
-        [RACSignal combineLatest:@[[RACObserve(self.usernameCell,validationState) skip:1],
-                                   [RACObserve(self.emailCell, validationState) skip:1],
-                                   [RACObserve(self.passwordCell, validationState) skip:1]]
-                          reduce:^UIColor *(NSNumber *u, NSNumber *e, NSNumber *p){
-                              if (u.integerValue == BZGValidationStateValid
-                                  && e.integerValue == BZGValidationStateValid
-                                  && p.integerValue == BZGValidationStateValid) {
-                                  return [UIColor colorWithRed:19/255.0 green:144/255.0 blue:255/255.0 alpha:1.0];
-                              } else {
-                                  return [UIColor lightGrayColor];
-                              }
-                          }];
+        [RACObserve(self, isValid) map:^UIColor *(NSNumber *isValid) {
+            return isValid.boolValue ? BZG_BLUE_COLOR : [UIColor lightGrayColor];
+        }];
+
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.textColor = [UIColor lightGrayColor];
     }

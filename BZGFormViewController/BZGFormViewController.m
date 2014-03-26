@@ -7,11 +7,11 @@
 #import "BZGFormViewController.h"
 #import "BZGTextFieldCell.h"
 #import "BZGInfoCell.h"
-#import "Constants.h"
 
 @interface BZGFormViewController ()
 
 @property (nonatomic, assign) UITableViewStyle style;
+@property (nonatomic, assign) BOOL isValid;
 
 @end
 
@@ -59,7 +59,12 @@
 - (void)setFormCells:(NSMutableArray *)formCells
 {
     _formCells = formCells;
-    for (id cell in formCells) {
+    for (BZGFormCell *cell in formCells) {
+        if (![cell isKindOfClass:[BZGFormCell class]]) {
+            [NSException raise:NSInternalInconsistencyException
+                        format:@"%@ only accepts cells that subclass BZGFormCell", NSStringFromSelector(_cmd)];
+        }
+        cell.delegate = self;
         if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
             ((BZGTextFieldCell *)cell).textField.delegate = self;
         }
@@ -250,6 +255,19 @@
 
     [self updateInfoCellBelowFormCell:cell];
     return shouldReturn;
+}
+
+#pragma mark - BZGFormCellDelegate
+
+- (void)formCell:(BZGFormCell *)formCell didChangeValidationState:(BZGValidationState)validationState
+{
+    BOOL isValid = YES;
+    for (BZGFormCell *cell in self.formCells) {
+        isValid = isValid &&
+                  (cell.validationState == BZGValidationStateValid ||
+                   cell.validationState == BZGValidationStateWarning);
+    }
+    self.isValid = isValid;
 }
 
 

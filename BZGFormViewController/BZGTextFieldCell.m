@@ -9,16 +9,17 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <libextobjc/EXTScope.h>
 #import "BZGInfoCell.h"
-#import "Constants.h"
 
 @implementation BZGTextFieldCell
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    self = [super init];
     if (self) {
-        [self setDefaults];
-        [self configureInfoCell];
+        self.showsCheckmarkWhenValid = YES;
+        self.showsValidationWhileEditing = NO;
+        self.infoCell = [[BZGInfoCell alloc] init];
+
         [self configureActivityIndicatorView];
         [self configureTextField];
         [self configureLabel];
@@ -36,32 +37,9 @@
     return self;
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super init];
-    return self;
-}
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)setDefaults
-{
-    self.backgroundColor = BZG_TEXTFIELD_BACKGROUND_COLOR;
-    self.textLabel.hidden = YES;
-    self.detailTextLabel.hidden = YES;
-    self.imageView.hidden = YES;
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.validationState = BZGValidationStateNone;
-    self.showsCheckmarkWhenValid = YES;
-    self.showsValidationWhileEditing = NO;
-}
-
-- (void)configureInfoCell
-{
-    self.infoCell = [[BZGInfoCell alloc] init];
 }
 
 - (void)configureTextField
@@ -167,7 +145,6 @@
     }];
 }
 
-
 + (BZGTextFieldCell *)parentCellForTextField:(UITextField *)textField
 {
     UIView *view = textField;
@@ -176,7 +153,6 @@
     }
     return (BZGTextFieldCell *)view;
 }
-
 
 #pragma mark - UITextField notification selectors
 // I'm using these notifications to flush the validation state signal.

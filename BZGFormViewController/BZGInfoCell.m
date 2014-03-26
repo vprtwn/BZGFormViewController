@@ -5,7 +5,6 @@
 //
 
 #import "BZGInfoCell.h"
-#import "Constants.h"
 
 @interface BZGInfoCell () {
     void (^_tapGestureBlock) ();
@@ -50,9 +49,11 @@
 
 - (void)setup
 {
+    // Hide default components
     self.textLabel.hidden = YES;
     self.detailTextLabel.hidden = YES;
     self.imageView.hidden = YES;
+
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = BZG_INFO_BACKGROUND_COLOR;
     

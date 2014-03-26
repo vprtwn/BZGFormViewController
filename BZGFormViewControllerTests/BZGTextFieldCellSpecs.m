@@ -5,7 +5,6 @@
 //
 
 #import "BZGTextFieldCell.h"
-#import "Constants.h"
 
 BZGTextFieldCell *cell;
 

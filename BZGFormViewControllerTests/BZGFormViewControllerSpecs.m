@@ -44,11 +44,18 @@ describe(@"Setting form cells", ^{
         expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
     });
 
-    it(@"should set the cell's textfield's delegate to the form view controller", ^{
+    it(@"should set the cell's UITextFieldDelegate to the form view controller", ^{
         formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2]];
         [formViewController.tableView reloadData];
         expect(cell1.textField.delegate).to.equal(formViewController);
         expect(cell2.textField.delegate).to.equal(formViewController);
+    });
+
+    it(@"should set the cell's BZGFormCellDelegate to the form view controller", ^{
+        formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2]];
+        [formViewController.tableView reloadData];
+        expect(cell1.delegate).to.equal(formViewController);
+        expect(cell2.delegate).to.equal(formViewController);
     });
 });
 
@@ -195,6 +202,40 @@ describe(@"UITextFieldDelegate blocks", ^{
         [formViewController textFieldShouldReturn:cell1.textField];
         [cell1.textField sendActionsForControlEvents:UIControlEventAllEditingEvents];
         expect(cell1.infoCell.textLabel.text).to.equal(@"foo");
+    });
+});
+
+describe(@"isValid", ^{
+    it(@"should be valid when all the cells are valid", ^{
+        formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+        cell1.validationState = BZGValidationStateValid;
+        cell2.validationState = BZGValidationStateValid;
+        cell3.validationState = BZGValidationStateValid;
+        expect(formViewController.isValid).to.equal(YES);
+    });
+
+    it(@"should be valid when one cell is warning", ^{
+        formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+        cell1.validationState = BZGValidationStateWarning;
+        cell2.validationState = BZGValidationStateValid;
+        cell3.validationState = BZGValidationStateValid;
+        expect(formViewController.isValid).to.equal(YES);
+    });
+
+    it(@"should be invalid when one cell is invalid", ^{
+        formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+        cell1.validationState = BZGValidationStateValid;
+        cell2.validationState = BZGValidationStateInvalid;
+        cell3.validationState = BZGValidationStateValid;
+        expect(formViewController.isValid).to.equal(NO);
+    });
+
+    it(@"should be invalid when one cell is validating", ^{
+        formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+        cell1.validationState = BZGValidationStateValid;
+        cell2.validationState = BZGValidationStateValid;
+        cell3.validationState = BZGValidationStateValidating;
+        expect(formViewController.isValid).to.equal(NO);
     });
 });
 

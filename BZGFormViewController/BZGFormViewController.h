@@ -5,10 +5,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BZGFormCell.h"
 
 @class BZGTextFieldCell, BZGInfoCell;
 
-@interface BZGFormViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface BZGFormViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, BZGFormCellDelegate>
 
 /// The table view managed by the controller object.
 @property (nonatomic, strong) UITableView *tableView;
@@ -18,6 +19,13 @@
 
 /// The table view section where the form should be displayed.
 @property (nonatomic, assign) NSUInteger formSection;
+
+/** 
+ * A property indicating whether or not the form is valid.
+ * A form is valid when all of its formCells have validation state
+ * BZGValidationStateValid or BZGValidationStateWarning.
+ */
+@property (nonatomic, readonly) BOOL isValid;
 
 /**
  * Initializes a form view controller to manage a table view of a given style.
