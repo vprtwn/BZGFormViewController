@@ -10,11 +10,11 @@
 @protocol BZGFormCellDelegate;
 
 typedef NS_ENUM(NSInteger, BZGValidationState) {
+    BZGValidationStateNone,
     BZGValidationStateInvalid,
     BZGValidationStateWarning,
     BZGValidationStateValid,
     BZGValidationStateValidating,
-    BZGValidationStateNone
 };
 
 @interface BZGFormCell : UITableViewCell

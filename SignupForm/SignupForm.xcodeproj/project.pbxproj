@@ -518,6 +518,7 @@
 			baseConfigurationReference = 2F4402527AED4455AEE5A0EC /* Pods-SignupFormTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SignupForm.app/SignupForm";
+				CLANG_ENABLE_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -541,6 +542,7 @@
 			baseConfigurationReference = 2F4402527AED4455AEE5A0EC /* Pods-SignupFormTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SignupForm.app/SignupForm";
+				CLANG_ENABLE_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

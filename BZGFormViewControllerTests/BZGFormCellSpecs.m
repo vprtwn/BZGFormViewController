@@ -26,8 +26,18 @@ describe(@"Initialization", ^{
 });
 
 describe(@"validationState", ^{
-    it(@"should invoke formCell:didChangeValidationState: when the cell's validation state changes", ^{
-        
+    it(@"should invoke formCell:didChangeValidationState: with the correct arguments when the cell's validation state changes to valid", ^{
+        id<BZGFormCellDelegate> mockDelegate = mockProtocol(@protocol(BZGFormCellDelegate));
+        cell.delegate = mockDelegate;
+        cell.validationState = BZGValidationStateValid;
+        [verify(mockDelegate) formCell:cell didChangeValidationState:BZGValidationStateValid];
+    });
+
+    it(@"should invoke formCell:didChangeValidationState: with the correct arguments when the cell's validation state changes to invalid", ^{
+        id<BZGFormCellDelegate> mockDelegate = mockProtocol(@protocol(BZGFormCellDelegate));
+        cell.delegate = mockDelegate;
+        cell.validationState = BZGValidationStateInvalid;
+        [verify(mockDelegate) formCell:cell didChangeValidationState:BZGValidationStateInvalid];
     });
 });
 
