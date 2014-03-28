@@ -42,9 +42,9 @@
 @property (copy, nonatomic) BOOL (^shouldReturnBlock)(BZGTextFieldCell *cell, NSString *text);
 
 /**
- * Returns the parent BZGFormFieldCell for the given text field. If no cell is found, returns nil.
+ * Returns the parent BZGTextFieldCell for the given text field. If no cell is found, returns nil.
  *
- * @param textField A UITextField instance that may or may not belong to this BZGFormFieldCell instance.
+ * @param textField A UITextField instance that may or may not belong to this BZGTextFieldCell instance.
  */
 + (BZGTextFieldCell *)parentCellForTextField:(UITextField *)textField;
 
