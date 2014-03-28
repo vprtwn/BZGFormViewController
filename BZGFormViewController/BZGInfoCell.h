@@ -12,7 +12,7 @@
 @property (nonatomic, strong) UILabel *infoLabel;
 
 /**
- * Initializes a BZGFormInfoCell with the given text.
+ * Initializes a BZGInfoCell with the given text.
  */
 - (id)initWithText:(NSString *)text;
 
