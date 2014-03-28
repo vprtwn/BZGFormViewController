@@ -264,9 +264,11 @@
 {
     BOOL isValid = YES;
     for (BZGFormCell *cell in self.formCells) {
-        isValid = isValid &&
-                  (cell.validationState == BZGValidationStateValid ||
-                   cell.validationState == BZGValidationStateWarning);
+        if ([cell isKindOfClass:[BZGFormCell class]]) {
+            isValid = isValid &&
+                      (cell.validationState == BZGValidationStateValid ||
+                       cell.validationState == BZGValidationStateWarning);
+        }
     }
     self.isValid = isValid;
 }
