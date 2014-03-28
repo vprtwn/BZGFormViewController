@@ -38,7 +38,7 @@
 /**
  * Updates the display state of the info cell below a form cell.
  *
- * @param cell an instance of BZGTextFieldCell in a BZGFormViewController's formFieldCells
+ * @param cell an instance of BZGTextFieldCell in a BZGFormViewController's form cells
  */
 - (void)updateInfoCellBelowFormCell:(BZGTextFieldCell *)cell;
 
