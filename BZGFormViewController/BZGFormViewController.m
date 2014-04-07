@@ -36,6 +36,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)loadView
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:self.style];
@@ -55,6 +60,16 @@
     [contentView addSubview:self.tableView];
 
     self.view = contentView;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 - (void)setFormCells:(NSMutableArray *)formCells
@@ -271,6 +286,28 @@
         }
     }
     self.isValid = isValid;
+}
+
+#pragma mark - Keyboard notifications
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    UIEdgeInsets contentInsets;
+    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.height), 0.0);
+    } else {
+        contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.width), 0.0);
+    }
+
+    self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = contentInsets;
+}
+
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    self.tableView.contentInset = UIEdgeInsetsZero;
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
 }
 
 
