@@ -20,8 +20,8 @@
 /// The table view section where the form should be displayed.
 @property (nonatomic, assign) NSUInteger formSection;
 
-/// A property indicating whether or not the keyboard should display a control accessory view when a BZGTextFieldCell is editing.
-@property (nonatomic, assign) BOOL showKeyboardControl;
+/// A property indicating whether or not the keyboard should display an input accessory view with previous, next, and done buttons.
+@property (nonatomic, assign) BOOL showsKeyboardControl;
 
 /** 
  * A property indicating whether or not the form is valid.

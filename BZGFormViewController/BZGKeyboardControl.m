@@ -1,5 +1,5 @@
 //
-//  BZGFormCell.m
+//  BZGKeyboardControl.m
 //
 //  https://github.com/benzguo/BZGFormViewController
 //

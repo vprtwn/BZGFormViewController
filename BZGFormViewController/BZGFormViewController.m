@@ -233,7 +233,7 @@
     
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    if (self.showKeyboardControl) {
+    if (self.showsKeyboardControl) {
         [self accesorizeTextField:textField];
     }
 }
