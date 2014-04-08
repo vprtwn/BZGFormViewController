@@ -51,6 +51,14 @@
 - (BZGTextFieldCell *)nextFormCell:(BZGTextFieldCell *)cell;
 
 /**
+ * Returns the previous form cell.
+ *
+ * @param cell The starting form field cell.
+ * @return The previous form field cell or nil if no cell is found.
+ */
+- (BZGTextFieldCell *)previousFormCell:(BZGTextFieldCell *)cell;    
+
+/**
  * Returns the first invalid form field cell.
  *
  * @return The first form field cell with state 'BZGValidationStateInvalid' or nil if no cell is found.

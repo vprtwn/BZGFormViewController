@@ -8,15 +8,18 @@ const CGFloat BZGKeyboardControlButtonSpacing = 22;
     self = [super initWithFrame:frame];
     if (self) {
         self.previousButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:105
-                                                                            target:self
-                                                                            action:@selector(layoutSubviews)];
+                                                                            target:nil
+                                                                            action:nil];
         self.nextButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:106
-                                                                        target:self
-                                                                        action:@selector(layoutSubviews)];
+                                                                        target:nil
+                                                                        action:nil];
         
         self.doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                        target:self
-                                                                        action:@selector(layoutSubviews)];
+                                                                        target:nil
+                                                                        action:nil];
+        self.previousButton.tintColor   = [UIColor blackColor];
+        self.nextButton.tintColor       = [UIColor blackColor];
+        self.doneButton.tintColor       = [UIColor blackColor];
         
         UIBarButtonItem *buttonSpacing = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                                                                        target:self

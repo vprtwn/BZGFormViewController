@@ -332,6 +332,7 @@
 - (void)accesorizeTextField:(UITextField *)textField {
     BZGTextFieldCell *cell = [BZGTextFieldCell parentCellForTextField:textField];
     self.keyboardControl.previousCell = [self previousFormCell:cell];
+    self.keyboardControl.currentCell = cell;
     self.keyboardControl.nextCell = [self nextFormCell:cell];
     textField.inputAccessoryView = self.keyboardControl;
 }
@@ -343,6 +344,8 @@
         _keyboardControl.previousButton.action = @selector(navigateToPreviousCell:);
         _keyboardControl.nextButton.target = self;
         _keyboardControl.nextButton.action = @selector(navigateToNextCell);
+        _keyboardControl.doneButton.target = self;
+        _keyboardControl.doneButton.action = @selector(doneButtonPressed);
     }
     return _keyboardControl;
 }
@@ -353,7 +356,10 @@
 
 - (void)navigateToNextCell {
     [self.keyboardControl.nextCell.textField becomeFirstResponder];
+}
 
+- (void)doneButtonPressed {
+    [self.keyboardControl.currentCell.textField resignFirstResponder];
 }
 
 @end
