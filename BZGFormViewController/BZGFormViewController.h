@@ -20,6 +20,9 @@
 /// The table view section where the form should be displayed.
 @property (nonatomic, assign) NSUInteger formSection;
 
+/// A property indicating whether or not the keyboard should display an input accessory view with previous, next, and done buttons.
+@property (nonatomic, assign) BOOL showsKeyboardControl;
+
 /** 
  * A property indicating whether or not the form is valid.
  * A form is valid when all of its formCells have validation state
@@ -49,6 +52,14 @@
  * @return The next form field cell or nil if no cell is found.
  */
 - (BZGTextFieldCell *)nextFormCell:(BZGTextFieldCell *)cell;
+
+/**
+ * Returns the previous form cell.
+ *
+ * @param cell The starting form field cell.
+ * @return The previous form field cell or nil if no cell is found.
+ */
+- (BZGTextFieldCell *)previousFormCell:(BZGTextFieldCell *)cell;    
 
 /**
  * Returns the first invalid form field cell.

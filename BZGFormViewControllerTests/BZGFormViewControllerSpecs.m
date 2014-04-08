@@ -59,6 +59,16 @@ describe(@"Setting form cells", ^{
     });
 });
 
+describe(@"previousFormCell:", ^{
+    it(@"should return the correct previous cell", ^{
+        formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
+        [formViewController.tableView reloadData];
+        expect([formViewController previousFormCell:cell3]).to.equal(cell2);
+        expect([formViewController previousFormCell:cell2]).to.equal(cell1);
+        expect([formViewController previousFormCell:cell1]).to.equal(nil);
+    });
+});
+
 describe(@"nextFormCell:", ^{
     it(@"should return the correct next cell", ^{
         formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];

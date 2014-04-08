@@ -33,6 +33,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
                                                       self.passwordCell]];
     self.formSection = 0;
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
+    self.showsKeyboardControl = YES;
 }
 
 - (void)configureUsernameFieldCell
