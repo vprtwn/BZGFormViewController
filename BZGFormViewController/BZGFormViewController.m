@@ -230,10 +230,12 @@
     if (cell.didBeginEditingBlock) {
         cell.didBeginEditingBlock(cell, textField.text);
     }
-
+    
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    [self accesorizeTextField:textField];
+    if (self.showKeyboardControl) {
+        [self accesorizeTextField:textField];
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

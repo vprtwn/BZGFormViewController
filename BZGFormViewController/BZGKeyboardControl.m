@@ -1,3 +1,9 @@
+//
+//  BZGFormCell.m
+//
+//  https://github.com/benzguo/BZGFormViewController
+//
+
 #import "BZGKeyboardControl.h"
 
 const CGFloat BZGKeyboardControlButtonSpacing = 22;
@@ -17,6 +23,9 @@ const CGFloat BZGKeyboardControlButtonSpacing = 22;
         self.doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                         target:nil
                                                                         action:nil];
+        
+        self.previousButton.enabled     = NO;
+        self.nextButton.enabled         = NO;
         self.previousButton.tintColor   = [UIColor blackColor];
         self.nextButton.tintColor       = [UIColor blackColor];
         self.doneButton.tintColor       = [UIColor blackColor];
