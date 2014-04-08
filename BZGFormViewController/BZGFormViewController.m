@@ -7,12 +7,14 @@
 #import "BZGFormViewController.h"
 #import "BZGTextFieldCell.h"
 #import "BZGInfoCell.h"
+#import "BZGKeyboardControl.h"
 #import "Constants.h"
 
 @interface BZGFormViewController ()
 
 @property (nonatomic, assign) UITableViewStyle style;
 @property (nonatomic, assign) BOOL isValid;
+@property (nonatomic, strong) BZGKeyboardControl *keyboardControl;
 
 @end
 
@@ -176,6 +178,20 @@
     return nil;
 }
 
+- (BZGTextFieldCell *)previousFormCell:(BZGTextFieldCell *)cell
+{
+    NSUInteger cellIndex = [self.formCells indexOfObject:cell];
+    if (cellIndex == NSNotFound || cellIndex == 0) return nil;
+    
+    for (NSInteger i = cellIndex - 1; i >= 0; --i) {
+        UITableViewCell *cell = self.formCells[i];
+        if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
+            return (BZGTextFieldCell *)cell;
+        }
+    }
+    return nil;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -217,6 +233,7 @@
 
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self accesorizeTextField:textField];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -245,7 +262,7 @@
     if (cell.didEndEditingBlock) {
         cell.didEndEditingBlock(cell, textField.text);
     }
-
+    
     [self updateInfoCellBelowFormCell:cell];
 }
 
@@ -310,5 +327,33 @@
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
 }
 
+#pragma mark - BZGKeyboardControl Methods
+
+- (void)accesorizeTextField:(UITextField *)textField {
+    BZGTextFieldCell *cell = [BZGTextFieldCell parentCellForTextField:textField];
+    self.keyboardControl.previousCell = [self previousFormCell:cell];
+    self.keyboardControl.nextCell = [self nextFormCell:cell];
+    textField.inputAccessoryView = self.keyboardControl;
+}
+
+- (BZGKeyboardControl *)keyboardControl {
+    if (!_keyboardControl) {
+        _keyboardControl = [[BZGKeyboardControl alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), BZG_KEYBOARD_CONTROL_HEIGHT)];
+        _keyboardControl.previousButton.target = self;
+        _keyboardControl.previousButton.action = @selector(navigateToPreviousCell:);
+        _keyboardControl.nextButton.target = self;
+        _keyboardControl.nextButton.action = @selector(navigateToNextCell);
+    }
+    return _keyboardControl;
+}
+
+- (void)navigateToPreviousCell: (id)sender {
+    [self.keyboardControl.previousCell.textField becomeFirstResponder];
+}
+
+- (void)navigateToNextCell {
+    [self.keyboardControl.nextCell.textField becomeFirstResponder];
+
+}
 
 @end

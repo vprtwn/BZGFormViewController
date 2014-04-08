@@ -22,4 +22,6 @@
 #define BZG_INFO_LABEL_FONT                   BZG_SMALL_FONT
 #define BZG_INFO_BACKGROUND_COLOR             BZG_TABLEVIEW_BACKGROUND_COLOR
 
+#define BZG_KEYBOARD_CONTROL_HEIGHT            44
+
 #endif
