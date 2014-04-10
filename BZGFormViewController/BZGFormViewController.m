@@ -56,19 +56,19 @@
     }
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = BZG_TABLEVIEW_BACKGROUND_COLOR;
-    
+
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
     contentView.autoresizesSubviews = YES;
     contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [contentView addSubview:self.tableView];
-    
+
     self.view = contentView;
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
@@ -97,12 +97,12 @@
     NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return nil;
     if (cellIndex + 1 >= self.formCells.count) return nil;
-    
+
     UITableViewCell *cellBelow = self.formCells[cellIndex + 1];
     if ([cellBelow isKindOfClass:[BZGInfoCell class]]) {
         return (BZGInfoCell *)cellBelow;
     }
-    
+
     return nil;
 }
 
@@ -110,14 +110,14 @@
 {
     NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return;
-    
+
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cellIndex+1
                                                 inSection:self.formSection];
-    
+
     // if an info cell is already showing, do nothing
     BZGInfoCell *infoCell = [self infoCellBelowFormCell:cell];
     if (infoCell) return;
-    
+
     // otherwise, add the cell's info cell to the table view
     [self.formCells insertObject:cell.infoCell atIndex:cellIndex+1];
     [self.tableView insertRowsAtIndexPaths:@[indexPath]
@@ -128,11 +128,11 @@
 {
     NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return;
-    
+
     // if no info cell is showing, do nothing
     BZGInfoCell *infoCell = [self infoCellBelowFormCell:cell];
     if (!infoCell) return;
-    
+
     // otherwise, remove it
     [self.formCells removeObjectAtIndex:cellIndex+1];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cellIndex+1
@@ -169,7 +169,7 @@
 {
     NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound) return nil;
-    
+
     for (NSUInteger i = cellIndex + 1; i < self.formCells.count; ++i) {
         UITableViewCell *cell = self.formCells[i];
         if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
@@ -183,7 +183,7 @@
 {
     NSUInteger cellIndex = [self.formCells indexOfObject:cell];
     if (cellIndex == NSNotFound || cellIndex == 0) return nil;
-    
+
     for (NSInteger i = cellIndex - 1; i >= 0; --i) {
         UITableViewCell *cell = self.formCells[i];
         if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
@@ -231,7 +231,7 @@
     if (cell.didBeginEditingBlock) {
         cell.didBeginEditingBlock(cell, textField.text);
     }
-    
+
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     if (self.showsKeyboardControl) {
@@ -246,12 +246,12 @@
     if (!cell) {
         return YES;
     }
-    
+
     NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (cell.shouldChangeTextBlock) {
         shouldChange = cell.shouldChangeTextBlock(cell, newText);
     }
-    
+
     [self updateInfoCellBelowFormCell:cell];
     return shouldChange;
 }
@@ -265,7 +265,7 @@
     if (cell.didEndEditingBlock) {
         cell.didEndEditingBlock(cell, textField.text);
     }
-    
+
     [self updateInfoCellBelowFormCell:cell];
 }
 
@@ -276,11 +276,11 @@
     if (!cell) {
         return YES;
     }
-    
+
     if (cell.shouldReturnBlock) {
         shouldReturn = cell.shouldReturnBlock(cell, textField.text);
     }
-    
+
     BZGTextFieldCell *nextCell = [self nextFormCell:cell];
     if (!nextCell) {
         [cell.textField resignFirstResponder];
@@ -288,7 +288,7 @@
     else {
         [nextCell.textField becomeFirstResponder];
     }
-    
+
     [self updateInfoCellBelowFormCell:cell];
     return shouldReturn;
 }
@@ -312,14 +312,14 @@
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
+
     UIEdgeInsets contentInsets;
     if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
         contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.height), 0.0);
     } else {
         contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.width), 0.0);
     }
-    
+
     self.tableView.contentInset = contentInsets;
     self.tableView.scrollIndicatorInsets = contentInsets;
 }
