@@ -15,8 +15,7 @@
 @property (nonatomic, assign) UITableViewStyle style;
 @property (nonatomic, assign) BOOL isValid;
 @property (nonatomic, strong) BZGKeyboardControl *keyboardControl;
-@property (nonatomic, copy) void (^newFirstResponder)();
-
+@property (nonatomic, copy) void (^didEndScrollingBlock)();
 
 @end
 
@@ -372,7 +371,7 @@
     else {
         NSUInteger row = [self.formCells indexOfObject:destinationCell];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:self.formSection];
-        self.newFirstResponder = ^{
+        self.didEndScrollingBlock = ^{
             [destinationCell.textField becomeFirstResponder];
         };
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
@@ -387,9 +386,9 @@
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     if (scrollView == self.tableView) {
-        if (self.newFirstResponder) {
-            self.newFirstResponder();
-            self.newFirstResponder = nil;
+        if (self.didEndScrollingBlock) {
+            self.didEndScrollingBlock();
+            self.didEndScrollingBlock = nil;
         }
     }
 }
