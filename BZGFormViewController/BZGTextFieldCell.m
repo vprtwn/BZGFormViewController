@@ -24,6 +24,7 @@
         [self configureActivityIndicatorView];
         [self configureTextField];
         [self configureLabel];
+        [self configureTap];
         [self configureBindings];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -94,6 +95,11 @@
     self.activityIndicatorView.hidesWhenStopped = NO;
     self.activityIndicatorView.hidden = YES;
     [self addSubview:self.activityIndicatorView];
+}
+
+- (void)configureTap {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(becomeFirstResponder)];
+    [self.contentView addGestureRecognizer:tap];
 }
 
 - (void)configureBindings
@@ -182,6 +188,10 @@
     if ([textField isEqual:self.textField]) {
         self.validationState = self.validationState;
     }
+}
+
+- (BOOL)becomeFirstResponder {
+    return [self.textField becomeFirstResponder];
 }
 
 @end
