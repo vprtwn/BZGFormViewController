@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'BZGFormViewController'
-  s.version  = '2.3.2'
+  s.version  = '2.3.1'
   s.license  = 'MIT'
   s.summary  = 'A library for creating dynamic forms.'
   s.homepage = 'https://github.com/benzguo/BZGFormViewController'
