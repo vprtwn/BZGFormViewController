@@ -7,8 +7,9 @@
 #import "BZGTextFieldCell.h"
 #import <libPhoneNumber-iOS/NBAsYouTypeFormatter.h>
 
-@interface BZGPhoneTextFieldCell : BZGTextFieldCell <UITextFieldDelegate>
+@interface BZGPhoneTextFieldCell : BZGTextFieldCell
 
-@property (strong, nonatomic) NBAsYouTypeFormatter *phoneFormatter;
+/// The text to display in the info cell when the phone number is invalid
+@property (strong, nonatomic) NSString *invalidText;
 
 @end

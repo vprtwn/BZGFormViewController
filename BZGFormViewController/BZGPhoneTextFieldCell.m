@@ -5,7 +5,6 @@
 //
 
 #import "BZGPhoneTextFieldCell.h"
-#import <libPhoneNumber-iOS/NBAsYouTypeFormatter.h>
 
 @implementation BZGPhoneTextFieldCell
 
@@ -13,10 +12,7 @@
 {
     self = [super init];
     if (self) {
-        self.textField.delegate = self;
-        NSLocale *locale = [NSLocale currentLocale];
-        NSString *regionCode = [[locale localeIdentifier] substringFromIndex:3];
-        self.phoneFormatter = [[NBAsYouTypeFormatter alloc] initWithRegionCode:regionCode];
+        self.invalidText = @"Please enter a valid phone number";
     }
     return self;
 }

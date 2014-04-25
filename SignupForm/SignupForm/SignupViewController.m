@@ -43,7 +43,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 {
     self.usernameCell = [BZGTextFieldCell new];
     self.usernameCell.label.text = @"Username";
-    self.usernameCell.textField.placeholder = NSLocalizedString(@"Username", nil);
+    self.usernameCell.textField.placeholder = @"Username";
     self.usernameCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
         if (newText.length < 5) {
@@ -60,7 +60,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 {
     self.emailCell = [BZGTextFieldCell new];
     self.emailCell.label.text = @"Email";
-    self.emailCell.textField.placeholder = NSLocalizedString(@"Email", nil);
+    self.emailCell.textField.placeholder = @"Email";
     self.emailCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
     @weakify(self)
     self.emailCell.didEndEditingBlock = ^(BZGTextFieldCell *cell, NSString *text) {
@@ -113,7 +113,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 {
     self.passwordCell = [BZGTextFieldCell new];
     self.passwordCell.label.text = @"Password";
-    self.passwordCell.textField.placeholder = NSLocalizedString(@"Password", nil);
+    self.passwordCell.textField.placeholder = @"Password";
     self.passwordCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordCell.textField.secureTextEntry = YES;
     self.passwordCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *text) {
