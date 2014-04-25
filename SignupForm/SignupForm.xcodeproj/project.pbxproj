@@ -11,6 +11,7 @@
 		3A1F56A718F388B40090E732 /* BZGKeyboardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F56A618F388B40090E732 /* BZGKeyboardControl.m */; };
 		3A1F56A918F432F90090E732 /* BZGKeyboardControlSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F56A818F432F90090E732 /* BZGKeyboardControlSpecs.m */; };
 		799AEBE944DD4B758103BA7E /* libPods-SignupFormTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */; };
+		EB102241190B078E00F973F0 /* BZGPhoneTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB102240190B078E00F973F0 /* BZGPhoneTextFieldCell.m */; };
 		EB18C91A18DE628500F23064 /* BZGFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB18C91918DE628500F23064 /* BZGFormCell.m */; };
 		EB18C91C18DE62BC00F23064 /* BZGFormCellSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = EB18C91B18DE62BC00F23064 /* BZGFormCellSpecs.m */; };
 		EB59ED58180B2D9200DAA992 /* BZGTextFieldCellSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = EB59ED55180B2D9200DAA992 /* BZGTextFieldCellSpecs.m */; };
@@ -31,6 +32,7 @@
 		EB83D53B180B2CA9001037F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB83D520180B2CA9001037F5 /* Foundation.framework */; };
 		EB83D53C180B2CA9001037F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB83D524180B2CA9001037F5 /* UIKit.framework */; };
 		EB83D544180B2CA9001037F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB83D542180B2CA9001037F5 /* InfoPlist.strings */; };
+		EB9A0BED190B18CF0085B5A8 /* BZGPhoneTextFieldCellSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EB9A0BEC190B18CF0085B5A8 /* BZGPhoneTextFieldCellSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		3A1F56A818F432F90090E732 /* BZGKeyboardControlSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGKeyboardControlSpecs.m; path = ../../BZGFormViewControllerTests/BZGKeyboardControlSpecs.m; sourceTree = "<group>"; };
 		51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SignupFormTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F90CF32A864DEC854302D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB10223F190B078E00F973F0 /* BZGPhoneTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGPhoneTextFieldCell.h; path = ../../BZGFormViewController/BZGPhoneTextFieldCell.h; sourceTree = "<group>"; };
+		EB102240190B078E00F973F0 /* BZGPhoneTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGPhoneTextFieldCell.m; path = ../../BZGFormViewController/BZGPhoneTextFieldCell.m; sourceTree = "<group>"; };
 		EB18C91818DE628500F23064 /* BZGFormCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGFormCell.h; path = ../../BZGFormViewController/BZGFormCell.h; sourceTree = "<group>"; };
 		EB18C91918DE628500F23064 /* BZGFormCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFormCell.m; path = ../../BZGFormViewController/BZGFormCell.m; sourceTree = "<group>"; };
 		EB18C91B18DE62BC00F23064 /* BZGFormCellSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGFormCellSpecs.m; path = ../../BZGFormViewControllerTests/BZGFormCellSpecs.m; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 		EB83D541180B2CA9001037F5 /* SignupFormTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SignupFormTests-Info.plist"; sourceTree = "<group>"; };
 		EB83D543180B2CA9001037F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EB876CDE18D78408009544F9 /* SignupFormTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SignupFormTests-Prefix.pch"; sourceTree = "<group>"; };
+		EB9A0BEC190B18CF0085B5A8 /* BZGPhoneTextFieldCellSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGPhoneTextFieldCellSpec.m; path = ../../BZGFormViewControllerTests/BZGPhoneTextFieldCellSpec.m; sourceTree = "<group>"; };
 		EBDC9F3F18763ACF002EB25F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../../BZGFormViewController/Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +124,8 @@
 				EB18C91918DE628500F23064 /* BZGFormCell.m */,
 				EB59ED5C180B2DB100DAA992 /* BZGTextFieldCell.h */,
 				EB59ED5D180B2DB100DAA992 /* BZGTextFieldCell.m */,
+				EB10223F190B078E00F973F0 /* BZGPhoneTextFieldCell.h */,
+				EB102240190B078E00F973F0 /* BZGPhoneTextFieldCell.m */,
 				EB59ED5E180B2DB100DAA992 /* BZGInfoCell.h */,
 				EB59ED5F180B2DB100DAA992 /* BZGInfoCell.m */,
 				EB59ED6A180B2F0800DAA992 /* BZGFormViewController.h */,
@@ -193,6 +200,7 @@
 				EB18C91B18DE62BC00F23064 /* BZGFormCellSpecs.m */,
 				3A1F56A818F432F90090E732 /* BZGKeyboardControlSpecs.m */,
 				EB59ED55180B2D9200DAA992 /* BZGTextFieldCellSpecs.m */,
+				EB9A0BEC190B18CF0085B5A8 /* BZGPhoneTextFieldCellSpec.m */,
 				EB59ED70180B377900DAA992 /* BZGInfoCellSpecs.m */,
 				EB59ED72180B378A00DAA992 /* BZGFormViewControllerSpecs.m */,
 				EB83D540180B2CA9001037F5 /* Supporting Files */,
@@ -380,6 +388,7 @@
 				EB83D531180B2CA9001037F5 /* AppDelegate.m in Sources */,
 				EB83D52D180B2CA9001037F5 /* main.m in Sources */,
 				EB59ED6F180B313000DAA992 /* SignupViewController.m in Sources */,
+				EB102241190B078E00F973F0 /* BZGPhoneTextFieldCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +401,7 @@
 				EB59ED73180B378A00DAA992 /* BZGFormViewControllerSpecs.m in Sources */,
 				EB18C91C18DE62BC00F23064 /* BZGFormCellSpecs.m in Sources */,
 				EB59ED71180B377900DAA992 /* BZGInfoCellSpecs.m in Sources */,
+				EB9A0BED190B18CF0085B5A8 /* BZGPhoneTextFieldCellSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

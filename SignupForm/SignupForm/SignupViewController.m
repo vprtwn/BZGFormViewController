@@ -6,6 +6,7 @@
 
 #import "SignupViewController.h"
 #import "BZGTextFieldCell.h"
+#import "BZGPhoneTextFieldCell.h"
 #import "BZGMailgunEmailValidator.h"
 #import "ReactiveCocoa.h"
 #import "EXTScope.h"
@@ -24,19 +25,21 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self configureUsernameFieldCell];
-    [self configureEmailFieldCell];
-    [self configurePasswordFieldCell];
+    [self configureUsernameCell];
+    [self configureEmailCell];
+    [self configurePhoneCell];
+    [self configurePasswordCell];
 
     self.formCells = [NSMutableArray arrayWithArray:@[self.usernameCell,
                                                       self.emailCell,
+                                                      self.phoneCell,
                                                       self.passwordCell]];
     self.formSection = 0;
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
     self.showsKeyboardControl = YES;
 }
 
-- (void)configureUsernameFieldCell
+- (void)configureUsernameCell
 {
     self.usernameCell = [BZGTextFieldCell new];
     self.usernameCell.label.text = @"Username";
@@ -53,7 +56,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     };
 }
 
-- (void)configureEmailFieldCell
+- (void)configureEmailCell
 {
     self.emailCell = [BZGTextFieldCell new];
     self.emailCell.label.text = @"Email";
@@ -98,7 +101,15 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     };
 }
 
-- (void)configurePasswordFieldCell
+- (void)configurePhoneCell
+{
+    self.phoneCell = [BZGPhoneTextFieldCell new];
+    self.phoneCell.label.text = @"Phone";
+    self.phoneCell.textField.placeholder = @"Phone";
+    self.phoneCell.textField.keyboardType = UIKeyboardTypePhonePad;
+}
+
+- (void)configurePasswordCell
 {
     self.passwordCell = [BZGTextFieldCell new];
     self.passwordCell.label.text = @"Password";

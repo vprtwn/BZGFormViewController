@@ -5,8 +5,11 @@
 //
 
 #import "BZGFormViewController.h"
-#import "BZGTextFieldCell.h"
+
+#import "BZGFormCell.h"
 #import "BZGInfoCell.h"
+#import "BZGPhoneTextFieldCell.h"
+#import "BZGTextFieldCell.h"
 #import "BZGKeyboardControl.h"
 #import "Constants.h"
 
@@ -245,6 +248,23 @@
     BZGTextFieldCell *cell = [BZGTextFieldCell parentCellForTextField:textField];
     if (!cell) {
         return YES;
+    }
+
+    // Phone number formatting
+    if ([cell isMemberOfClass:[BZGPhoneTextFieldCell class]]) {
+        BZGPhoneTextFieldCell *phoneCell = (BZGPhoneTextFieldCell *)cell;
+        NSCharacterSet *digitSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        // Entered one number
+        if (string.length == 1 &&
+            [string rangeOfCharacterFromSet:digitSet].length != 0 &&
+            range.location == textField.text.length) {
+            textField.text = [phoneCell.phoneFormatter inputDigit:string];
+        }
+        // Backspace
+        else if (string.length == 0) {
+            textField.text = [phoneCell.phoneFormatter removeLastDigit];
+        }
+        return NO;
     }
 
     NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
