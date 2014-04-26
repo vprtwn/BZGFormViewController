@@ -8,7 +8,7 @@
 #define BZG_TABLEVIEW_BACKGROUND_COLOR        [UIColor colorWithRed:235/255.0f green:235/255.0f blue:241/255.0f alpha:1.0f]
 #define BZG_STANDARD_FONT                     [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define BZG_SMALL_FONT                        [UIFont fontWithName:@"HelveticaNeue" size:14]
-#define BZG_BOLD_FONT                         [UIFont fontWithName:@"HelveticaNeue-Bold" size:15]
+#define BZG_BOLD_FONT                         [UIFont fontWithName:@"HelveticaNeue-Medium" size:15]
 
 #define BZG_BACKGROUND_COLOR                  [UIColor whiteColor]
 

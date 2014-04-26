@@ -125,19 +125,6 @@ describe(@"updateInfoCellBelowFormCell", ^{
         expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
     });
 
-    it(@"should not show an info cell when the text field is editing", ^{
-        UITextField *mockEditingTextField = mock([UITextField class]);
-        [given([mockEditingTextField isEditing]) willReturnBool:YES];
-        cell1.textField = mockEditingTextField;
-        cell1.validationState = BZGValidationStateInvalid;
-
-        formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
-        [formViewController.tableView reloadData];
-
-        [formViewController updateInfoCellBelowFormCell:cell1];
-        expect([formViewController.tableView numberOfRowsInSection:formViewController.formSection]).to.equal(3);
-    });
-
     it(@"should update the info cell's text", ^{
         formViewController.formCells = [NSMutableArray arrayWithArray:@[cell1, cell2, cell3]];
         [formViewController.tableView reloadData];

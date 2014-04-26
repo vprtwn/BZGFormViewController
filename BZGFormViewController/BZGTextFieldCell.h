@@ -7,7 +7,7 @@
 #import <UIKit/UIKit.h>
 #import "BZGFormCell.h"
 
-@interface BZGTextFieldCell : BZGFormCell <UITextFieldDelegate>
+@interface BZGTextFieldCell : BZGFormCell
 
 @property (strong, nonatomic) UILabel *label;
 @property (strong, nonatomic) UITextField *textField;
