@@ -6,9 +6,6 @@
 
 #import "BZGFormViewController.h"
 
-#import <libPhoneNumber-iOS/NBAsYouTypeFormatter.h>
-#import <libPhoneNumber-iOS/NBPhoneNumberUtil.h>
-
 #import "BZGFormCell.h"
 #import "BZGInfoCell.h"
 #import "BZGPhoneTextFieldCell.h"
@@ -23,11 +20,6 @@
 @property (nonatomic, strong) BZGKeyboardControl *keyboardControl;
 @property (nonatomic, copy) void (^didEndScrollingBlock)();
 
-// Phone number formatting
-@property (strong, nonatomic) NBAsYouTypeFormatter *phoneFormatter;
-@property (strong, nonatomic) NSString *regionCode;
-@property (strong, nonatomic) NBPhoneNumberUtil *phoneUtil;
-
 @end
 
 @implementation BZGFormViewController
@@ -37,7 +29,6 @@
     self = [super init];
     if (self) {
         self.style = UITableViewStyleGrouped;
-        [self setup];
     }
     return self;
 }
@@ -47,16 +38,8 @@
     self = [super init];
     if (self) {
         self.style = style;
-        [self setup];
     }
     return self;
-}
-
-- (void)setup {
-    NSLocale *locale = [NSLocale currentLocale];
-    self.regionCode = [[locale localeIdentifier] substringFromIndex:3];
-    self.phoneFormatter = [[NBAsYouTypeFormatter alloc] initWithRegionCode:self.regionCode];
-    self.phoneUtil = [NBPhoneNumberUtil sharedInstance];   
 }
 
 - (void)dealloc
@@ -74,7 +57,7 @@
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = BZG_TABLEVIEW_BACKGROUND_COLOR;
 
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -267,35 +250,11 @@
         return YES;
     }
 
-    // Phone number formatting
     if ([cell isMemberOfClass:[BZGPhoneTextFieldCell class]]) {
         BZGPhoneTextFieldCell *phoneCell = (BZGPhoneTextFieldCell *)cell;
-        NSCharacterSet *digitSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-        // Entered one number
-        if (string.length == 1 &&
-            [string rangeOfCharacterFromSet:digitSet].length != 0 &&
-            range.location == textField.text.length) {
-            textField.text = [self.phoneFormatter inputDigit:string];
-        }
-        // Backspace
-        else if (string.length == 0) {
-            textField.text = [self.phoneFormatter removeLastDigit];
-        }
-        // Validate text
-        NSError *error = nil;
-        NBPhoneNumber *phoneNumber = [self.phoneUtil parse:textField.text
-                                             defaultRegion:self.regionCode
-                                                     error:&error];
-        if (!error) {
-            BOOL isPossibleNumber = [self.phoneUtil isPossibleNumber:phoneNumber error:&error];
-            phoneCell.validationState = (error || !isPossibleNumber) ? BZGValidationStateInvalid : BZGValidationStateValid;
-        }
-        else {
-            phoneCell.validationState = BZGValidationStateInvalid;
-        }
-        [phoneCell.infoCell setText:phoneCell.invalidText];
+        BOOL shouldChange = [phoneCell shouldChangeCharactersInRange:range replacementString:string];
         [self updateInfoCellBelowFormCell:phoneCell];
-        return NO;
+        return shouldChange;
     }
 
     NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
@@ -377,9 +336,14 @@
 
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    self.tableView.contentInset = UIEdgeInsetsZero;
-    self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    NSNumber *rate = notification.userInfo[UIKeyboardAnimationDurationUserInfoKey];
+    [UIView animateWithDuration:rate.floatValue animations:^{
+        self.tableView.contentInset = UIEdgeInsetsZero;
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    }];
 }
+
+
 
 #pragma mark - BZGKeyboardControl Methods
 

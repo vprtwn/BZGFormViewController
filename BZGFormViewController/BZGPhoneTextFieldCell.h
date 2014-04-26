@@ -12,4 +12,6 @@
 /// The text to display in the info cell when the phone number is invalid
 @property (strong, nonatomic) NSString *invalidText;
 
+- (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
+
 @end

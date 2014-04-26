@@ -37,13 +37,15 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     self.formSection = 0;
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
     self.showsKeyboardControl = YES;
+    self.title = @"BZGFormViewController";
+    
+    [self.usernameCell becomeFirstResponder];
 }
 
 - (void)configureUsernameCell
 {
     self.usernameCell = [BZGTextFieldCell new];
     self.usernameCell.label.text = @"Username";
-    self.usernameCell.textField.placeholder = @"Username";
     self.usernameCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *newText) {
         if (newText.length < 5) {
@@ -60,7 +62,6 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 {
     self.emailCell = [BZGTextFieldCell new];
     self.emailCell.label.text = @"Email";
-    self.emailCell.textField.placeholder = @"Email";
     self.emailCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
     @weakify(self)
     self.emailCell.didEndEditingBlock = ^(BZGTextFieldCell *cell, NSString *text) {
@@ -105,15 +106,12 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 {
     self.phoneCell = [BZGPhoneTextFieldCell new];
     self.phoneCell.label.text = @"Phone";
-    self.phoneCell.textField.placeholder = @"Phone";
-    self.phoneCell.textField.keyboardType = UIKeyboardTypePhonePad;
 }
 
 - (void)configurePasswordCell
 {
     self.passwordCell = [BZGTextFieldCell new];
     self.passwordCell.label.text = @"Password";
-    self.passwordCell.textField.placeholder = @"Password";
     self.passwordCell.textField.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordCell.textField.secureTextEntry = YES;
     self.passwordCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString *text) {
