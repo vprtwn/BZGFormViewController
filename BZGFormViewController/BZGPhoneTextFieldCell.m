@@ -64,7 +64,16 @@
                                          defaultRegion:self.regionCode
                                                  error:&error];
     if (!error) {
-        BOOL isPossibleNumber = [self.phoneUtil isPossibleNumber:phoneNumber error:&error];
+        BOOL isPossibleNumber = NO;
+        if ([self.regionCode isEqualToString:@"US"]) {
+            // Don't allow 7-digit local format
+            NSCharacterSet *nonDigitCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
+            NSString *strippedPhoneString = [[self.textField.text componentsSeparatedByCharactersInSet:nonDigitCharacterSet] componentsJoinedByString:@""];
+            isPossibleNumber = [self.phoneUtil isPossibleNumber:phoneNumber error:&error] && strippedPhoneString.length >= 10;
+        }
+        else {
+            isPossibleNumber = [self.phoneUtil isPossibleNumber:phoneNumber error:&error];
+        }
         self.validationState = (error || !isPossibleNumber) ? BZGValidationStateInvalid : BZGValidationStateValid;
     }
     else {
