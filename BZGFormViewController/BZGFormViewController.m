@@ -5,8 +5,11 @@
 //
 
 #import "BZGFormViewController.h"
-#import "BZGTextFieldCell.h"
+
+#import "BZGFormCell.h"
 #import "BZGInfoCell.h"
+#import "BZGPhoneTextFieldCell.h"
+#import "BZGTextFieldCell.h"
 #import "BZGKeyboardControl.h"
 #import "Constants.h"
 
@@ -247,6 +250,13 @@
         return YES;
     }
 
+    if ([cell isMemberOfClass:[BZGPhoneTextFieldCell class]]) {
+        BZGPhoneTextFieldCell *phoneCell = (BZGPhoneTextFieldCell *)cell;
+        BOOL shouldChange = [phoneCell shouldChangeCharactersInRange:range replacementString:string];
+        [self updateInfoCellBelowFormCell:phoneCell];
+        return shouldChange;
+    }
+
     NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (cell.shouldChangeTextBlock) {
         shouldChange = cell.shouldChangeTextBlock(cell, newText);
@@ -326,9 +336,14 @@
 
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    self.tableView.contentInset = UIEdgeInsetsZero;
-    self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    NSNumber *rate = notification.userInfo[UIKeyboardAnimationDurationUserInfoKey];
+    [UIView animateWithDuration:rate.floatValue animations:^{
+        self.tableView.contentInset = UIEdgeInsetsZero;
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    }];
 }
+
+
 
 #pragma mark - BZGKeyboardControl Methods
 

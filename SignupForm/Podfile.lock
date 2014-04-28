@@ -36,35 +36,38 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4)
   - libextobjc/UmbrellaHeader (0.4)
+  - libPhoneNumber-iOS (0.7.2)
   - OCHamcrest (3.0.1)
-  - OCMock (2.2.3)
+  - OCMock (2.2.4)
   - OCMockito (1.1.0):
     - OCHamcrest (~> 3.0)
-  - ReactiveCocoa (2.2.4):
+  - ReactiveCocoa (2.3):
     - ReactiveCocoa/Core
     - ReactiveCocoa/no-arc
-  - ReactiveCocoa/Core (2.2.4):
+  - ReactiveCocoa/Core (2.3):
     - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.2.4)
+  - ReactiveCocoa/no-arc (2.3)
   - Specta (0.2.1)
 
 DEPENDENCIES:
-  - BZGMailgunEmailValidation (~> 1.1.0)
+  - BZGMailgunEmailValidation
   - Expecta (~> 0.3.0)
   - libextobjc (~> 0.4)
+  - libPhoneNumber-iOS (~> 0.7)
   - OCMock (~> 2.2.3)
   - OCMockito (~> 1.1.0)
-  - ReactiveCocoa (~> 2.2.4)
+  - ReactiveCocoa (~> 2.3)
   - Specta (~> 0.2.1)
 
 SPEC CHECKSUMS:
   BZGMailgunEmailValidation: 156c6d389d234fb5a3034c6e1ae4e5cedcc7a203
   Expecta: 322f1dc42610106a5ba9871b4924cf1635d80833
   libextobjc: 2c9fc8226f0f38e562587f65172f93f0c9b4a47a
+  libPhoneNumber-iOS: 0d337bdaf8fcbd9e1bd864f62f67afbb27d81d82
   OCHamcrest: 782c52ae8c673e5d6060a65005cfd26d20d519ba
-  OCMock: ea7fe30ee99e4e3186ad47d032a301fa7e8793ec
+  OCMock: 5008fae4b4789b8fc3e48cd7660f2eb5ef8ce89e
   OCMockito: 317fa0cf75c9b0d73d2be335789c556537be7fd2
-  ReactiveCocoa: 953a45dda30674fe704d1d9c77cc874141742f47
+  ReactiveCocoa: 1f6265f9d521923d3efcc37b00722cefc16df269
   Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
 
-COCOAPODS: 0.31.1
+COCOAPODS: 0.32.1

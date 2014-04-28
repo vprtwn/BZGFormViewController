@@ -38,6 +38,7 @@ const CGFloat BZGKeyboardControlButtonSpacing = 22;
                                                                                        target:self
                                                                                        action:nil];
         UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:self.frame];
+        toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [toolbar setItems:@[self.previousButton, buttonSpacing, self.nextButton, flexibleSpace, self.doneButton]];
         [self addSubview:toolbar];
     }
@@ -55,4 +56,5 @@ const CGFloat BZGKeyboardControlButtonSpacing = 22;
     _nextCell = nextCell;
     self.nextButton.enabled = !!nextCell;
 }
+
 @end
