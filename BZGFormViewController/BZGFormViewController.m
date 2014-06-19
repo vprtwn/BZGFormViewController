@@ -115,7 +115,7 @@
     if (cellIndex == NSNotFound) return;
 
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cellIndex+1
-                                                inSection:self.formSection];
+                                                inSection:cell.formViewSection];
 
     // if an info cell is already showing, do nothing
     BZGInfoCell *infoCell = [self infoCellBelowFormCell:cell];
@@ -139,7 +139,7 @@
     // otherwise, remove it
     [self.formCells removeObjectAtIndex:cellIndex+1];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cellIndex+1
-                                                inSection:self.formSection];
+                                                inSection:cell.formViewSection];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
@@ -385,7 +385,7 @@
     }
     else {
         NSUInteger row = [self.formCells indexOfObject:destinationCell];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:self.formSection];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:destinationCell.formViewSection];
         self.didEndScrollingBlock = ^{
             [destinationCell.textField becomeFirstResponder];
         };

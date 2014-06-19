@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSMutableArray *formCells;
 
 /// The table view section where the form should be displayed.
-@property (nonatomic, assign) NSUInteger formSection;
+@property (nonatomic, assign) NSUInteger formSection __deprecated;
 
 /// A property indicating whether or not the keyboard should display an input accessory view with previous, next, and done buttons.
 @property (nonatomic, assign) BOOL showsKeyboardControl;
