@@ -15,10 +15,10 @@
 @property (nonatomic, strong) UITableView *tableView;
 
 /// The form cells used to populate the table view's form section.
-@property (nonatomic, strong) NSMutableArray *formCells;
+@property (nonatomic, strong) NSMutableArray *formCells __deprecated;
 
-/// The table view section where the form should be displayed.
-@property (nonatomic, assign) NSUInteger formSection;
+/// The table view section where the form should be displayed. (Use 
+@property (nonatomic, assign) NSUInteger formSection __deprecated;
 
 /// A property indicating whether or not the keyboard should display an input accessory view with previous, next, and done buttons.
 @property (nonatomic, assign) BOOL showsKeyboardControl;
@@ -67,6 +67,10 @@
  * @return The first form field cell with state 'BZGValidationStateInvalid' or nil if no cell is found.
  */
 - (BZGTextFieldCell *)firstInvalidFormCell;
+
+- (NSMutableArray *)formCellsInSection:(NSInteger)section;
+- (void)addFormCells:(NSMutableArray *)formCells atSection:(NSInteger)section;
+- (void)insertFormCells:(NSMutableArray *)formCells atIndexPath:(NSIndexPath *)indexPath;
 
 
 @end
