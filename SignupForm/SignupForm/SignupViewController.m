@@ -13,7 +13,13 @@
 #import "Constants.h"
 
 static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9crlc28";
-static NSInteger const FORM_CELL_SECTION = 0;
+
+typedef NS_ENUM(NSInteger, SignupViewControllerSection) {
+    SignupViewControllerSectionPrimaryInfo,
+    SignupViewControllerSectionSecondaryInfo,
+    SignupViewControllerSectionSignUpButton,
+    SignupViewControllerSectionCount
+};
 
 @interface SignupViewController ()
 
@@ -31,7 +37,8 @@ static NSInteger const FORM_CELL_SECTION = 0;
     [self configurePhoneCell];
     [self configurePasswordCell];
 
-    [self addFormCells:@[self.usernameCell, self.emailCell, self.phoneCell, self.passwordCell] atSection:FORM_CELL_SECTION];
+    [self addFormCells:@[self.usernameCell, self.emailCell, self.passwordCell] atSection:SignupViewControllerSectionPrimaryInfo];
+    [self addFormCells:@[self.phoneCell] atSection:SignupViewControllerSectionSecondaryInfo];
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
     self.showsKeyboardControl = YES;
     self.title = @"BZGFormViewController";
@@ -132,24 +139,24 @@ static NSInteger const FORM_CELL_SECTION = 0;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return SignupViewControllerSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == FORM_CELL_SECTION) {
-        return [super tableView:tableView numberOfRowsInSection:section];
-    } else {
+    if (section == SignupViewControllerSectionSignUpButton) {
         return 1;
+    } else {
+        return [super tableView:tableView numberOfRowsInSection:section];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == FORM_CELL_SECTION) {
-        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    } else {
+    if (indexPath.section == SignupViewControllerSectionSignUpButton) {
         return self.signupCell;
+    } else {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
 }
 
@@ -183,10 +190,31 @@ static NSInteger const FORM_CELL_SECTION = 0;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == FORM_CELL_SECTION) {
-        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
-    } else {
+    if (indexPath.section == SignupViewControllerSectionSignUpButton) {
         return 44;
+    } else {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == SignupViewControllerSectionSecondaryInfo) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
+        label.text = @"Secondary Info";
+        label.textAlignment = NSTextAlignmentCenter;
+        return label;
+    } else {
+        return nil;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == SignupViewControllerSectionSecondaryInfo) {
+        return 50;
+    } else {
+        return 0;
     }
 }
 
