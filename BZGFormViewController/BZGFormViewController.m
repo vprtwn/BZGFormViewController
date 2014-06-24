@@ -387,7 +387,6 @@
 
 - (void)navigateToDestinationCell:(BZGTextFieldCell *)destinationCell
 {
-    [self.keyboardControl.currentCell resignFirstResponder];
     if ([[self.tableView visibleCells] containsObject:destinationCell]) {
         [destinationCell becomeFirstResponder];
     }
