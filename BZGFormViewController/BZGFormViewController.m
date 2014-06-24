@@ -159,8 +159,8 @@
     for (NSInteger s = cellIndexPath.section; s < [self.formCellsBySection count]; s++) {
         NSArray* formCellsInSection = [self formCellsInSection:s];
         
-        NSInteger startAt = (s == cellIndexPath.section) ? cellIndexPath.row + 1 : 0;
-        for (NSInteger r = startAt; r < [formCellsInSection count]; ++r) {
+        NSInteger startRow = (s == cellIndexPath.section) ? cellIndexPath.row + 1 : 0;
+        for (NSInteger r = startRow; r < [formCellsInSection count]; ++r) {
             UITableViewCell *cell = formCellsInSection[r];
             if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
                 return (BZGTextFieldCell *)cell;
@@ -178,8 +178,8 @@
     for (NSInteger s = cellIndexPath.section; s >= 0; s--) {
         NSArray* formCellsInSection = [self formCellsInSection:s];
         
-        NSInteger startAt = (s == cellIndexPath.section) ? cellIndexPath.row - 1 : [formCellsInSection count] - 1;
-        for (NSInteger r = startAt; r >= 0; r--) {
+        NSInteger startRow = (s == cellIndexPath.section) ? cellIndexPath.row - 1 : [formCellsInSection count] - 1;
+        for (NSInteger r = startRow; r >= 0; r--) {
             UITableViewCell *cell = formCellsInSection[r];
             if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
                 return (BZGTextFieldCell *)cell;
