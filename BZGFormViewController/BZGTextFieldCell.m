@@ -190,8 +190,14 @@
     }
 }
 
-- (BOOL)becomeFirstResponder {
+- (BOOL)becomeFirstResponder
+{
     return [self.textField becomeFirstResponder];
+}
+
+- (BOOL)resignFirstResponder
+{
+    return [self.textField resignFirstResponder];
 }
 
 @end

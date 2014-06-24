@@ -23,14 +23,21 @@ BZGTextFieldCell *cell3;
 SpecBegin(BZGFormViewController)
 
 beforeEach(^{
-    [super setUp];
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     formViewController = [[BZGFormViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    cell1 = [[BZGTextFieldCell alloc] init];
-    cell2 = [[BZGTextFieldCell alloc] init];
-    cell3 = [[BZGTextFieldCell alloc] init];
-    [formViewController addFormCells:[@[cell1, cell2] mutableCopy] atSection:1];
-    [formViewController addFormCells:[@[cell3] mutableCopy] atSection:2];
+    
+    cell1 = [OCMockObject partialMockForObject:[[BZGTextFieldCell alloc] init]];
+    cell2 = [OCMockObject partialMockForObject:[[BZGTextFieldCell alloc] init]];
+    cell3 = [OCMockObject partialMockForObject:[[BZGTextFieldCell alloc] init]];
+    [[(id)cell1 stub] resignFirstResponder];
+    [[(id)cell1 stub] becomeFirstResponder];
+    [[(id)cell2 stub] resignFirstResponder];
+    [[(id)cell2 stub] becomeFirstResponder];
+    [[(id)cell3 stub] resignFirstResponder];
+    [[(id)cell3 stub] becomeFirstResponder];
+    
+    [formViewController addFormCells:@[cell1, cell2] atSection:1];
+    [formViewController addFormCells:@[cell3] atSection:2];
     [formViewController.tableView reloadData];
     window.rootViewController = formViewController;
     [window makeKeyAndVisible];
@@ -89,18 +96,6 @@ describe(@"Setting form cells", ^{
             expect([formViewController.tableView numberOfRowsInSection:0]).to.equal(0);
             expect([formViewController.tableView numberOfRowsInSection:1]).to.equal(2);
             expect([formViewController.tableView numberOfRowsInSection:2]).to.equal(1);
-        });
-
-        it(@"should set the cell's UITextFieldDelegate to the form view controller", ^{
-            expect(cell1.textField.delegate).to.equal(formViewController);
-            expect(cell2.textField.delegate).to.equal(formViewController);
-            expect(cell3.textField.delegate).to.equal(formViewController);
-        });
-
-        it(@"should set the cell's BZGFormCellDelegate to the form view controller", ^{
-            expect(cell1.delegate).to.equal(formViewController);
-            expect(cell2.delegate).to.equal(formViewController);
-            expect(cell3.delegate).to.equal(formViewController);
         });
     });
 });
@@ -236,7 +231,7 @@ describe(@"isValid", ^{
         cell3.validationState = BZGValidationStateValid;
         expect(formViewController.isValid).to.equal(YES);
     });
-
+   
     it(@"should be valid when one cell is warning", ^{
         cell1.validationState = BZGValidationStateWarning;
         cell2.validationState = BZGValidationStateValid;
@@ -256,6 +251,70 @@ describe(@"isValid", ^{
         cell2.validationState = BZGValidationStateValid;
         cell3.validationState = BZGValidationStateValidating;
         expect(formViewController.isValid).to.equal(NO);
+    });
+});
+
+describe(@"prepareCell:", ^{
+    it(@"should set the cell's delegate to the BZGFormViewController", ^{
+        it(@"should set the cell's UITextFieldDelegate to the form view controller", ^{
+            [formViewController addFormCell:cell1 atSection:0];
+            expect(cell1.textField.delegate).to.equal(formViewController);
+        });
+        
+        it(@"should set the cell's BZGFormCellDelegate to the form view controller", ^{
+            [formViewController addFormCell:cell1 atSection:0];
+            expect(cell1.delegate).to.equal(formViewController);
+        });
+        
+        it(@"should raise an exception if the cell is not a BZGFormCell or BZGInfoCell", ^{
+            expect(^{
+                [formViewController addFormCell:(BZGFormCell *)[[UITableViewCell alloc] init] atSection:0];
+            }).to.raise(nil);
+        });
+    });
+});
+
+describe(@"insertFormCells:atIndexPath:", ^{
+    it(@"should insert the form cells into the section", ^{
+        BZGFormCell *cell4 = [[BZGFormCell alloc] init];
+        
+        [formViewController insertFormCells:@[cell3, cell4] atIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+        expect([formViewController formCellsInSection:1]).to.equal(@[cell1, cell3, cell4, cell2]);
+    });
+});
+
+describe(@"removeFormCellAtIndexPath:", ^{
+    it(@"should remove the form cell at the provided index path", ^{
+        [formViewController removeFormCellAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        
+        expect([formViewController formCellsInSection:1]).to.equal(@[cell2]);
+        expect([formViewController formCellsInSection:2]).to.equal(@[cell3]);
+    });
+});
+
+describe(@"removeFormCellsInSection:", ^{
+    it(@"should remove the form cell at the providedindex path", ^{
+        [formViewController removeFormCellsInSection:1];
+        
+        expect([formViewController formCellsInSection:1]).to.equal(@[]);
+    });
+});
+
+describe(@"removeAllFormCells", ^{
+    it(@"should remove the form cell at the providedindex path", ^{
+        [formViewController removeAllFormCells];
+        
+        expect([formViewController allFormCells]).to.equal(@[]);
+    });
+});
+
+describe(@"indexPathOfCell:", ^{
+    it(@"should return an NSIndexPath representing the row and section that the cell is in", ^{
+        expect([formViewController indexPathOfCell:cell3]).to.equal([NSIndexPath indexPathForRow:0 inSection:2]);
+    });
+    
+    it(@"should return nil if the cell is not in the formViewController", ^{
+        expect([formViewController indexPathOfCell:[[BZGFormCell alloc] init]]).to.beNil();
     });
 });
 

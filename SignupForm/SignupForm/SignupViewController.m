@@ -30,11 +30,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     [self configurePhoneCell];
     [self configurePasswordCell];
 
-    [self addFormCells:[NSMutableArray arrayWithArray:@[self.usernameCell,
-                                                        self.emailCell,
-                                                        self.phoneCell,
-                                                        self.passwordCell]]
-             atSection:0];
+    [self addFormCells:@[self.usernameCell, self.emailCell, self.phoneCell, self.passwordCell] atSection:0];
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
     self.showsKeyboardControl = YES;
     self.title = @"BZGFormViewController";

@@ -68,9 +68,63 @@
  */
 - (BZGTextFieldCell *)firstInvalidFormCell;
 
-- (NSMutableArray *)formCellsInSection:(NSInteger)section;
-- (void)addFormCells:(NSMutableArray *)formCells atSection:(NSInteger)section;
-- (void)insertFormCells:(NSMutableArray *)formCells atIndexPath:(NSIndexPath *)indexPath;
+/**
+ * Returns an array of cells in the section, ordered by row
+ *
+ * @return An array of cells in the section, ordered by row
+ */
+- (NSArray *)formCellsInSection:(NSInteger)section;
+
+/**
+ * Appends the form cell at the end of the section
+ *
+ * @param formCell A BZGFormCell
+ * @param section A form section
+ */
+- (void)addFormCell:(BZGFormCell *)formCell atSection:(NSInteger)section;
+
+/**
+ * Appends the form cells at the end of the section
+ *
+ * @param formCells An array of BZGFormCells
+ * @param section A form section
+ */
+- (void)addFormCells:(NSArray *)formCells atSection:(NSInteger)section;
+
+/**
+ * Inserts the form cells into the section, starting at the specified index path
+ *
+ * @param formCells An array of BZGFormCells
+ * @param indexPath An index path representing the section and row for insertion
+ */
+- (void)insertFormCells:(NSArray *)formCells atIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ * Removes the form cell at the specified index path
+ *
+ * @param indexPath An index path representing the section and row for removal
+ */
+- (void)removeFormCellAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ * Removes all form cells in the specified section
+ *
+ * @param section A form section
+ */
+- (void)removeFormCellsInSection:(NSInteger)section;
+
+/**
+ * Removes all form cells from all sections
+ */
+- (void)removeAllFormCells;
+
+/**
+ * Returns an index path for the cell in the form
+ *
+ * @param cell A BZGFormCell that's in the form
+ * @return An index path representing the row and section of the cell in the form
+ */
+- (NSIndexPath *)indexPathOfCell:(BZGFormCell *)cell;
 
 
 @end

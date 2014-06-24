@@ -294,10 +294,10 @@
 
     BZGTextFieldCell *nextCell = [self nextFormCell:cell];
     if (!nextCell) {
-        [cell.textField resignFirstResponder];
+        [cell resignFirstResponder];
     }
     else {
-        [nextCell.textField becomeFirstResponder];
+        [nextCell becomeFirstResponder];
     }
 
     [self updateInfoCellBelowFormCell:cell];
@@ -402,7 +402,7 @@
 
 - (void)doneButtonPressed
 {
-    [self.keyboardControl.currentCell.textField resignFirstResponder];
+    [self.keyboardControl.currentCell resignFirstResponder];
 }
 
 #pragma mark - UIScrollView Methods
@@ -425,7 +425,7 @@
     [self addFormCells:formCells atSection:self.formSection];
 }
 
-- (NSMutableArray *)formCells
+- (NSArray *)formCells
 {
     return [self formCellsInSection:self.formSection];
 }
@@ -445,19 +445,24 @@
 
 - (void)prepareCell:(BZGFormCell *)cell
 {
-    if (![cell isKindOfClass:[BZGFormCell class]]) { return; }
-    
-    if (![cell isKindOfClass:[BZGFormCell class]]) {
+    if ([cell isKindOfClass:[BZGFormCell class]]) {
+        cell.delegate = self;
+        
+        if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
+            ((BZGTextFieldCell *)cell).textField.delegate = self;
+        }
+    } else if (![cell isKindOfClass:[BZGInfoCell class]]) {
         [NSException raise:NSInternalInconsistencyException
-                    format:@"%@ only accepts cells that subclass BZGFormCell", NSStringFromSelector(_cmd)];
-    }
-    cell.delegate = self;
-    if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
-        ((BZGTextFieldCell *)cell).textField.delegate = self;
+                    format:@"BZGFormViewController only accepts cells that subclass BZGFormCell or BZGInfoCell"];
     }
 }
 
-- (NSMutableArray *)formCellsInSection:(NSInteger)section
+- (NSArray *)formCellsInSection:(NSInteger)section
+{
+    return [[self mutableFormCellsInSection:section] copy];
+}
+
+- (NSMutableArray *)mutableFormCellsInSection:(NSInteger)section
 {
     if ([self.formCellsBySection count] > section) {
         return [self.formCellsBySection objectAtIndex:section];
@@ -466,13 +471,18 @@
     }
 }
 
-- (void)addFormCells:(NSMutableArray *)formCells atSection:(NSInteger)section
+- (void)addFormCell:(BZGFormCell *)formCell atSection:(NSInteger)section
+{
+    [self addFormCells:@[formCell] atSection:section];
+}
+
+- (void)addFormCells:(NSArray *)formCells atSection:(NSInteger)section
 {
     NSInteger formCellCount = [[self formCellsInSection:section] count];
     [self insertFormCells:formCells atIndexPath:[NSIndexPath indexPathForRow:formCellCount inSection:section]];
 }
 
-- (void)insertFormCells:(NSMutableArray *)formCells atIndexPath:(NSIndexPath *)indexPath
+- (void)insertFormCells:(NSArray *)formCells atIndexPath:(NSIndexPath *)indexPath
 {
     for (BZGFormCell *cell in formCells) {
         [self prepareCell:cell];
@@ -488,7 +498,7 @@
 
 - (void)removeFormCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableArray *formCells = [self formCellsInSection:indexPath.section];
+    NSMutableArray *formCells = [self mutableFormCellsInSection:indexPath.section];
     if (formCells) {
         [formCells removeObjectAtIndex:indexPath.row];
     }

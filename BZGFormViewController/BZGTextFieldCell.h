@@ -48,4 +48,18 @@
  */
 + (BZGTextFieldCell *)parentCellForTextField:(UITextField *)textField;
 
+/**
+ * Notifies the receiver that it is about to become first responder in its window.
+ *
+ * @return YES if the receiver accepts first-responder status or NO if it refuses this status. The default implementation returns YES, accepting first responder status.
+ */
+- (BOOL)becomeFirstResponder;
+
+/**
+ * Notifies the receiver that it has been asked to relinquish its status as first responder in its window.
+ *
+ * @return YES, resigning first responder status.
+ */
+- (BOOL)resignFirstResponder;
+
 @end
