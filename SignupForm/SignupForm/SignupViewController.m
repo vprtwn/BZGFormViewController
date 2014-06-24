@@ -13,6 +13,7 @@
 #import "Constants.h"
 
 static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9crlc28";
+static NSInteger const FORM_CELL_SECTION = 0;
 
 @interface SignupViewController ()
 
@@ -30,7 +31,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     [self configurePhoneCell];
     [self configurePasswordCell];
 
-    [self addFormCells:@[self.usernameCell, self.emailCell, self.phoneCell, self.passwordCell] atSection:0];
+    [self addFormCells:@[self.usernameCell, self.emailCell, self.phoneCell, self.passwordCell] atSection:FORM_CELL_SECTION];
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
     self.showsKeyboardControl = YES;
     self.title = @"BZGFormViewController";
@@ -136,7 +137,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (section == FORM_CELL_SECTION) {
         return [super tableView:tableView numberOfRowsInSection:section];
     } else {
         return 1;
@@ -145,7 +146,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
+    if (indexPath.section == FORM_CELL_SECTION) {
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     } else {
         return self.signupCell;
@@ -182,7 +183,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
+    if (indexPath.section == FORM_CELL_SECTION) {
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     } else {
         return 44;
