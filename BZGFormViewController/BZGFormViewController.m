@@ -105,7 +105,7 @@
     // otherwise, add the cell's info cell to the table view
     NSIndexPath *infoCellIndexPath = [NSIndexPath indexPathForRow:cellIndexPath.row + 1
                                                         inSection:cellIndexPath.section];
-    [self insertFormCells:@[cell.infoCell] atIndexPath:infoCellIndexPath];
+    [self insertFormCells:[@[cell.infoCell] mutableCopy] atIndexPath:infoCellIndexPath];
     [self.tableView insertRowsAtIndexPaths:@[infoCellIndexPath]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -392,12 +392,11 @@
         [destinationCell.textField becomeFirstResponder];
     }
     else {
-        NSUInteger row = [self indexPathOfCell:destinationCell].row;
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:destinationCell.formViewSection];
+        NSIndexPath *cellIndexPath = [self indexPathOfCell:destinationCell];
         self.didEndScrollingBlock = ^{
             [destinationCell.textField becomeFirstResponder];
         };
-        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        [self.tableView scrollToRowAtIndexPath:cellIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
 }
 
@@ -422,13 +421,13 @@
 
 - (void)setFormCells:(NSMutableArray *)formCells
 {
-    self.formCellsBySection = [NSMutableArray array];
+    [self removeAllFormCells];
     [self addFormCells:formCells atSection:self.formSection];
 }
 
 - (NSMutableArray *)formCells
 {
-    [self formCellsInSection:self.formSection];
+    return [self formCellsInSection:self.formSection];
 }
 
 - (NSArray *)allFormCells
@@ -463,7 +462,7 @@
     if ([self.formCellsBySection count] > section) {
         return [self.formCellsBySection objectAtIndex:section];
     } else {
-        return @[];
+        return [NSMutableArray array];
     }
 }
 
@@ -489,7 +488,22 @@
 
 - (void)removeFormCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[self formCellsInSection:indexPath.section] removeObjectAtIndex:indexPath.row];
+    NSMutableArray *formCells = [self formCellsInSection:indexPath.section];
+    if (formCells) {
+        [formCells removeObjectAtIndex:indexPath.row];
+    }
+}
+
+- (void)removeFormCellsInSection:(NSInteger)section
+{
+    if ([self.formCellsBySection count] > section) {
+        self.formCellsBySection[section] = [NSMutableArray array];
+    }
+}
+
+- (void)removeAllFormCells
+{
+    self.formCellsBySection = [NSMutableArray array];
 }
 
 - (NSIndexPath *)indexPathOfCell:(BZGFormCell *)cell

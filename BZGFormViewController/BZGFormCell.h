@@ -28,14 +28,9 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 /// The cell's delegate
 @property (strong, nonatomic) id<BZGFormCellDelegate> delegate;
 
-// The BZGFormViewController section that the cell should be placed into
-@property (assign, nonatomic) NSInteger formViewSection;
-
 @end
 
 @protocol BZGFormCellDelegate <NSObject>
-
-- (id)initWithFormViewSection:(NSInteger)formViewSection;
 
 /**
  * Tells the delegate that the form cell changed its validation state.

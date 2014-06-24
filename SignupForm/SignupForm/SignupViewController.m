@@ -30,11 +30,11 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     [self configurePhoneCell];
     [self configurePasswordCell];
 
-    self.formCells = [NSMutableArray arrayWithArray:@[self.usernameCell,
-                                                      self.emailCell,
-                                                      self.phoneCell,
-                                                      self.passwordCell]];
-    self.formSection = 0;
+    [self addFormCells:[NSMutableArray arrayWithArray:@[self.usernameCell,
+                                                        self.emailCell,
+                                                        self.phoneCell,
+                                                        self.passwordCell]]
+             atSection:0];
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
     self.showsKeyboardControl = YES;
     self.title = @"BZGFormViewController";
@@ -140,7 +140,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == self.formSection) {
+    if (section == 0) {
         return [super tableView:tableView numberOfRowsInSection:section];
     } else {
         return 1;
@@ -149,7 +149,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == self.formSection) {
+    if (indexPath.section == 0) {
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     } else {
         return self.signupCell;
@@ -186,7 +186,7 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == self.formSection) {
+    if (indexPath.section == 0) {
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     } else {
         return 44;

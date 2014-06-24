@@ -11,11 +11,6 @@
 
 - (id)init
 {
-    return [self initWithFormViewSection:0];
-}
-
-- (id)initWithFormViewSection:(NSInteger)formViewSection
-{
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     if (self) {
         // Hide default elements
@@ -27,7 +22,6 @@
         self.backgroundColor = BZG_BACKGROUND_COLOR;
         
         _validationState = BZGValidationStateNone;
-        _formViewSection = formViewSection;
     }
     return self;
 }
