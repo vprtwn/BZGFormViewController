@@ -389,12 +389,12 @@
 {
     [self.keyboardControl.currentCell resignFirstResponder];
     if ([[self.tableView visibleCells] containsObject:destinationCell]) {
-        [destinationCell.textField becomeFirstResponder];
+        [destinationCell becomeFirstResponder];
     }
     else {
         NSIndexPath *cellIndexPath = [self indexPathOfCell:destinationCell];
         self.didEndScrollingBlock = ^{
-            [destinationCell.textField becomeFirstResponder];
+            [destinationCell becomeFirstResponder];
         };
         [self.tableView scrollToRowAtIndexPath:cellIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
