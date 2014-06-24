@@ -67,7 +67,7 @@ After you've configured your cells, add them into the desired section
 ```
 
 ## Custom sections
-BZGFormViewController will only manage sections containing form cells. If you'd like to have other sections containing custom cells, you'll have to manage them yourself via the `UITableViewDataSource` methods. Be sure to use the values from `super` for the table view's form section.
+`BZGFormViewController` will only manage sections containing form cells. If you'd like to have other sections containing custom cells, you'll have to manage them yourself via the `UITableViewDataSource` methods. Be sure to use the values from `super` for the table view's form section.
 ```objc
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
