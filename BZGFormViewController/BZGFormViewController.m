@@ -20,6 +20,7 @@
 @property (nonatomic, strong) BZGKeyboardControl *keyboardControl;
 @property (nonatomic, copy) void (^didEndScrollingBlock)();
 @property (nonatomic, strong) NSMutableArray *formCellsBySection;
+@property (nonatomic, assign) NSArray *allFormCells;
 
 @end
 
@@ -431,15 +432,18 @@
 
 - (NSArray *)allFormCells
 {
-    NSMutableArray *allFormCells = [NSMutableArray array];
+    if (!_allFormCells) {
+        NSMutableArray *allFormCells = [NSMutableArray array];
     
-    for (NSArray *section in self.formCellsBySection) {
-        for (BZGFormCell *sectionCell in section) {
-            [allFormCells addObject:sectionCell];
+        for (NSArray *section in self.formCellsBySection) {
+            for (BZGFormCell *sectionCell in section) {
+                [allFormCells addObject:sectionCell];
+            }
         }
+        self.allFormCells = allFormCells;
     }
     
-    return allFormCells;
+    return _allFormCells;
 }
 
 - (void)prepareCell:(BZGFormCell *)cell
@@ -483,6 +487,7 @@
 
 - (void)insertFormCells:(NSArray *)formCells atIndexPath:(NSIndexPath *)indexPath
 {
+    self.allFormCells = nil;
     for (BZGFormCell *cell in formCells) {
         [self prepareCell:cell];
     }
@@ -497,6 +502,7 @@
 
 - (void)removeFormCellAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.allFormCells = nil;
     NSMutableArray *formCells = [self mutableFormCellsInSection:indexPath.section];
     if (formCells) {
         [formCells removeObjectAtIndex:indexPath.row];
@@ -505,6 +511,7 @@
 
 - (void)removeFormCellsInSection:(NSInteger)section
 {
+    self.allFormCells = nil;
     if ([self.formCellsBySection count] > section) {
         self.formCellsBySection[section] = [NSMutableArray array];
     }
@@ -512,6 +519,7 @@
 
 - (void)removeAllFormCells
 {
+    self.allFormCells = nil;
     self.formCellsBySection = [NSMutableArray array];
 }
 
