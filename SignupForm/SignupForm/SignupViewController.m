@@ -14,6 +14,13 @@
 
 static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9crlc28";
 
+typedef NS_ENUM(NSInteger, SignupViewControllerSection) {
+    SignupViewControllerSectionPrimaryInfo,
+    SignupViewControllerSectionSecondaryInfo,
+    SignupViewControllerSectionSignUpButton,
+    SignupViewControllerSectionCount
+};
+
 @interface SignupViewController ()
 
 @property (strong, nonatomic) UITableViewCell *signupCell;
@@ -30,11 +37,8 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
     [self configurePhoneCell];
     [self configurePasswordCell];
 
-    self.formCells = [NSMutableArray arrayWithArray:@[self.usernameCell,
-                                                      self.emailCell,
-                                                      self.phoneCell,
-                                                      self.passwordCell]];
-    self.formSection = 0;
+    [self addFormCells:@[self.usernameCell, self.emailCell, self.passwordCell] atSection:SignupViewControllerSectionPrimaryInfo];
+    [self addFormCells:@[self.phoneCell] atSection:SignupViewControllerSectionSecondaryInfo];
     self.emailValidator = [BZGMailgunEmailValidator validatorWithPublicKey:MAILGUN_PUBLIC_KEY];
     self.showsKeyboardControl = YES;
     self.title = @"BZGFormViewController";
@@ -135,24 +139,24 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return SignupViewControllerSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == self.formSection) {
-        return [super tableView:tableView numberOfRowsInSection:section];
-    } else {
+    if (section == SignupViewControllerSectionSignUpButton) {
         return 1;
+    } else {
+        return [super tableView:tableView numberOfRowsInSection:section];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == self.formSection) {
-        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    } else {
+    if (indexPath.section == SignupViewControllerSectionSignUpButton) {
         return self.signupCell;
+    } else {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
 }
 
@@ -186,10 +190,31 @@ static NSString *const MAILGUN_PUBLIC_KEY = @"pubkey-501jygdalut926-6mb1ozo8ay9c
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == self.formSection) {
-        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
-    } else {
+    if (indexPath.section == SignupViewControllerSectionSignUpButton) {
         return 44;
+    } else {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == SignupViewControllerSectionSecondaryInfo) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
+        label.text = @"Secondary Info";
+        label.textAlignment = NSTextAlignmentCenter;
+        return label;
+    } else {
+        return nil;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == SignupViewControllerSectionSecondaryInfo) {
+        return 50;
+    } else {
+        return 0;
     }
 }
 

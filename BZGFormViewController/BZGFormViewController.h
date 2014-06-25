@@ -15,10 +15,10 @@
 @property (nonatomic, strong) UITableView *tableView;
 
 /// The form cells used to populate the table view's form section.
-@property (nonatomic, strong) NSMutableArray *formCells;
+@property (nonatomic, strong) NSMutableArray *formCells __deprecated;
 
-/// The table view section where the form should be displayed.
-@property (nonatomic, assign) NSUInteger formSection;
+/// The table view section where the form should be displayed. (Use 
+@property (nonatomic, assign) NSUInteger formSection __deprecated;
 
 /// A property indicating whether or not the keyboard should display an input accessory view with previous, next, and done buttons.
 @property (nonatomic, assign) BOOL showsKeyboardControl;
@@ -67,6 +67,64 @@
  * @return The first form field cell with state 'BZGValidationStateInvalid' or nil if no cell is found.
  */
 - (BZGTextFieldCell *)firstInvalidFormCell;
+
+/**
+ * Returns an array of cells in the section, ordered by row
+ *
+ * @return An array of cells in the section, ordered by row
+ */
+- (NSArray *)formCellsInSection:(NSInteger)section;
+
+/**
+ * Appends the form cell at the end of the section
+ *
+ * @param formCell A BZGFormCell
+ * @param section A form section
+ */
+- (void)addFormCell:(BZGFormCell *)formCell atSection:(NSInteger)section;
+
+/**
+ * Appends the form cells at the end of the section
+ *
+ * @param formCells An array of BZGFormCells
+ * @param section A form section
+ */
+- (void)addFormCells:(NSArray *)formCells atSection:(NSInteger)section;
+
+/**
+ * Inserts the form cells into the section, starting at the specified index path
+ *
+ * @param formCells An array of BZGFormCells
+ * @param indexPath An index path representing the section and row for insertion
+ */
+- (void)insertFormCells:(NSArray *)formCells atIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ * Removes the form cell at the specified index path
+ *
+ * @param indexPath An index path representing the section and row for removal
+ */
+- (void)removeFormCellAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ * Removes all form cells in the specified section
+ *
+ * @param section A form section
+ */
+- (void)removeFormCellsInSection:(NSInteger)section;
+
+/**
+ * Removes all form cells from all sections
+ */
+- (void)removeAllFormCells;
+
+/**
+ * Returns an index path for the cell in the form
+ *
+ * @param cell A BZGFormCell that's in the form
+ * @return An index path representing the row and section of the cell in the form
+ */
+- (NSIndexPath *)indexPathOfCell:(BZGFormCell *)cell;
 
 
 @end

@@ -19,8 +19,9 @@
         self.imageView.hidden = YES;
 
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.validationState = BZGValidationStateNone;
         self.backgroundColor = BZG_BACKGROUND_COLOR;
+        
+        _validationState = BZGValidationStateNone;
     }
     return self;
 }

@@ -58,28 +58,25 @@ self.usernameCell.shouldChangeTextBlock = ^BOOL(BZGTextFieldCell *cell, NSString
 
 You should use `BZGTextFieldCell`'s `shouldChangeTextBlock`, `didBeginEditingBlock`, `didEndEditingBlock`, and `shouldReturnBlock` for validation and any other logic you would usually put in `UITextFieldDelegate` methods.
 
-After you've configured your cells, set `formCells` to an array containing your form's cells.
+After you've configured your cells, add them into the desired section
 ```objc
-self.formCells = [NSMutableArray arrayWithArray:@[self.usernameCell,
-                                                  self.emailCell,
-                                                  self.passwordCell]];
+[self addFormCells:@[self.usernameCell, self.emailCell, self.passwordCell] 
+         atSection:0];
+[self addFormCells:@[self.phoneCell] atSection:1];
+
 ```
 
 ## Custom sections
-`BZGFormViewController` will only manage one section of your table view. If you want to use a table view with multiple sections, you should specify the section the form view controller should manage.
-```objc
-self.formSection = 0
-```
-You'll also need to override the `UITableViewDataSource` methods. Be sure to use the values from `super` for the table view's form section.
+`BZGFormViewController` will only manage sections containing form cells. If you'd like to have other sections containing custom cells, you'll have to manage them yourself via the `UITableViewDataSource` methods. Be sure to use the values from `super` for the table view's form section.
 ```objc
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == self.formSection) {
+    if (section > 1) {
         return [super tableView:tableView numberOfRowsInSection:section];
     } else {
         return 1;
@@ -88,7 +85,7 @@ You'll also need to override the `UITableViewDataSource` methods. Be sure to use
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == self.formSection) {
+    if (indexPath.section > 1) {
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     } else {
         return self.otherCell;
