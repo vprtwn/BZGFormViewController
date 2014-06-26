@@ -20,7 +20,7 @@
 @property (nonatomic, strong) BZGKeyboardControl *keyboardControl;
 @property (nonatomic, copy) void (^didEndScrollingBlock)();
 @property (nonatomic, strong) NSMutableArray *formCellsBySection;
-@property (nonatomic, assign) NSArray *allFormCells;
+@property (nonatomic, strong) NSArray *allFormCells;
 
 @end
 
@@ -57,7 +57,7 @@
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = BZG_TABLEVIEW_BACKGROUND_COLOR;
+    self.tableView.backgroundColor = BZG_TABLEVIEW_BACK GROUND_COLOR;
 
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
     contentView.autoresizesSubviews = YES;
@@ -440,7 +440,7 @@
                 [allFormCells addObject:sectionCell];
             }
         }
-        self.allFormCells = allFormCells;
+        self.allFormCells = [allFormCells copy];
     }
     
     return _allFormCells;
