@@ -57,7 +57,7 @@
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = BZG_TABLEVIEW_BACK GROUND_COLOR;
+    self.tableView.backgroundColor = BZG_TABLEVIEW_BACKGROUND_COLOR;
 
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
     contentView.autoresizesSubviews = YES;
