@@ -20,7 +20,7 @@
 @property (nonatomic, strong) BZGKeyboardControl *keyboardControl;
 @property (nonatomic, copy) void (^didEndScrollingBlock)();
 @property (nonatomic, strong) NSMutableArray *formCellsBySection;
-@property (nonatomic, assign) NSArray *allFormCells;
+@property (nonatomic, strong) NSArray *allFormCells;
 
 @end
 
@@ -440,7 +440,7 @@
                 [allFormCells addObject:sectionCell];
             }
         }
-        self.allFormCells = allFormCells;
+        self.allFormCells = [allFormCells copy];
     }
     
     return _allFormCells;
