@@ -149,6 +149,17 @@ describe(@"updateInfoCellBelowFormCell", ^{
         expect(infoCell).to.beKindOf([BZGInfoCell class]);
         expect(((BZGInfoCell *)infoCell).infoLabel.text).to.equal(@"cell3 info text");
     });
+    
+    it(@"should never show an info cell if text has not been provided", ^{
+        [cell3.infoCell setText:@""];
+        cell3.validationState = BZGValidationStateWarning;
+        [formViewController updateInfoCellBelowFormCell:cell3];
+        expect([formViewController.tableView numberOfRowsInSection:2]).to.equal(1);
+        [cell3.infoCell setText:nil];
+        cell3.validationState = BZGValidationStateInvalid;
+        [formViewController updateInfoCellBelowFormCell:cell3];
+        expect([formViewController.tableView numberOfRowsInSection:2]).to.equal(1);
+    });
 
     it(@"should not show an info cell when the field has state BZGValidationStateValid", ^{
         [cell1.infoCell setText:@"cell1 info text"];
