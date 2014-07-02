@@ -69,6 +69,13 @@
 - (BZGTextFieldCell *)firstInvalidFormCell;
 
 /**
+ * Returns a two-dimensional array of all of the cells, ordered by section and row.
+ *
+ * @return A two-dimensional array of all of the cells, ordered by section and row.
+ */
+- (NSArray *)allFormCells;
+
+/**
  * Returns an array of cells in the section, ordered by row
  *
  * @return An array of cells in the section, ordered by row

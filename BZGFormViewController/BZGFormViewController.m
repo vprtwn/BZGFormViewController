@@ -20,7 +20,7 @@
 @property (nonatomic, strong) BZGKeyboardControl *keyboardControl;
 @property (nonatomic, copy) void (^didEndScrollingBlock)();
 @property (nonatomic, strong) NSMutableArray *formCellsBySection;
-@property (nonatomic, strong) NSArray *allFormCells;
+@property (nonatomic, strong) NSArray *allFormCellsFlattened;
 
 @end
 
@@ -144,7 +144,7 @@
 
 - (BZGTextFieldCell *)firstInvalidFormCell
 {
-    for (UITableViewCell *cell in [self allFormCells]) {
+    for (UITableViewCell *cell in [self allFormCellsFlattened]) {
         if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
             if (((BZGTextFieldCell *)cell).validationState == BZGValidationStateInvalid) {
                 return (BZGTextFieldCell *)cell;
@@ -312,7 +312,7 @@
 - (void)formCell:(BZGFormCell *)formCell didChangeValidationState:(BZGValidationState)validationState
 {
     BOOL isValid = YES;
-    for (BZGFormCell *cell in [self allFormCells]) {
+    for (BZGFormCell *cell in [self allFormCellsFlattened]) {
         if ([cell isKindOfClass:[BZGFormCell class]]) {
             isValid = isValid &&
             (cell.validationState == BZGValidationStateValid ||
@@ -434,18 +434,12 @@
 
 - (NSArray *)allFormCells
 {
-    if (!_allFormCells) {
-        NSMutableArray *allFormCells = [NSMutableArray array];
-    
-        for (NSArray *section in self.formCellsBySection) {
-            for (BZGFormCell *sectionCell in section) {
-                [allFormCells addObject:sectionCell];
-            }
-        }
-        self.allFormCells = [allFormCells copy];
-    }
-    
-    return _allFormCells;
+    return [self.formCellsBySection copy];
+}
+
+- (NSArray *)allFormCellsFlattened
+{
+    return [[self allFormCells] valueForKeyPath: @"@unionOfArrays.self"];
 }
 
 - (void)prepareCell:(BZGFormCell *)cell
@@ -489,7 +483,7 @@
 
 - (void)insertFormCells:(NSArray *)formCells atIndexPath:(NSIndexPath *)indexPath
 {
-    self.allFormCells = nil;
+    self.allFormCellsFlattened = nil;
     for (BZGFormCell *cell in formCells) {
         [self prepareCell:cell];
     }
@@ -504,7 +498,7 @@
 
 - (void)removeFormCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.allFormCells = nil;
+    self.allFormCellsFlattened = nil;
     NSMutableArray *formCells = [self mutableFormCellsInSection:indexPath.section];
     if (formCells) {
         [formCells removeObjectAtIndex:indexPath.row];
@@ -513,7 +507,7 @@
 
 - (void)removeFormCellsInSection:(NSInteger)section
 {
-    self.allFormCells = nil;
+    self.allFormCellsFlattened = nil;
     if ([self.formCellsBySection count] > section) {
         self.formCellsBySection[section] = [NSMutableArray array];
     }
@@ -521,7 +515,7 @@
 
 - (void)removeAllFormCells
 {
-    self.allFormCells = nil;
+    self.allFormCellsFlattened = nil;
     self.formCellsBySection = [NSMutableArray array];
 }
 
