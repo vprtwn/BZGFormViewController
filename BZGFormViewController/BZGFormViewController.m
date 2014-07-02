@@ -130,7 +130,6 @@
 - (void)updateInfoCellBelowFormCell:(BZGTextFieldCell *)cell
 {
     if (!cell.textField.editing &&
-        cell.infoCell.infoLabel.text &&
         [cell.infoCell.infoLabel.text length] &&
         (cell.validationState == BZGValidationStateInvalid ||
          cell.validationState == BZGValidationStateWarning)) {
