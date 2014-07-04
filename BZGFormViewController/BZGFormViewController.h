@@ -65,6 +65,14 @@
  */
 - (BZGTextFieldCell *)previousFormCell:(BZGTextFieldCell *)cell;    
 
+
+/**
+ * Scrolls to and makes a destination cell the first responder.
+ *
+ * @param destinationCell The destination cell.
+ */
+- (void)navigateToDestinationCell:(BZGTextFieldCell *)destinationCell;
+
 /**
  * Returns the first invalid form field cell.
  *
