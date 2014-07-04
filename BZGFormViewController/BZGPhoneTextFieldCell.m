@@ -5,6 +5,7 @@
 //
 
 #import "BZGPhoneTextFieldCell.h"
+#import "NSError+BZGFormViewController.h"
 
 #import <libPhoneNumber-iOS/NBAsYouTypeFormatter.h>
 #import <libPhoneNumber-iOS/NBPhoneNumberUtil.h>
@@ -75,11 +76,13 @@
             isPossibleNumber = [self.phoneUtil isPossibleNumber:phoneNumber error:&error];
         }
         self.validationState = (error || !isPossibleNumber) ? BZGValidationStateInvalid : BZGValidationStateValid;
+        self.validationError = error ? [NSError bzg_errorWithDescription:self.invalidText] : nil;
     }
     else {
         self.validationState = BZGValidationStateInvalid;
+        self.validationError = [NSError bzg_errorWithDescription:self.invalidText];
     }
-    [self.infoCell setText:self.invalidText];
+
     return NO;
 }
 

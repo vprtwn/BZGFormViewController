@@ -6,6 +6,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BZGFormCell.h"
+#import "NSError+BZGFormViewController.h"
 
 @class BZGInfoCell, BZGTextFieldCell, BZGPhoneTextFieldCell;
 

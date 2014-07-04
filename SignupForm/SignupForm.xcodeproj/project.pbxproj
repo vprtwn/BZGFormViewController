@@ -11,6 +11,7 @@
 		3A1F56A718F388B40090E732 /* BZGKeyboardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F56A618F388B40090E732 /* BZGKeyboardControl.m */; };
 		3A1F56A918F432F90090E732 /* BZGKeyboardControlSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F56A818F432F90090E732 /* BZGKeyboardControlSpecs.m */; };
 		799AEBE944DD4B758103BA7E /* libPods-SignupFormTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */; };
+		8CE100451965E4DD00287E0B /* NSError+BZGFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE100441965E4DD00287E0B /* NSError+BZGFormViewController.m */; };
 		EB102241190B078E00F973F0 /* BZGPhoneTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB102240190B078E00F973F0 /* BZGPhoneTextFieldCell.m */; };
 		EB18C91A18DE628500F23064 /* BZGFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB18C91918DE628500F23064 /* BZGFormCell.m */; };
 		EB18C91C18DE62BC00F23064 /* BZGFormCellSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = EB18C91B18DE62BC00F23064 /* BZGFormCellSpecs.m */; };
@@ -52,6 +53,8 @@
 		3A1F56A618F388B40090E732 /* BZGKeyboardControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGKeyboardControl.m; path = ../../BZGFormViewController/BZGKeyboardControl.m; sourceTree = "<group>"; };
 		3A1F56A818F432F90090E732 /* BZGKeyboardControlSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGKeyboardControlSpecs.m; path = ../../BZGFormViewControllerTests/BZGKeyboardControlSpecs.m; sourceTree = "<group>"; };
 		51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SignupFormTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CE100431965E4DD00287E0B /* NSError+BZGFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+BZGFormViewController.h"; path = "../../BZGFormViewController/NSError+BZGFormViewController.h"; sourceTree = "<group>"; };
+		8CE100441965E4DD00287E0B /* NSError+BZGFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+BZGFormViewController.m"; path = "../../BZGFormViewController/NSError+BZGFormViewController.m"; sourceTree = "<group>"; };
 		90F90CF32A864DEC854302D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB10223F190B078E00F973F0 /* BZGPhoneTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGPhoneTextFieldCell.h; path = ../../BZGFormViewController/BZGPhoneTextFieldCell.h; sourceTree = "<group>"; };
 		EB102240190B078E00F973F0 /* BZGPhoneTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGPhoneTextFieldCell.m; path = ../../BZGFormViewController/BZGPhoneTextFieldCell.m; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				EB59ED6A180B2F0800DAA992 /* BZGFormViewController.h */,
 				EB59ED6B180B2F0800DAA992 /* BZGFormViewController.m */,
 				EBDC9F3F18763ACF002EB25F /* Constants.h */,
+				8CE100431965E4DD00287E0B /* NSError+BZGFormViewController.h */,
+				8CE100441965E4DD00287E0B /* NSError+BZGFormViewController.m */,
 			);
 			name = BZGFormViewController;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				EB59ED6C180B2F0800DAA992 /* BZGFormViewController.m in Sources */,
 				EB59ED63180B2DB100DAA992 /* BZGTextFieldCell.m in Sources */,
 				EB59ED64180B2DB100DAA992 /* BZGInfoCell.m in Sources */,
+				8CE100451965E4DD00287E0B /* NSError+BZGFormViewController.m in Sources */,
 				3A1F56A718F388B40090E732 /* BZGKeyboardControl.m in Sources */,
 				EB83D531180B2CA9001037F5 /* AppDelegate.m in Sources */,
 				EB83D52D180B2CA9001037F5 /* main.m in Sources */,
