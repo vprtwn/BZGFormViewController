@@ -450,7 +450,11 @@
 
 - (NSArray *)allFormCellsFlattened
 {
-    return [[self allFormCells] valueForKeyPath: @"@unionOfArrays.self"];
+    NSMutableArray *flattenedCellArray = [[NSMutableArray alloc] init];
+    for (NSMutableArray *cellArray in self.allFormCells) {
+        [flattenedCellArray addObjectsFromArray:cellArray];
+    }
+    return flattenedCellArray;
 }
 
 - (void)prepareCell:(BZGFormCell *)cell
