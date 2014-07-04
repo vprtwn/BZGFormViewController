@@ -153,16 +153,26 @@
 
 #pragma mark - Finding cells
 
-- (BZGTextFieldCell *)firstInvalidFormCell
+- (BZGTextFieldCell *)firstFormCellWithValidationState:(BZGValidationState)validationState
 {
     for (UITableViewCell *cell in [self allFormCellsFlattened]) {
         if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
-            if (((BZGTextFieldCell *)cell).validationState == BZGValidationStateInvalid) {
-                return (BZGTextFieldCell *)cell;
+            if (((BZGTextFieldCell *)cell).validationState == validationState) {
+                return cell;
             }
         }
     }
     return nil;
+}
+
+- (BZGTextFieldCell *)firstInvalidFormCell
+{
+    return [self firstFormCellWithValidationState:BZGValidationStateInvalid];
+}
+
+- (BZGTextFieldCell *)firstWarningFormCell
+{
+    return [self firstFormCellWithValidationState:BZGValidationStateWarning];
 }
 
 - (BZGTextFieldCell *)nextFormCell:(BZGTextFieldCell *)cell

@@ -129,6 +129,17 @@ describe(@"firstInvalidFormCell", ^{
     });
 });
 
+describe(@"firstWarningFormCell", ^{
+    it(@"should return the correct first warning cell", ^{
+        expect([formViewController firstInvalidFormCell]).to.equal(nil);
+        cell2.validationState = BZGValidationStateWarning;
+        cell3.validationState = BZGValidationStateWarning;
+        expect([formViewController firstWarningFormCell]).to.equal(cell2);
+        cell1.validationState = BZGValidationStateWarning;
+        expect([formViewController firstWarningFormCell]).to.equal(cell1);
+    });
+});
+
 describe(@"updateInfoCellBelowFormCell", ^{
     it(@"should show an info cell when the field has state BZGValidationStateInvalid", ^{
         [cell1.infoCell setText:@"cell1 info text"];

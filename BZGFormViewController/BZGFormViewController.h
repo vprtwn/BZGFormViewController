@@ -81,6 +81,13 @@
 - (BZGTextFieldCell *)firstInvalidFormCell;
 
 /**
+ * Returns the first warning form field cell.
+ *
+ * @return The first form field cell with state 'BZGValidationStateWarning' or nil if no cell is found.
+ */
+- (BZGTextFieldCell *)firstWarningFormCell;
+
+/**
  * Returns a two-dimensional array of all of the cells, ordered by section and row.
  *
  * @return A two-dimensional array of all of the cells, ordered by section and row.
