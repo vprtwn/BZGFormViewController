@@ -37,6 +37,7 @@
     if (self) {
         _formCellsBySection = [NSMutableArray array];
         _style = style;
+        _showsValidationCell = YES;
     }
     return self;
 }
@@ -129,7 +130,8 @@
 
 - (void)updateInfoCellBelowFormCell:(BZGTextFieldCell *)cell
 {
-    if (!cell.textField.editing &&
+    if (self.showsValidationCell &&
+        !cell.textField.editing &&
         [cell.infoCell.infoLabel.text length] &&
         (cell.validationState == BZGValidationStateInvalid ||
          cell.validationState == BZGValidationStateWarning)) {
@@ -137,6 +139,16 @@
         } else {
             [self removeInfoCellBelowFormCell:cell];
         }
+}
+
+- (void)setShowsValidationCell:(BOOL)showsValidationCell
+{
+    _showsValidationCell = showsValidationCell;
+    for (BZGTextFieldCell *cell in [self allFormCellsFlattened]) {
+        if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
+            [self updateInfoCellBelowFormCell:cell];
+        }
+    }
 }
 
 #pragma mark - Finding cells

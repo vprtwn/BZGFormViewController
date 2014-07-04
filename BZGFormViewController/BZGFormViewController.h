@@ -24,6 +24,9 @@
 /// A property indicating whether or not the keyboard should display an input accessory view with previous, next, and done buttons.
 @property (nonatomic, assign) BOOL showsKeyboardControl;
 
+/// A property indicating whether or not a cell manages displaying its own validation state underneath itself with another cell. Default is YES;
+@property (assign, nonatomic) BOOL showsValidationCell;
+
 /** 
  * A property indicating whether or not the form is valid.
  * A form is valid when all of its formCells have validation state

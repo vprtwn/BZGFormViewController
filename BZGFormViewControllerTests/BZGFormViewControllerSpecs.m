@@ -10,7 +10,9 @@
 @interface BZGFormViewController ()
 
 - (NSArray *)allFormCells;
+
 @property (nonatomic, strong) NSMutableArray *formCellsBySection;
+@property (nonatomic, strong) NSArray *allFormCellsFlattened;
 
 @end
 
@@ -24,7 +26,7 @@ SpecBegin(BZGFormViewController)
 
 beforeEach(^{
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    formViewController = [[BZGFormViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    formViewController = [OCMockObject partialMockForObject:[[BZGFormViewController alloc] initWithStyle:UITableViewStyleGrouped]];
     
     cell1 = [OCMockObject partialMockForObject:[[BZGTextFieldCell alloc] init]];
     cell2 = [OCMockObject partialMockForObject:[[BZGTextFieldCell alloc] init]];
@@ -69,7 +71,7 @@ describe(@"Setting form cells", ^{
             formViewController.formCells = formCells;
             
             expect((formViewController.formCells)).to.equal(formCells);
-            expect(([formViewController allFormCells])).to.equal(formCells);
+            expect(([formViewController allFormCells])).to.equal(@[@[], @[], formCells]);
             
             expect(([formViewController formCellsInSection:0])).to.haveCountOf(0);
             expect(([formViewController formCellsInSection:1])).to.haveCountOf(0);
@@ -80,7 +82,7 @@ describe(@"Setting form cells", ^{
             formViewController.formCells = formCells;
             
             expect((formViewController.formCells)).to.equal(formCells);
-            expect(([formViewController allFormCells])).to.equal(formCells);
+            expect(([formViewController allFormCells])).to.equal(@[@[], formCells]);
             
             expect(([formViewController formCellsInSection:0])).to.haveCountOf(0);
             expect(([formViewController formCellsInSection:1])).to.equal(formCells);
@@ -164,6 +166,14 @@ describe(@"updateInfoCellBelowFormCell", ^{
     it(@"should not show an info cell when the field has state BZGValidationStateValid", ^{
         [cell1.infoCell setText:@"cell1 info text"];
         cell1.validationState = BZGValidationStateValid;
+        [formViewController updateInfoCellBelowFormCell:cell1];
+        expect([formViewController.tableView numberOfRowsInSection:1]).to.equal(2);
+    });
+
+    it(@"should not show any info cells when the formViewController has flag showsValidationCell=NO", ^{
+        formViewController.showsValidationCell = NO;
+        [cell1.infoCell setText:@"cell1 info text"];
+        cell1.validationState = BZGValidationStateInvalid;
         [formViewController updateInfoCellBelowFormCell:cell1];
         expect([formViewController.tableView numberOfRowsInSection:1]).to.equal(2);
     });
@@ -326,6 +336,19 @@ describe(@"indexPathOfCell:", ^{
     
     it(@"should return nil if the cell is not in the formViewController", ^{
         expect([formViewController indexPathOfCell:[[BZGFormCell alloc] init]]).to.beNil();
+    });
+});
+
+describe(@"setShowsValidationCell", ^{
+    it(@"should updateInfoCellBelowFormCell for all cells", ^{
+        for (NSNumber *boolean in @[@(YES), @(NO)]) {
+            for (BZGTextFieldCell *cell in @[cell1, cell2, cell3]) {
+                [[(id)formViewController expect] updateInfoCellBelowFormCell:cell];
+            }
+            BOOL booleanPrimitive = [boolean boolValue];
+            formViewController.showsValidationCell = booleanPrimitive;
+            expect(formViewController.showsValidationCell).to.equal(booleanPrimitive);
+        }
     });
 });
 
