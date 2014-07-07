@@ -75,8 +75,13 @@
         else {
             isPossibleNumber = [self.phoneUtil isPossibleNumber:phoneNumber error:&error];
         }
-        self.validationState = (error || !isPossibleNumber) ? BZGValidationStateInvalid : BZGValidationStateValid;
-        self.validationError = error ? [NSError bzg_errorWithDescription:self.invalidText] : nil;
+        if (error || !isPossibleNumber) {
+            self.validationState = BZGValidationStateInvalid;
+            self.validationError = [NSError bzg_errorWithDescription:self.invalidText];
+        } else {
+            self.validationState = BZGValidationStateValid;
+            self.validationError = nil;
+        }
     }
     else {
         self.validationState = BZGValidationStateInvalid;
