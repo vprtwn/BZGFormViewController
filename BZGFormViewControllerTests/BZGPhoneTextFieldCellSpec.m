@@ -90,7 +90,7 @@ describe(@"shouldChangeCharactersInRange:replacementString", ^{
 
     });
 
-    fit(@"should set validationState to BZGValidationStateValid and clear the validationError if the phone number is valid", ^{
+    it(@"should set validationState to BZGValidationStateValid and clear the validationError if the phone number is valid", ^{
         cell.validationState = BZGValidationStateInvalid;
         cell.validationError = [NSError bzg_errorWithDescription:@"Hleol, whirled"];
         NSString *testString = @"6123883823";

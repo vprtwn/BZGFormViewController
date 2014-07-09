@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, BZGValidationState) {
 @property (assign, nonatomic) BZGValidationState validationState;
 
 // The cell's validation error
-@property (copy, nonatomic) NSError* validationError;
+@property (copy, nonatomic) NSError *validationError;
 
 /// The cell displayed when the cell's validation state is Invalid or Warning.
 @property (strong, nonatomic) BZGInfoCell *infoCell;

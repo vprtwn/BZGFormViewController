@@ -461,7 +461,7 @@
 - (NSArray *)allFormCellsFlattened
 {
     NSMutableArray *flattenedCellArray = [[NSMutableArray alloc] init];
-    for (NSMutableArray *cellArray in self.allFormCells) {
+    for (NSArray *cellArray in self.allFormCells) {
         [flattenedCellArray addObjectsFromArray:cellArray];
     }
     return flattenedCellArray;
