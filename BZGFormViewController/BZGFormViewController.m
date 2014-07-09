@@ -37,6 +37,7 @@
     if (self) {
         _formCellsBySection = [NSMutableArray array];
         _style = style;
+        _showsValidationCell = YES;
     }
     return self;
 }
@@ -129,7 +130,8 @@
 
 - (void)updateInfoCellBelowFormCell:(BZGTextFieldCell *)cell
 {
-    if (!cell.textField.editing &&
+    if (self.showsValidationCell &&
+        !cell.textField.editing &&
         [cell.infoCell.infoLabel.text length] &&
         (cell.validationState == BZGValidationStateInvalid ||
          cell.validationState == BZGValidationStateWarning)) {
@@ -139,18 +141,38 @@
         }
 }
 
+- (void)setShowsValidationCell:(BOOL)showsValidationCell
+{
+    _showsValidationCell = showsValidationCell;
+    for (BZGTextFieldCell *cell in [self allFormCellsFlattened]) {
+        if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
+            [self updateInfoCellBelowFormCell:cell];
+        }
+    }
+}
+
 #pragma mark - Finding cells
 
-- (BZGTextFieldCell *)firstInvalidFormCell
+- (BZGTextFieldCell *)firstFormCellWithValidationState:(BZGValidationState)validationState
 {
     for (UITableViewCell *cell in [self allFormCellsFlattened]) {
         if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
-            if (((BZGTextFieldCell *)cell).validationState == BZGValidationStateInvalid) {
-                return (BZGTextFieldCell *)cell;
+            if (((BZGTextFieldCell *)cell).validationState == validationState) {
+                return cell;
             }
         }
     }
     return nil;
+}
+
+- (BZGTextFieldCell *)firstInvalidFormCell
+{
+    return [self firstFormCellWithValidationState:BZGValidationStateInvalid];
+}
+
+- (BZGTextFieldCell *)firstWarningFormCell
+{
+    return [self firstFormCellWithValidationState:BZGValidationStateWarning];
 }
 
 - (BZGTextFieldCell *)nextFormCell:(BZGTextFieldCell *)cell
@@ -438,7 +460,11 @@
 
 - (NSArray *)allFormCellsFlattened
 {
-    return [[self allFormCells] valueForKeyPath: @"@unionOfArrays.self"];
+    NSMutableArray *flattenedCellArray = [[NSMutableArray alloc] init];
+    for (NSArray *cellArray in self.allFormCells) {
+        [flattenedCellArray addObjectsFromArray:cellArray];
+    }
+    return flattenedCellArray;
 }
 
 - (void)prepareCell:(BZGFormCell *)cell

@@ -42,4 +42,10 @@
     }
 }
 
+- (void)setValidationError:(NSError *)error
+{
+    _validationError = error;
+    [self.infoCell setText:error.localizedDescription];
+}
+
 @end

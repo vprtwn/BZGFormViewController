@@ -3,6 +3,8 @@
 #import <libPhoneNumber-iOS/NBAsYouTypeFormatter.h>
 #import <libPhoneNumber-iOS/NBPhoneNumberUtil.h>
 
+#import "NSError+BZGFormViewController.h"
+
 @interface BZGPhoneTextFieldCell ()
 
 @property (strong, nonatomic) NBAsYouTypeFormatter *phoneFormatter;
@@ -22,8 +24,15 @@ describe(@"initialization", ^{
 
 describe(@"shouldChangeCharactersInRange:replacementString", ^{
     __block BZGPhoneTextFieldCell *cell;
-    
-    before(^{
+
+    void(^enterPhoneNumber)(NSString *) = ^(NSString *phoneNumber) {
+        for (NSInteger i = 0; i <phoneNumber.length; i++) {
+            NSString *singleDigit = [phoneNumber substringWithRange:NSMakeRange(i, 1)];
+            [cell shouldChangeCharactersInRange:NSMakeRange(cell.textField.text.length, 1) replacementString:singleDigit];
+        }
+    };
+
+    beforeEach(^{
         cell = [BZGPhoneTextFieldCell new];
     });
     
@@ -72,7 +81,24 @@ describe(@"shouldChangeCharactersInRange:replacementString", ^{
         [cell shouldChangeCharactersInRange:NSRangeFromString(@"3 1") replacementString:@""];
         [mockFormatter verify];                     
     });
-    
+
+    it(@"should set validationState to BZGValidationStateInvalid and set validationError if the phone number is invalid", ^{
+        NSString *testString = @"61238838";
+        enterPhoneNumber(testString);
+        expect(cell.validationState).to.equal(BZGValidationStateInvalid);
+        expect(cell.validationError).toNot.beNil();
+
+    });
+
+    it(@"should set validationState to BZGValidationStateValid and clear the validationError if the phone number is valid", ^{
+        cell.validationState = BZGValidationStateInvalid;
+        cell.validationError = [NSError bzg_errorWithDescription:@"Hleol, whirled"];
+        NSString *testString = @"6123883823";
+        enterPhoneNumber(testString);
+        expect(cell.validationState).to.equal(BZGValidationStateValid);
+        expect(cell.validationError).to.beNil();
+    });
 });
+
 
 SpecEnd

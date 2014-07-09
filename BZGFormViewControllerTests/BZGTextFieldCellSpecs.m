@@ -5,6 +5,7 @@
 //
 
 #import "BZGTextFieldCell.h"
+#import "NSError+BZGFormViewController.h"
 
 BZGTextFieldCell *cell;
 
@@ -98,6 +99,14 @@ describe(@"showsCheckmarkWhenValid", ^{
         cell.showsCheckmarkWhenValid = YES;
         cell.validationState = BZGValidationStateValid;
         expect(cell.accessoryType).to.equal(UITableViewCellAccessoryCheckmark);
+    });
+});
+
+describe(@"setValidationError", ^{
+    it(@"should set the info cell's text to the valdation error", ^{
+        cell.validationError = [NSError bzg_errorWithDescription:@"Hello, error!"];
+        expect(cell.infoCell.infoLabel.text).to.equal(@"Hello, error!");
+        expect(cell.validationError).to.equal([NSError bzg_errorWithDescription:@"Hello, error!"]);
     });
 });
 

@@ -6,6 +6,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BZGFormCell.h"
+#import "NSError+BZGFormViewController.h"
 
 @class BZGInfoCell, BZGTextFieldCell, BZGPhoneTextFieldCell;
 
@@ -22,6 +23,9 @@
 
 /// A property indicating whether or not the keyboard should display an input accessory view with previous, next, and done buttons.
 @property (nonatomic, assign) BOOL showsKeyboardControl;
+
+/// A property indicating whether or not a cell manages displaying its own validation state underneath itself with another cell. Default is YES;
+@property (assign, nonatomic) BOOL showsValidationCell;
 
 /** 
  * A property indicating whether or not the form is valid.
@@ -61,12 +65,27 @@
  */
 - (BZGTextFieldCell *)previousFormCell:(BZGTextFieldCell *)cell;    
 
+
+/**
+ * Scrolls to and makes a destination cell the first responder.
+ *
+ * @param destinationCell The destination cell.
+ */
+- (void)navigateToDestinationCell:(BZGTextFieldCell *)destinationCell;
+
 /**
  * Returns the first invalid form field cell.
  *
  * @return The first form field cell with state 'BZGValidationStateInvalid' or nil if no cell is found.
  */
 - (BZGTextFieldCell *)firstInvalidFormCell;
+
+/**
+ * Returns the first warning form field cell.
+ *
+ * @return The first form field cell with state 'BZGValidationStateWarning' or nil if no cell is found.
+ */
+- (BZGTextFieldCell *)firstWarningFormCell;
 
 /**
  * Returns a two-dimensional array of all of the cells, ordered by section and row.

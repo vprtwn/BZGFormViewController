@@ -161,6 +161,13 @@
     return (BZGTextFieldCell *)view;
 }
 
+- (void)setShowsCheckmarkWhenValid:(BOOL)showsCheckmarkWhenValid
+{
+    _showsCheckmarkWhenValid = showsCheckmarkWhenValid;
+    // Force RACObserve to trigger
+    self.validationState = self.validationState;
+}
+
 #pragma mark - UITextField notification selectors
 // I'm using these notifications to flush the validation state signal.
 // It works, but seems hacky. Is there a better way?
