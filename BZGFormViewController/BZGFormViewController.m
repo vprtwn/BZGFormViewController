@@ -158,7 +158,7 @@
     for (UITableViewCell *cell in [self allFormCellsFlattened]) {
         if ([cell isKindOfClass:[BZGTextFieldCell class]]) {
             if (((BZGTextFieldCell *)cell).validationState == validationState) {
-                return cell;
+                return (BZGTextFieldCell *)cell;
             }
         }
     }
