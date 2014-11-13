@@ -10,6 +10,7 @@
 		30709D4AA1994EF090749611 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F90CF32A864DEC854302D2 /* libPods.a */; };
 		3A1F56A718F388B40090E732 /* BZGKeyboardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F56A618F388B40090E732 /* BZGKeyboardControl.m */; };
 		3A1F56A918F432F90090E732 /* BZGKeyboardControlSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F56A818F432F90090E732 /* BZGKeyboardControlSpecs.m */; };
+		3A7A8B281A145A120039AAD7 /* LaunchImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A8B271A145A120039AAD7 /* LaunchImage.xib */; };
 		799AEBE944DD4B758103BA7E /* libPods-SignupFormTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */; };
 		8CE100451965E4DD00287E0B /* NSError+BZGFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE100441965E4DD00287E0B /* NSError+BZGFormViewController.m */; };
 		EB102241190B078E00F973F0 /* BZGPhoneTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB102240190B078E00F973F0 /* BZGPhoneTextFieldCell.m */; };
@@ -51,6 +52,7 @@
 		3A1F56A518F388B40090E732 /* BZGKeyboardControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGKeyboardControl.h; path = ../../BZGFormViewController/BZGKeyboardControl.h; sourceTree = "<group>"; };
 		3A1F56A618F388B40090E732 /* BZGKeyboardControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGKeyboardControl.m; path = ../../BZGFormViewController/BZGKeyboardControl.m; sourceTree = "<group>"; };
 		3A1F56A818F432F90090E732 /* BZGKeyboardControlSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGKeyboardControlSpecs.m; path = ../../BZGFormViewControllerTests/BZGKeyboardControlSpecs.m; sourceTree = "<group>"; };
+		3A7A8B271A145A120039AAD7 /* LaunchImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchImage.xib; sourceTree = "<group>"; };
 		51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SignupFormTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		598A47BFA37AFF1A218D4E27 /* Pods-SignupFormTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignupFormTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SignupFormTests/Pods-SignupFormTests.debug.xcconfig"; sourceTree = "<group>"; };
 		637FF53EA385C8AADC43AB6C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				EB83D528180B2CA9001037F5 /* SignupForm-Info.plist */,
+				3A7A8B271A145A120039AAD7 /* LaunchImage.xib */,
 				EB83D529180B2CA9001037F5 /* InfoPlist.strings */,
 				EB83D52C180B2CA9001037F5 /* main.m */,
 				EB83D52E180B2CA9001037F5 /* SignupForm-Prefix.pch */,
@@ -316,6 +319,7 @@
 			files = (
 				EB83D52B180B2CA9001037F5 /* InfoPlist.strings in Resources */,
 				EB83D533180B2CA9001037F5 /* Images.xcassets in Resources */,
+				3A7A8B281A145A120039AAD7 /* LaunchImage.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
