@@ -350,7 +350,9 @@
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
     UIEdgeInsets contentInsets;
-    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+
+    if ((floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1)
+        || UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
         contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.height), 0.0);
     } else {
         contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.width), 0.0);
