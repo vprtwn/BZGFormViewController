@@ -57,6 +57,7 @@
                                        self.bounds.size.width - textFieldX - self.activityIndicatorView.frame.size.width,
                                        self.bounds.size.height);
     self.textField = [[UITextField alloc] initWithFrame:textFieldFrame];
+    self.textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.textFieldNormalColor = BZG_TEXTFIELD_NORMAL_COLOR;

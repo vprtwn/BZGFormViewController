@@ -10,6 +10,7 @@
 		30709D4AA1994EF090749611 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F90CF32A864DEC854302D2 /* libPods.a */; };
 		3A1F56A718F388B40090E732 /* BZGKeyboardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F56A618F388B40090E732 /* BZGKeyboardControl.m */; };
 		3A1F56A918F432F90090E732 /* BZGKeyboardControlSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F56A818F432F90090E732 /* BZGKeyboardControlSpecs.m */; };
+		3A7A8B281A145A120039AAD7 /* LaunchImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A8B271A145A120039AAD7 /* LaunchImage.xib */; };
 		799AEBE944DD4B758103BA7E /* libPods-SignupFormTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */; };
 		8CE100451965E4DD00287E0B /* NSError+BZGFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE100441965E4DD00287E0B /* NSError+BZGFormViewController.m */; };
 		EB102241190B078E00F973F0 /* BZGPhoneTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB102240190B078E00F973F0 /* BZGPhoneTextFieldCell.m */; };
@@ -47,12 +48,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F4402527AED4455AEE5A0EC /* Pods-SignupFormTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignupFormTests.xcconfig"; path = "Pods/Pods-SignupFormTests.xcconfig"; sourceTree = "<group>"; };
-		36501D3196434BDDACC01A05 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		2AE1260CFD537C6C57DF2D2E /* Pods-SignupFormTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignupFormTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SignupFormTests/Pods-SignupFormTests.release.xcconfig"; sourceTree = "<group>"; };
 		3A1F56A518F388B40090E732 /* BZGKeyboardControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZGKeyboardControl.h; path = ../../BZGFormViewController/BZGKeyboardControl.h; sourceTree = "<group>"; };
 		3A1F56A618F388B40090E732 /* BZGKeyboardControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGKeyboardControl.m; path = ../../BZGFormViewController/BZGKeyboardControl.m; sourceTree = "<group>"; };
 		3A1F56A818F432F90090E732 /* BZGKeyboardControlSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZGKeyboardControlSpecs.m; path = ../../BZGFormViewControllerTests/BZGKeyboardControlSpecs.m; sourceTree = "<group>"; };
+		3A7A8B271A145A120039AAD7 /* LaunchImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchImage.xib; sourceTree = "<group>"; };
 		51A99866C8474A4D9FA92F85 /* libPods-SignupFormTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SignupFormTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		598A47BFA37AFF1A218D4E27 /* Pods-SignupFormTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignupFormTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SignupFormTests/Pods-SignupFormTests.debug.xcconfig"; sourceTree = "<group>"; };
+		637FF53EA385C8AADC43AB6C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		75D592C1258E247EE1D17150 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8CE100431965E4DD00287E0B /* NSError+BZGFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+BZGFormViewController.h"; path = "../../BZGFormViewController/NSError+BZGFormViewController.h"; sourceTree = "<group>"; };
 		8CE100441965E4DD00287E0B /* NSError+BZGFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+BZGFormViewController.m"; path = "../../BZGFormViewController/NSError+BZGFormViewController.m"; sourceTree = "<group>"; };
 		90F90CF32A864DEC854302D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +122,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86185DBC2499DA471C1B1266 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				637FF53EA385C8AADC43AB6C /* Pods.debug.xcconfig */,
+				75D592C1258E247EE1D17150 /* Pods.release.xcconfig */,
+				598A47BFA37AFF1A218D4E27 /* Pods-SignupFormTests.debug.xcconfig */,
+				2AE1260CFD537C6C57DF2D2E /* Pods-SignupFormTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EB59ED66180B2DB900DAA992 /* BZGFormViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,8 +162,7 @@
 				EB83D53F180B2CA9001037F5 /* SignupFormTests */,
 				EB83D51F180B2CA9001037F5 /* Frameworks */,
 				EB83D51E180B2CA9001037F5 /* Products */,
-				36501D3196434BDDACC01A05 /* Pods.xcconfig */,
-				2F4402527AED4455AEE5A0EC /* Pods-SignupFormTests.xcconfig */,
+				86185DBC2499DA471C1B1266 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -192,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				EB83D528180B2CA9001037F5 /* SignupForm-Info.plist */,
+				3A7A8B271A145A120039AAD7 /* LaunchImage.xib */,
 				EB83D529180B2CA9001037F5 /* InfoPlist.strings */,
 				EB83D52C180B2CA9001037F5 /* main.m */,
 				EB83D52E180B2CA9001037F5 /* SignupForm-Prefix.pch */,
@@ -304,6 +319,7 @@
 			files = (
 				EB83D52B180B2CA9001037F5 /* InfoPlist.strings in Resources */,
 				EB83D533180B2CA9001037F5 /* Images.xcassets in Resources */,
+				3A7A8B281A145A120039AAD7 /* LaunchImage.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-SignupFormTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SignupFormTests/Pods-SignupFormTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7DD26754F29C4870A2544F40 /* Check Pods Manifest.lock */ = {
@@ -375,7 +391,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -513,10 +529,12 @@
 		};
 		EB83D54A180B2CA9001037F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36501D3196434BDDACC01A05 /* Pods.xcconfig */;
+			baseConfigurationReference = 637FF53EA385C8AADC43AB6C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SignupForm/SignupForm-Prefix.pch";
 				INFOPLIST_FILE = "SignupForm/SignupForm-Info.plist";
@@ -529,10 +547,12 @@
 		};
 		EB83D54B180B2CA9001037F5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36501D3196434BDDACC01A05 /* Pods.xcconfig */;
+			baseConfigurationReference = 75D592C1258E247EE1D17150 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SignupForm/SignupForm-Prefix.pch";
 				INFOPLIST_FILE = "SignupForm/SignupForm-Info.plist";
@@ -545,7 +565,7 @@
 		};
 		EB83D54D180B2CA9001037F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F4402527AED4455AEE5A0EC /* Pods-SignupFormTests.xcconfig */;
+			baseConfigurationReference = 598A47BFA37AFF1A218D4E27 /* Pods-SignupFormTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SignupForm.app/SignupForm";
 				CLANG_ENABLE_MODULES = NO;
@@ -554,6 +574,8 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SignupFormTests/SignupFormTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -569,7 +591,7 @@
 		};
 		EB83D54E180B2CA9001037F5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F4402527AED4455AEE5A0EC /* Pods-SignupFormTests.xcconfig */;
+			baseConfigurationReference = 2AE1260CFD537C6C57DF2D2E /* Pods-SignupFormTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SignupForm.app/SignupForm";
 				CLANG_ENABLE_MODULES = NO;
@@ -578,6 +600,8 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SignupFormTests/SignupFormTests-Prefix.pch";
 				INFOPLIST_FILE = "SignupFormTests/SignupFormTests-Info.plist";
