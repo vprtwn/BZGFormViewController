@@ -65,6 +65,7 @@
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     self.infoLabel.backgroundColor = [UIColor clearColor];
     self.infoLabel.text = @"";
+    self.infoLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction)];
     [self addGestureRecognizer:self.tapGestureRecognizer];
