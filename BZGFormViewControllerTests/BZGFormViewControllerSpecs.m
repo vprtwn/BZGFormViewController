@@ -363,4 +363,128 @@ describe(@"setShowsValidationCell", ^{
     });
 });
 
+describe(@"Keyboard notifications", ^{
+    describe(@"tableView.contentInset", ^{
+        __block UIEdgeInsets existingInsets;
+        __block UIEdgeInsets expectedInsets;
+        __block UIEdgeInsets insetsWithKeyboard;
+        __block CGRect keyboardRect;
+        __block CGSize keyboardSize;
+        __block NSDictionary *notificationUserInfo;
+        
+        before(^{
+            existingInsets       = UIEdgeInsetsMake(1.f, 1.f, 1.f, 1.f);
+            keyboardSize         = CGSizeMake(320.f, 270.f);
+            keyboardRect         = CGRectMake(0.f, 0.f, keyboardSize.width, keyboardSize.height);
+            notificationUserInfo = @{
+                                     UIKeyboardFrameBeginUserInfoKey        : [NSValue valueWithCGRect:keyboardRect],
+                                     UIKeyboardAnimationDurationUserInfoKey : [NSNumber numberWithInt:0]
+                                     };
+            insetsWithKeyboard = UIEdgeInsetsMake(existingInsets.top,
+                                                  existingInsets.left,
+                                                  existingInsets.bottom + keyboardSize.height,
+                                                  existingInsets.right);
+        });
+        
+        context(@"UIKeyboardWillShowNotification", ^{
+            before(^{
+                expectedInsets = insetsWithKeyboard;
+
+                formViewController.tableView.contentInset = existingInsets;
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillShowNotification
+                                                                    object:nil
+                                                                  userInfo:notificationUserInfo];
+            });
+            
+            it(@"should maintain the current insets, adding the height of the keyboard", ^{
+                expect(formViewController.tableView.contentInset).to.equal(expectedInsets);
+            });
+        });
+        
+        context(@"UIKeyboardWillHideNotification", ^{
+            before(^{
+                expectedInsets = existingInsets;
+                
+                formViewController.tableView.contentInset = existingInsets;
+                
+                // Trigger the show (this sets up the with-keyboard-insets
+                [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillShowNotification
+                                                                    object:nil
+                                                                  userInfo:notificationUserInfo];
+                
+                // "Hide" the keyboard
+                [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillHideNotification
+                                                                    object:nil
+                                                                  userInfo:notificationUserInfo];
+            });
+            
+            it(@"should set the insets back to their original value", ^{
+                expect(formViewController.tableView.contentInset).to.equal(expectedInsets);
+            });
+        });
+    });
+    
+    describe(@"tableView.scrollIndicatorInsets", ^{
+        __block UIEdgeInsets existingInsets;
+        __block UIEdgeInsets expectedInsets;
+        __block UIEdgeInsets insetsWithKeyboard;
+        __block CGRect keyboardRect;
+        __block CGSize keyboardSize;
+        __block NSDictionary *notificationUserInfo;
+        
+        before(^{
+            existingInsets       = UIEdgeInsetsMake(1.f, 1.f, 1.f, 1.f);
+            keyboardSize         = CGSizeMake(320.f, 270.f);
+            keyboardRect         = CGRectMake(0.f, 0.f, keyboardSize.width, keyboardSize.height);
+            notificationUserInfo = @{
+                                     UIKeyboardFrameBeginUserInfoKey        : [NSValue valueWithCGRect:keyboardRect],
+                                     UIKeyboardAnimationDurationUserInfoKey : [NSNumber numberWithInt:0]
+                                     };
+            insetsWithKeyboard = UIEdgeInsetsMake(existingInsets.top,
+                                                  existingInsets.left,
+                                                  existingInsets.bottom + keyboardSize.height,
+                                                  existingInsets.right);
+        });
+        
+        context(@"UIKeyboardWillShowNotification", ^{
+            before(^{
+                expectedInsets = insetsWithKeyboard;
+                
+                formViewController.tableView.contentInset = existingInsets;
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillShowNotification
+                                                                    object:nil
+                                                                  userInfo:notificationUserInfo];
+            });
+            
+            it(@"should maintain the current insets, adding the height of the keyboard", ^{
+                expect(formViewController.tableView.scrollIndicatorInsets).to.equal(expectedInsets);
+            });
+        });
+        
+        context(@"UIKeyboardWillHideNotification", ^{
+            before(^{
+                expectedInsets = existingInsets;
+                
+                formViewController.tableView.contentInset = existingInsets;
+                
+                // Trigger the show (this sets up the with-keyboard-insets
+                [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillShowNotification
+                                                                    object:nil
+                                                                  userInfo:notificationUserInfo];
+                
+                // "Hide" the keyboard
+                [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillHideNotification
+                                                                    object:nil
+                                                                  userInfo:notificationUserInfo];
+            });
+            
+            it(@"should set the insets back to their original value", ^{
+                expect(formViewController.tableView.scrollIndicatorInsets).to.equal(expectedInsets);
+            });
+        });
+    });
+});
+
 SpecEnd

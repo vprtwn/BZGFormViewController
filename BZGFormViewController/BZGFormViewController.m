@@ -24,7 +24,10 @@
 
 @end
 
-@implementation BZGFormViewController
+@implementation BZGFormViewController {
+    @protected
+    UIEdgeInsets _preKeyboardTableViewInsets;
+}
 
 - (id)init
 {
@@ -349,13 +352,17 @@
 {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
-    UIEdgeInsets contentInsets;
+    // Save the original contentInset so that it can be reset when the keyboard hides
+    _preKeyboardTableViewInsets = self.tableView.contentInset;
+
+    // Base the new inset off of the original
+    UIEdgeInsets contentInsets = _preKeyboardTableViewInsets;
 
     if ((floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1)
         || UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.height), 0.0);
+        contentInsets.bottom += keyboardSize.height;
     } else {
-        contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize.width), 0.0);
+        contentInsets.bottom += keyboardSize.width;
     }
 
     self.tableView.contentInset = contentInsets;
@@ -367,8 +374,11 @@
 {
     NSNumber *rate = notification.userInfo[UIKeyboardAnimationDurationUserInfoKey];
     [UIView animateWithDuration:rate.floatValue animations:^{
-        self.tableView.contentInset = UIEdgeInsetsZero;
-        self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
+        self.tableView.contentInset = _preKeyboardTableViewInsets;
+        self.tableView.scrollIndicatorInsets = _preKeyboardTableViewInsets;
+        
+        // Reset: These insets should only exist for the lifetime of the visible keyboard
+        _preKeyboardTableViewInsets = UIEdgeInsetsZero;
     }];
 }
 
