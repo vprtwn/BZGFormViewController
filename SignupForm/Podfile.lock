@@ -2,18 +2,18 @@ PODS:
   - BZGMailgunEmailValidation (1.1.0)
   - Expecta (0.3.0)
   - libextobjc (0.4):
-    - libextobjc/EXTADT
-    - libextobjc/EXTConcreteProtocol
-    - libextobjc/EXTKeyPathCoding
-    - libextobjc/EXTNil
-    - libextobjc/EXTSafeCategory
-    - libextobjc/EXTScope
-    - libextobjc/EXTSelectorChecking
-    - libextobjc/EXTSynthesize
-    - libextobjc/NSInvocation+EXT
-    - libextobjc/NSMethodSignature+EXT
-    - libextobjc/RuntimeExtensions
-    - libextobjc/UmbrellaHeader
+    - libextobjc/EXTADT (= 0.4)
+    - libextobjc/EXTConcreteProtocol (= 0.4)
+    - libextobjc/EXTKeyPathCoding (= 0.4)
+    - libextobjc/EXTNil (= 0.4)
+    - libextobjc/EXTSafeCategory (= 0.4)
+    - libextobjc/EXTScope (= 0.4)
+    - libextobjc/EXTSelectorChecking (= 0.4)
+    - libextobjc/EXTSynthesize (= 0.4)
+    - libextobjc/NSInvocation+EXT (= 0.4)
+    - libextobjc/NSMethodSignature+EXT (= 0.4)
+    - libextobjc/RuntimeExtensions (= 0.4)
+    - libextobjc/UmbrellaHeader (= 0.4)
   - libextobjc/EXTADT (0.4):
     - libextobjc/RuntimeExtensions
   - libextobjc/EXTConcreteProtocol (0.4):
@@ -42,7 +42,7 @@ PODS:
   - OCMockito (1.1.0):
     - OCHamcrest (~> 3.0)
   - ReactiveCocoa (2.3):
-    - ReactiveCocoa/UI
+    - ReactiveCocoa/UI (= 2.3)
   - ReactiveCocoa/Core (2.3):
     - ReactiveCocoa/no-arc
   - ReactiveCocoa/no-arc (2.3)
@@ -71,4 +71,4 @@ SPEC CHECKSUMS:
   ReactiveCocoa: 2066583826c17dde8e90c41e489f682048cc57c9
   Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
 
-COCOAPODS: 0.34.4
+COCOAPODS: 0.35.0

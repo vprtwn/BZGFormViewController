@@ -9,10 +9,10 @@ Pod::Spec.new do |s|
     :git => 'https://github.com/benzguo/BZGFormViewController.git',
     :tag => "v#{s.version}"
   }
-  s.dependency 'ReactiveCocoa', '~>2.0'
+  s.dependency 'ReactiveCocoa', '~>2.3'
   s.dependency 'libextobjc', '~>0.4'
-  s.dependency 'libPhoneNumber-iOS'
+  s.dependency 'libPhoneNumber-iOS', '~>0.7'
   s.requires_arc = true
-  s.platform = :ios, '5.0'
+  s.platform = :ios, '6.0'
   s.source_files = 'BZGFormViewController/*.{h,m}'
 end
