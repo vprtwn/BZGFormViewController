@@ -10,7 +10,7 @@ Navigate to `SignupForm`, run `pod install`, and open `SignupForm.xcworkspace`. 
 
 ## Installation
 
-Cocoapods is the recommended method of installing `BZGFormViewController`. Add the following line to your `Podfile`:
+CocoaPods is the recommended method of installing `BZGFormViewController`. Add the following line to your `Podfile`:
 
 ```ruby
 pod `BZGFormViewController`
