@@ -45,6 +45,17 @@
     return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        _formCellsBySection = [NSMutableArray array];
+        _style = UITableViewStyleGrouped;
+        _showsValidationCell = YES;
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
