@@ -316,6 +316,10 @@
     }
 
     [self updateInfoCellBelowFormCell:cell];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.tableView setContentInset:UIEdgeInsetsZero];
+    }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
